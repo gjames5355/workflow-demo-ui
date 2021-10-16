@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import AppBar from "@material-ui/core/AppBar"
 import AccountCircle from "@material-ui/icons/AccountCircle"
 import { makeStyles, alpha } from "@material-ui/core/styles"
