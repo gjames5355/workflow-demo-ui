@@ -5,6 +5,7 @@ import { makeStyles } from "@material-ui/core/styles"
 import RefreshIcon from "@material-ui/icons/Refresh"
 import Tabs from "@material-ui/core/Tabs"
 import Tab from "@material-ui/core/Tab"
+import Toolbar from "@material-ui/core/Toolbar"
 
 const useStyles = makeStyles((theme) => ({
   tab: {
@@ -40,29 +41,41 @@ const Fields = () => {
 
   return (
     <>
-      <Tabs value={value} onChange={handleChange} indicatorColor="secondary">
-        <Tab className={classes.tab} component={Link} to="/" label="My Tasks" />
-        <Tab
-          className={classes.tab}
-          component={Link}
-          to="/team"
-          label="Team Tasks"
-        />
-        <Tab className={classes.tab} component={Link} to="/jobs" label="Jobs" />
-        <Tab
-          className={classes.tab}
-          component={Link}
-          to="/management"
-          label="Team Management"
-        />
+      <Toolbar disableGutters>
+        <Tabs value={value} onChange={handleChange} indicatorColor="secondary">
+          <Tab
+            className={classes.tab}
+            component={Link}
+            to="/"
+            label="My Tasks"
+          />
+          <Tab
+            className={classes.tab}
+            component={Link}
+            to="/team"
+            label="Team Tasks"
+          />
+          <Tab
+            className={classes.tab}
+            component={Link}
+            to="/jobs"
+            label="Jobs"
+          />
+          <Tab
+            className={classes.tab}
+            component={Link}
+            to="/management"
+            label="Team Management"
+          />
+        </Tabs>
         <Button
           color="primary"
           className={classes.button}
           startIcon={<RefreshIcon />}
         >
-          Refresh
+          Refresh Tasks
         </Button>
-      </Tabs>
+      </Toolbar>
     </>
   )
 }

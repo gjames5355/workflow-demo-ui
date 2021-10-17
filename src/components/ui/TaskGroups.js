@@ -4,7 +4,7 @@ import AccordionDetails from "@material-ui/core/AccordionDetails"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 import Typography from "@material-ui/core/Typography"
 import { makeStyles } from "@material-ui/core/styles"
-import EnhancedTable from "./TaskTable"
+import DataTable from "./TaskTable"
 const useStyles = makeStyles((theme) => ({
   title: {
     ...theme.typography.tab,
@@ -12,15 +12,21 @@ const useStyles = makeStyles((theme) => ({
   },
   accordion1: {
     marginTop: "35px",
-    backgroundColor: "#A0A1AD",
   },
   accordion2: {
     marginTop: "35px",
-    backgroundColor: "#9093A6",
   },
   accordion3: {
     marginTop: "35px",
-    backgroundColor: "#6478F5",
+  },
+  accordionSummary1: {
+    backgroundColor: "#FBD250",
+  },
+  accordionSummary2: {
+    backgroundColor: "#63B0F3",
+  },
+  accordionSummary3: {
+    backgroundColor: "#E35C5C",
   },
 }))
 
@@ -31,6 +37,7 @@ const TaskGroups = () => {
     <div>
       <Accordion className={classes.accordion1}>
         <AccordionSummary
+          className={classes.accordionSummary1}
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
           id="panel1a-header"
@@ -38,16 +45,17 @@ const TaskGroups = () => {
           <Typography className={classes.title}>Task Group 1</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <EnhancedTable />
+          <DataTable />
         </AccordionDetails>
       </Accordion>
       <Accordion className={classes.accordion2}>
         <AccordionSummary
+          className={classes.accordionSummary2}
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Typography className={classes.title}>Task Group 1</Typography>
+          <Typography className={classes.title}>Task Group 2</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
@@ -59,11 +67,12 @@ const TaskGroups = () => {
 
       <Accordion className={classes.accordion3}>
         <AccordionSummary
+          className={classes.accordionSummary3}
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Typography className={classes.title}>Task Group 1</Typography>
+          <Typography className={classes.title}>Task Group 3</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
