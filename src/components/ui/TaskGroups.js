@@ -1,6 +1,7 @@
 import Accordion from "@material-ui/core/Accordion"
 import AccordionSummary from "@material-ui/core/AccordionSummary"
 import AccordionDetails from "@material-ui/core/AccordionDetails"
+import ArrowForwardIcon from "@material-ui/icons/ArrowForward"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 import Typography from "@material-ui/core/Typography"
 import { makeStyles } from "@material-ui/core/styles"
@@ -27,6 +28,16 @@ const useStyles = makeStyles((theme) => ({
   },
   accordionSummary3: {
     backgroundColor: "#E35C5C",
+  },
+  paragraph: {
+    ...theme.typography.tab,
+    color: "#63B0F3",
+    fontSize: "1.25rem",
+    display: "flex",
+    marginTop: "45px",
+  },
+  arrowIcon: {
+    marginLeft: "5px",
   },
 }))
 
@@ -58,13 +69,9 @@ const TaskGroups = () => {
           <Typography className={classes.title}>Task Group 2</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget.
-          </Typography>
+          <DataTable />
         </AccordionDetails>
       </Accordion>
-
       <Accordion className={classes.accordion3}>
         <AccordionSummary
           className={classes.accordionSummary3}
@@ -75,12 +82,13 @@ const TaskGroups = () => {
           <Typography className={classes.title}>Task Group 3</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget.
-          </Typography>
+          <DataTable />
         </AccordionDetails>
       </Accordion>
+      <p className={classes.paragraph}>
+        View Completed Tasks
+        <ArrowForwardIcon className={classes.arrowIcon} />
+      </p>
     </div>
   )
 }

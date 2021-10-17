@@ -12,6 +12,9 @@ const useStyles = makeStyles((theme) => ({
     ...theme.typography.tab,
     minWidth: 10,
     // marginLeft: "25px",
+    "&:focus": {
+      color: "#A9D1F8",
+    },
   },
   button: {
     marginLeft: "auto",
