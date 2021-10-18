@@ -126,27 +126,58 @@ const columns = [
     width: 200,
     editable: false,
   },
+  {
+    field: "assignedTo",
+    headerName: "Assigned To",
+    width: 200,
+    editable: false,
+  },
 ]
 
 const rows = [
   {
     id: 1,
     processName: "Produce MPEG",
-    taskName: "Stich MPEG",
-    priority: "High",
-    division: "South Carolina",
-    date_time: "10/18/21 9:00AM",
-    client: "Kassel McVey",
-    case: "Addison, Lavaunda Vs. South Carolina Dept Of Trans",
-    primaryVendor: "Solange Ruiz-Uribe",
-    deliveryMethod: "Expedited",
-    deliveryDays: 3,
+    taskName: "QC Original Files",
+    priority: "Normal",
+    division: "Maryland",
+    date_time: "10/7/21 9:00AM",
+    client: "Litigation Services LLC",
+    case: "Dorsey, Bessie Et Al. v. Lm General Insurance Company",
+    primaryVendor: "Cappy Hallock",
+    deliveryMethod: "Normal",
+    deliveryDays: 10,
     jobDueDate: "10/21/2021",
-    scheduleCity: "Columbia",
+    scheduleCity: "Baltimore",
     proceedingType: "Depositions",
-    litigationType: "Personal Injury/Negligence",
-    jobNumber: 4520001,
-    status: "New",
+    litigationType: "CR Referral",
+    jobNumber: 4544414,
+    status: "Assgined",
+    assignedDate: "10/18/2021",
+    taskDueDate: "10/21/2021",
+    assignedTo: "mdrenkalo",
+  },
+  {
+    id: 2,
+    processName: "Produce MPEG",
+    taskName: "Review/ QC Files/ Prepare PIP Video",
+    priority: "Urgent",
+    division: "Houston",
+    date_time: "10/8/2021  1:00:00 PM",
+    client: "Arnold & Itkin LLP",
+    case: "In Re Brenn De Bree, Et Al.",
+    primaryVendor: "Joanna Sagastisado",
+    deliveryMethod: "Expedited",
+    deliveryDays: 2,
+    jobDueDate: "10/20/2021",
+    scheduleCity: "Houston",
+    proceedingType: "Depositions",
+    litigationType: "Misc/Unknowns",
+    jobNumber: 4572355,
+    status: "Overdue",
+    assignedDate: "10/20/2021",
+    taskDueDate: "10/20/2021",
+    assignedTo: "dmcclutchy",
   },
 ]
 
@@ -156,7 +187,7 @@ export default function DataTable() {
       <DataGrid
         rows={rows}
         columns={columns}
-        pageSize={1}
+        pageSize={2}
         onColumnOrderChange
         checkboxSelection
         disableSelectionOnClick

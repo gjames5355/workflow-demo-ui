@@ -5,6 +5,7 @@ import Fields from "./ui/Fields"
 import Header from "./ui/Header"
 import theme from "./ui/Theme"
 import TaskGroups from "./ui/TaskGroups"
+import TeamTasks from "./ui/TeamTasks"
 
 function App() {
   return (
@@ -15,8 +16,12 @@ function App() {
         <Fields />
         <Divider />
         <Switch>
-          <Route exact path="/" component={() => <div>Home</div>} />
-          <Route exact path="/team" component={() => <div>Team Tasks</div>} />
+          <Route exact path="/">
+            <TaskGroups />
+          </Route>
+          <Route exact path="/team">
+            <TeamTasks />
+          </Route>
           <Route exact path="/jobs" component={() => <div>Jobs</div>} />
           <Route
             exact
@@ -25,7 +30,6 @@ function App() {
           />
         </Switch>
       </Router>
-      <TaskGroups />
     </ThemeProvider>
   )
 }
