@@ -1,7 +1,7 @@
 import Popover from "@material-ui/core/Popover"
 import { Box, Button, InputBase, makeStyles, Paper } from "@material-ui/core"
 import Grid from "@material-ui/core/Grid"
-import FormLabel from "@material-ui/core/FormLabel"
+//import FormLabel from "@material-ui/core/FormLabel"
 import RadioGroup from "@material-ui/core/RadioGroup"
 import FormControlLabel from "@material-ui/core/FormControlLabel"
 import FormControl from "@material-ui/core/FormControl"
@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const VTSnoozePopover = (props) => {
+const SnoozePopover = (props) => {
   const classes = useStyles()
   return (
     <Popover
@@ -58,7 +58,7 @@ const VTSnoozePopover = (props) => {
               <FormControlLabel
                 value="snooze"
                 control={<Radio />}
-                label="Znoose"
+                label="Snooze"
               />
               <Grid container spacing={1}>
                 <Grid item md={3}>
@@ -123,4 +123,4 @@ const VTSnoozePopover = (props) => {
   )
 }
 
-export default VTSnoozePopover
+export default SnoozePopover
