@@ -5,10 +5,12 @@ import FlagIcon from "@material-ui/icons/Flag"
 import ChatBubbleIcon from "@material-ui/icons/ChatBubble"
 import TodayIcon from "@material-ui/icons/Today"
 import GroupsIcon from "@material-ui/icons/Group"
+import ErrorIcon from "@material-ui/icons/Error"
 import { useState } from "react"
 import VTTaskPopover from "./task-popover/TaskPopover"
 import VTSnoozePopover from "./snooze-popover/SnoozePopover"
 import VTFlagPopover from "./flag-popover/FlagPopover"
+import { Box, Grid } from "@material-ui/core"
 
 const initialRows = [
   {
@@ -17,7 +19,9 @@ const initialRows = [
     taskName: "Stich MPEG",
     priority: "High",
     division: "South Carolina",
-    date_time: "10/18/21 9:00AM",
+    childDivision: "Columbia",
+    dateDime: "10/18/2021 9:00AM",
+    thirdParty: "Third",
     client: "Kassel McVey",
     case: "Addison, Lavaunda Vs. South Carolina Dept Of Trans",
     primaryVendor: "Solange Ruiz-Uribe",
@@ -26,7 +30,9 @@ const initialRows = [
     jobDueDate: "10/21/2021",
     scheduleCity: "Columbia",
     proceedingType: "Depositions",
+    assignedDate: "10/18/2021",
     litigationType: "Personal Injury/Negligence",
+    taskDueDate: "10/21/2021",
     jobNumber: 4520001,
     status: "Assigned",
   },
@@ -34,9 +40,11 @@ const initialRows = [
     id: 2,
     processName: "Produce JPG",
     taskName: "Stich JPG",
-    priority: "High",
+    priority: "Medium",
     division: "South Carolina",
-    date_time: "10/18/21 9:00AM",
+    childDivision: "Columbia",
+    dateDime: "10/18/2021 9:00AM",
+    thirdParty: "Third Party",
     client: "Kassel McVey",
     case: "Addison, Lavaunda Vs. South Carolina Dept Of Trans",
     primaryVendor: "Solange Ruiz-Uribe",
@@ -45,7 +53,9 @@ const initialRows = [
     jobDueDate: "10/21/2021",
     scheduleCity: "Columbia",
     proceedingType: "Depositions",
+    assignedDate: "10/18/2021",
     litigationType: "Personal Injury/Negligence",
+    taskDueDate: "10/21/2021",
     jobNumber: 4520001,
     status: "Assigned",
   },
@@ -79,6 +89,19 @@ export default function DataTable() {
       headerName: "Process Name",
       width: 200,
       editable: false,
+      renderCell: (params) => {
+        return params.row.priority === "High" ? (
+          <Grid container alignItems="center">
+            {" "}
+            <ErrorIcon htmlColor="red" /> {params.row.processName}
+          </Grid>
+        ) : (
+          <Grid container alignItems="center">
+            {" "}
+            {params.row.processName}
+          </Grid>
+        )
+      },
     },
     {
       field: "taskName",
@@ -104,7 +127,7 @@ export default function DataTable() {
       editable: false,
     },
     {
-      field: "date&time",
+      field: "dateDime",
       headerName: "Date/Time",
       width: 200,
       editable: false,
@@ -146,7 +169,7 @@ export default function DataTable() {
       editable: false,
     },
     {
-      field: "jobDueDate ",
+      field: "jobDueDate",
       headerName: "Job Due Date",
       width: 200,
       editable: false,
@@ -216,11 +239,25 @@ export default function DataTable() {
         }
 
         const onFlagHandler = (event) => {
+          console.log("params.row", params.row)
           setSelectedTask({
             openFlag: true,
             task: params.row,
           })
           setAnchorEl(event.currentTarget)
+        }
+
+        let priorityColor = null
+        switch (params.row.priority) {
+          case "High":
+            priorityColor = "red"
+            break
+          case "Medium":
+            priorityColor = "orange"
+            break
+          default:
+            priorityColor = "lightgray"
+            break
         }
 
         return (
@@ -243,7 +280,12 @@ export default function DataTable() {
               anchorE1={anchorElFlag}
               onClose={closeModal}
             ></VTFlagPopover>
-            <IconButton onClick={onFlagHandler} style={{ color: "red" }}>
+            <IconButton
+              onClick={onFlagHandler}
+              style={{
+                color: priorityColor,
+              }}
+            >
               <FlagIcon />
             </IconButton>
             <IconButton onClick={onCommentHandler}>

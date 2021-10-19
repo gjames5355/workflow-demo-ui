@@ -30,7 +30,7 @@ const VTTaskPopover = (props) => {
           <Typography component="h6">{props.task?.taskName}</Typography>
         </Item>
         <Item>
-          <FormLabel>Data</FormLabel>
+          <FormLabel>Comment</FormLabel>
         </Item>
         <Item >
           <Paper
@@ -80,14 +80,14 @@ const VTTaskPopover = (props) => {
             <FormGroup style={{
                 padding: "5px 0px"
             }}>
-              <FormLabel>Data</FormLabel>
-              <TextField label="Comment" variant="filled" />
+              <FormLabel>Division</FormLabel>
+              <TextField label="Comment" variant="filled" value={props.task?.division} />
             </FormGroup>
             <FormGroup style={{
                 padding: "5px 0px"
             }}>
-              <FormLabel>Data</FormLabel>
-              <TextField label="Comment" variant="filled" />
+              <FormLabel>Child Division</FormLabel>
+              <TextField label="Comment" variant="filled" value={props.task?.childDivision} />
             </FormGroup>
           </Grid>
         </Box>
