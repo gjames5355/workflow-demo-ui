@@ -82,7 +82,7 @@ export default function DataTable() {
       task: undefined,
       open: false,
       openSnooze: false,
-      openAssign: false
+      openAssign: false,
     });
     setAnchorEl(null);
     setAnchorElSnooze(null);

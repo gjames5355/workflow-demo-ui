@@ -9,6 +9,7 @@ import GroupsIcon from "@material-ui/icons/Group"
 import VTTaskPopover from "./task-popover/TaskPopover"
 import VTSnoozePopover from "./snooze-popover/SnoozePopover"
 import VTFlagPopover from "./flag-popover/FlagPopover"
+import ReassignPopover from "./reassign-popover/ReassignPopover"
 
 const initialRows = [
   {
@@ -59,10 +60,19 @@ const initialRows = [
 
 export default function DataTable() {
   const { filterValue, setCount } = useContext(GlobalContext);
-  const [data, setData] = useState(rows);
+  const [data, setData] = useState(initialRows);
+  const [selectedTask, setSelectedTask] = useState({
+    open: false,
+    openSnooze: false,
+    openFlag: false,
+    openAssign: false,
+  })
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorElSnooze, setAnchorElSnooze] = useState(null);
+  const [anchorElFlag, setAnchorElFlag] = useState(null);
 
   useEffect(() => {
-    const filteredRows = rows.filter(r => 
+    const filteredRows = initialRows.filter(r => 
       r.processName.toLowerCase().includes(filterValue.toLowerCase()) 
       || r.taskName.toLowerCase().includes(filterValue.toLowerCase())
       || r.primaryVendor.toLowerCase().includes(filterValue.toLowerCase())
@@ -75,21 +85,13 @@ export default function DataTable() {
   const handleSelectRow = e => {
     setCount(e.length);
   }
-  const [rows, setRows] = useState(initialRows)
-  const [selectedTask, setSelectedTask] = useState({
-    open: false,
-    openSnooze: false,
-    openFlag: false,
-  })
-  const [anchorEl, setAnchorEl] = useState(null);
-  const [anchorElSnooze, setAnchorElSnooze] = useState(null);
-  const [anchorElFlag, setAnchorElFlag] = useState(null);
 
   const closeModal = () => {
     setSelectedTask({
       task: undefined,
       open: false,
       openSnooze: false,
+      openAssign: false,
     });
     setAnchorEl(null);
     setAnchorElSnooze(null);
@@ -256,6 +258,11 @@ export default function DataTable() {
           setAnchorEl(event.currentTarget)
         }
 
+        const onGroupIconClick = e => {
+          setSelectedTask(prev => ({...prev, openAssign: true, task: params.row}));
+          setAnchorEl(e.currentTarget)
+        }
+        
         return (
           <div>
             <VTTaskPopover
@@ -276,6 +283,7 @@ export default function DataTable() {
               anchorE1={anchorElFlag}
               onClose={closeModal}
             ></VTFlagPopover>
+            <ReassignPopover isOpen={selectedTask.openAssign} anchor={anchorEl} onClose={closeModal}/>
             <IconButton onClick={onFlagHandler} style={{ color: "red" }}>
               <FlagIcon />
             </IconButton>
@@ -289,7 +297,7 @@ export default function DataTable() {
               />
             </IconButton>
             <IconButton>
-              <GroupsIcon style={{ color: "#104B67" }} />
+              <GroupsIcon style={{ color: "#104B67" }} onClick={onGroupIconClick}/>
             </IconButton>
           </div>
         )

@@ -32,57 +32,55 @@ const ReassignPopover = ({ isOpen, anchor, onClose }) => {
 
     return (
         <Popover
-                open={isOpen}
-                anchorEl={anchor} 
-                placement={placement} 
-                transition
-                style={{
-                    width: "100%",
-                    maxHeight: "unset",
-                    maxWidth: "unset",
-                  }}
-            >
-                <Box style={{width: '300px'}}>
-                    <div className='popper-content'>
-                        <RadioGroup
-                            aria-label="gender"
-                            name="controlled-radio-buttons-group"
-                            value={1}
-                        >
-                            <FormControl component="fieldset">
-                                <FormControlLabel
-                                    value="reassign"
-                                    control={<Radio />}
-                                    label="Reassign"
-                                />
-                                <FormControlLabel
-                                    value="delegate"
-                                    control={<Radio />}
-                                    label="Delegate"
-                                />
-                            </FormControl>
-                        </RadioGroup>
-
-                       
-                        <div className='popper-bottom'>
-                            <FormControl sx={{ m: 1 }} fullWidth variant='standard'>
-                                <InputLabel id="team-member">Team Member</InputLabel>
-                                <Select
-                                    labelId="team-member"
-                                    id="team-member-select"
-                                    value={user}
-                                    label="Age"
-                                    placeholder='Team Member'
-                                    onChange={handleChange}
-                                >
-                                    {users.map((x) => <MenuItem key={x.id} value={x.id}>{x.name}</MenuItem>)}
-                                </Select>
-                            </FormControl>
-                            <CheckCircleIcon fontSize='large' htmlColor='green' onClick={onClose}/>
-                        </div>
+            open={isOpen}
+            anchorEl={anchor} 
+            placement={placement} 
+            style={{
+                width: "100%",
+                maxHeight: "unset",
+                maxWidth: "unset",
+                }}
+            onClose={onClose}
+        >
+            <Box style={{width: '300px'}}>
+                <div className='popper-content'>
+                    <RadioGroup
+                        aria-label="gender"
+                        name="controlled-radio-buttons-group"
+                        value={1}
+                    >
+                        <FormControl component="fieldset">
+                            <FormControlLabel
+                                value="reassign"
+                                control={<Radio />}
+                                label="Reassign"
+                            />
+                            <FormControlLabel
+                                value="delegate"
+                                control={<Radio />}
+                                label="Delegate"
+                            />
+                        </FormControl>
+                    </RadioGroup>
+                    <div className='popper-bottom'>
+                        <FormControl sx={{ m: 1 }} fullWidth variant='standard'>
+                            <InputLabel id="team-member">Team Member</InputLabel>
+                            <Select
+                                labelId="team-member"
+                                id="team-member-select"
+                                value={user}
+                                label="Age"
+                                placeholder='Team Member'
+                                onChange={handleChange}
+                            >
+                                {users.map((x) => <MenuItem key={x.id} value={x.id}>{x.name}</MenuItem>)}
+                            </Select>
+                        </FormControl>
+                        <CheckCircleIcon fontSize='large' htmlColor='green' onClick={onClose}/>
                     </div>
-                </Box>
-            </Popover>
+                </div>
+            </Box>
+        </Popover>
     )
 }
 
