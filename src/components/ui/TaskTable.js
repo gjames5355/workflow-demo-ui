@@ -7,7 +7,8 @@ import TodayIcon from "@material-ui/icons/Today"
 import GroupsIcon from "@material-ui/icons/Group"
 import { useState, useRef } from "react"
 import VTTaskPopover from "./task-popover/TaskPopover"
-import VTSnoozePopover from "./snooze-popover/snoozePopover"
+import VTSnoozePopover from "./snooze-popover/SnoozePopover"
+import VTFlagPopover from "./flag-popover/FlagPopover"
 
 const initialRows = [
   {
@@ -36,19 +37,22 @@ export default function DataTable() {
   const [selectedTask, setSelectedTask] = useState({
     open: false,
     openSnooze: false,
+    openFlag: false,
   })
-  const [anchorEl, setAnchorEl] = useState(null)
-  const [anchorELSnooze, setAnchorELSnooze] = useState(null)
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorElSnooze, setAnchorElSnooze] = useState(null);
+  const [anchorElFlag, setAnchorElFlag] = useState(null);
 
   const closeModal = () => {
     setSelectedTask({
       task: undefined,
       open: false,
       openSnooze: false,
-    })
-    setAnchorEl(null)
-    setAnchorELSnooze(null)
-  }
+    });
+    setAnchorEl(null);
+    setAnchorElSnooze(null);
+    setAnchorElFlag(null);
+  };
 
   const columns = [
     {
@@ -180,19 +184,29 @@ export default function DataTable() {
       headerName: "Action",
       width: 200,
       renderCell: (params) => {
-        const onCommentHandler = () => {
+        const onCommentHandler = (event) => {
           setSelectedTask({
             open: true,
             task: params.row,
-          })
+          });
+          setAnchorEl(event.currentTarget);
         }
 
-        const onSnoozeHandler = () => {
+        const onSnoozeHandler = (event) => {
           setSelectedTask({
             openSnooze: true,
             task: params.row,
-          })
-        }
+          });
+          setAnchorElSnooze(event.currentTarget);
+        };
+
+        const onFlagHandler = (event) => {
+          setSelectedTask({
+            openFlag: true,
+            task: params.row,
+          });
+          setAnchorEl(event.currentTarget);
+        };
 
         return (
           <div>
@@ -205,10 +219,18 @@ export default function DataTable() {
             <VTSnoozePopover
               task={selectedTask.task}
               open={selectedTask.openSnooze}
-              anchorE1={anchorELSnooze}
+              anchorE1={anchorElSnooze}
               onClose={closeModal}
             ></VTSnoozePopover>
-            <IconButton style={{ color: "red" }}>
+            <VTFlagPopover
+              task={selectedTask.task}
+              open={selectedTask.openFlag}
+              anchorE1={anchorElFlag}
+              onClose={closeModal}
+            >
+
+            </VTFlagPopover>
+            <IconButton onClick={onFlagHandler} style={{ color: "red" }}>
               <FlagIcon />
             </IconButton>
             <IconButton onClick={onCommentHandler}>
