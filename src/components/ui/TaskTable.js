@@ -5,12 +5,10 @@ import FlagIcon from "@material-ui/icons/Flag"
 import ChatBubbleIcon from "@material-ui/icons/ChatBubble"
 import TodayIcon from "@material-ui/icons/Today"
 import GroupsIcon from "@material-ui/icons/Group"
-import ErrorIcon from "@material-ui/icons/Error"
 import { useState } from "react"
 import VTTaskPopover from "./task-popover/TaskPopover"
 import VTSnoozePopover from "./snooze-popover/SnoozePopover"
 import VTFlagPopover from "./flag-popover/FlagPopover"
-import { Box, Grid } from "@material-ui/core"
 
 const initialRows = [
   {
@@ -89,19 +87,6 @@ export default function DataTable() {
       headerName: "Process Name",
       width: 200,
       editable: false,
-      renderCell: (params) => {
-        return params.row.priority === "High" ? (
-          <Grid container alignItems="center">
-            {" "}
-            <ErrorIcon htmlColor="red" /> {params.row.processName}
-          </Grid>
-        ) : (
-          <Grid container alignItems="center">
-            {" "}
-            {params.row.processName}
-          </Grid>
-        )
-      },
     },
     {
       field: "taskName",

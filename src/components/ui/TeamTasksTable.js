@@ -9,6 +9,8 @@ import GroupsIcon from "@material-ui/icons/Group"
 import VTTaskPopover from "./task-popover/TaskPopover"
 import VTSnoozePopover from "./snooze-popover/SnoozePopover"
 import VTFlagPopover from "./flag-popover/FlagPopover"
+import { Box, Grid } from "@material-ui/core"
+import ErrorIcon from "@material-ui/icons/Error"
 
 const initialRows = [
   {
@@ -194,6 +196,19 @@ export default function DataTable() {
       headerName: "Status",
       width: 200,
       editable: false,
+      renderCell: (params) => {
+        return params.row.status === "Overdue" ? (
+          <Grid container alignItems="center">
+            {" "}
+            <ErrorIcon htmlColor="red" /> {params.row.status}
+          </Grid>
+        ) : (
+          <Grid container alignItems="center">
+            {" "}
+            {params.row.status}
+          </Grid>
+        )
+      },
     },
     {
       field: "assignedDate",
