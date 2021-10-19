@@ -3,19 +3,21 @@ import { createTheme } from "@material-ui/core/styles"
 const veritextBlue = "#0C79C8"
 const veritextSecondary = "#A9D1F8"
 const veritextWhite = "#fff"
+const veritextGreen = "#57AE86"
 
 export default createTheme({
   palette: {
     common: {
-      blue: `${veritextBlue}`,
-      gray: `${veritextSecondary}`,
-      white: `${veritextWhite}`
+      blue: veritextBlue,
+      gray: veritextSecondary,
+      white: veritextWhite,
+      green: veritextGreen
     },
     primary: {
-       main: `${veritextBlue}`,
+       main: veritextBlue,
     },
     secondary: {
-      main: `${veritextSecondary}`,
+      main: veritextSecondary,
     },
   },
   typography: {

@@ -7,6 +7,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel"
 import FormControl from "@material-ui/core/FormControl"
 import Radio from "@material-ui/core/Radio"
 import CalendarTodayOutlined from "@material-ui/icons/CalendarTodayOutlined"
+import CheckCircleIcon from "@material-ui/icons/CheckCircle"
 
 const useStyles = makeStyles((theme) => ({
   flexGrow: {
@@ -19,6 +20,8 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: theme.palette.primary.main,
       color: theme.palette.common.white,
     },
+    padding: theme.spacing(0.5),
+    textAlign: "center",
   },
 }))
 
@@ -41,41 +44,41 @@ const VTSnoozePopover = (props) => {
     >
       <Box
         style={{
-          padding: "5px",
+          padding: "10px",
         }}
-        width="250px"
+        width="280px"
       >
         <Grid container>
-          <FormControl component="fieldset">
-            <RadioGroup
-              aria-label="gender"
-              name="controlled-radio-buttons-group"
-              value={1}
-            >
+          <RadioGroup
+            aria-label="gender"
+            name="controlled-radio-buttons-group"
+            value={1}
+          >
+            <FormControl component="fieldset">
               <FormControlLabel
                 value="snooze"
                 control={<Radio />}
                 label="Znoose"
               />
-              <Grid container>
-                <Grid item xs={12} sm={6} md={3}>
+              <Grid container spacing={1}>
+                <Grid item md={3}>
                   <Button variant="outlined" className={classes.button}>
                     30m
                   </Button>
                 </Grid>
-                <Grid item xs={12} sm={6} md={3}>
+                <Grid item md={3}>
                   <Button variant="outlined" className={classes.button}>
-                    30m
+                    1h
                   </Button>
                 </Grid>
-                <Grid item xs={12} sm={6} md={3}>
+                <Grid item md={3}>
                   <Button variant="outlined" className={classes.button}>
-                    30m
+                    3h
                   </Button>
                 </Grid>
-                <Grid item xs={12} sm={6} md={3}>
+                <Grid item md={3}>
                   <Button variant="outlined" className={classes.button}>
-                    30m
+                    5h
                   </Button>
                 </Grid>
               </Grid>
@@ -84,30 +87,36 @@ const VTSnoozePopover = (props) => {
                 control={<Radio />}
                 label="Change Due Date"
               />
-            </RadioGroup>
-          </FormControl>
-          <FormControl>
-            <FormLabel>Data</FormLabel>
-            <Paper
-              component="form"
-              style={{
-                display: "flex",
-                alignItems: "center",
-                padding: "0px 20px",
-              }}
-              elevation={0}
-              variant="outlined"
-            >
-              <InputBase
-                
-                placeholder="Comment"
-                inputProps={{
-                  "aria-label": "Comment",
-                }}
-              />
-              <CalendarTodayOutlined color="primary" />
-            </Paper>
-          </FormControl>
+            </FormControl>
+
+            <FormControl>
+              <Grid alignItems="center" container spacing={1}>
+                <Grid item>
+                  <Paper
+                    component="form"
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      padding: "0px 20px",
+                    }}
+                    elevation={0}
+                    variant="outlined"
+                  >
+                    <InputBase
+                      placeholder="Comment"
+                      inputProps={{
+                        "aria-label": "Comment",
+                      }}
+                    />
+                    <CalendarTodayOutlined color="primary" />
+                  </Paper>
+                </Grid>
+                <Grid>
+                  <CheckCircleIcon htmlColor="green" />
+                </Grid>
+              </Grid>
+            </FormControl>
+          </RadioGroup>
         </Grid>
       </Box>
     </Popover>
