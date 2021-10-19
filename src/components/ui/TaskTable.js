@@ -28,7 +28,7 @@ const initialRows = [
     proceedingType: "Depositions",
     litigationType: "Personal Injury/Negligence",
     jobNumber: 4520001,
-    status: "New",
+    status: "Assigned",
   },
   {
     id: 2,
@@ -47,7 +47,7 @@ const initialRows = [
     proceedingType: "Depositions",
     litigationType: "Personal Injury/Negligence",
     jobNumber: 4520001,
-    status: "New",
+    status: "Assigned",
   },
 ]
 
