@@ -53,7 +53,7 @@ const TaskGroups = () => {
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Typography className={classes.title}>Task Group 1</Typography>
+          <Typography className={classes.title}></Typography>
         </AccordionSummary>
         <AccordionDetails>
           <DataTable />

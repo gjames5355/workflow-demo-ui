@@ -58,20 +58,20 @@ export default function DataTable() {
     openSnooze: false,
     openFlag: false,
   })
-  const [anchorEl, setAnchorEl] = useState(null);
-  const [anchorElSnooze, setAnchorElSnooze] = useState(null);
-  const [anchorElFlag, setAnchorElFlag] = useState(null);
+  const [anchorEl, setAnchorEl] = useState(null)
+  const [anchorElSnooze, setAnchorElSnooze] = useState(null)
+  const [anchorElFlag, setAnchorElFlag] = useState(null)
 
   const closeModal = () => {
     setSelectedTask({
       task: undefined,
       open: false,
       openSnooze: false,
-    });
-    setAnchorEl(null);
-    setAnchorElSnooze(null);
-    setAnchorElFlag(null);
-  };
+    })
+    setAnchorEl(null)
+    setAnchorElSnooze(null)
+    setAnchorElFlag(null)
+  }
 
   const columns = [
     {
@@ -169,8 +169,8 @@ export default function DataTable() {
       editable: false,
     },
     {
-      field: "type",
-      headerName: "Type",
+      field: "litigationType",
+      headerName: "Litigation Type",
       width: 200,
       editable: false,
     },
@@ -204,29 +204,29 @@ export default function DataTable() {
       width: 200,
       renderCell: (params) => {
         const onCommentHandler = (event) => {
-          console.log('row', params.row);
+          console.log("row", params.row)
           setSelectedTask({
             open: true,
             task: params.row,
-          });
-          setAnchorEl(event.currentTarget);
+          })
+          setAnchorEl(event.currentTarget)
         }
 
         const onSnoozeHandler = (event) => {
           setSelectedTask({
             openSnooze: true,
             task: params.row,
-          });
-          setAnchorElSnooze(event.currentTarget);
-        };
+          })
+          setAnchorElSnooze(event.currentTarget)
+        }
 
         const onFlagHandler = (event) => {
           setSelectedTask({
             openFlag: true,
             task: params.row,
-          });
-          setAnchorEl(event.currentTarget);
-        };
+          })
+          setAnchorEl(event.currentTarget)
+        }
 
         return (
           <div>
@@ -247,9 +247,7 @@ export default function DataTable() {
               open={selectedTask.openFlag}
               anchorE1={anchorElFlag}
               onClose={closeModal}
-            >
-
-            </VTFlagPopover>
+            ></VTFlagPopover>
             <IconButton onClick={onFlagHandler} style={{ color: "red" }}>
               <FlagIcon />
             </IconButton>
