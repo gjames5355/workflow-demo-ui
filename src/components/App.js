@@ -5,6 +5,7 @@ import Fields from "./ui/Fields"
 import Header from "./ui/Header"
 import theme from "./ui/Theme"
 import TaskGroups from "./ui/TaskGroups"
+import SubHeader from "./ui/SubHeader"
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           />
         </Switch>
       </Router>
+      <SubHeader />
       <TaskGroups />
     </ThemeProvider>
   )
