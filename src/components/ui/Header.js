@@ -176,8 +176,7 @@ const Header = (props) => {
                 color="inherit"
                 aria-label="open drawer"
               ></IconButton>
-              <img src="/assets/img/logo-white.png" height="50px" alt="logo" />
-              
+              <img src="/assets/img/logo-white.png" height="45px" alt="logo" />
 
               <div className={classes.grow} />
               <div className={classes.search}>

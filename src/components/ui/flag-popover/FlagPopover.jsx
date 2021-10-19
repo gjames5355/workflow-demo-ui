@@ -1,5 +1,5 @@
 import Popover from "@material-ui/core/Popover"
-import { Box, makeStyles, IconButton } from "@material-ui/core"
+import { Box, IconButton } from "@material-ui/core"
 import Grid from "@material-ui/core/Grid"
 import FlagIcon from "@material-ui/icons/Flag"
 
