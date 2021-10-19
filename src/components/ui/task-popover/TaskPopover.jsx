@@ -12,7 +12,7 @@ import { InputBase, Paper } from "@material-ui/core"
 const VTTaskPopover = (props) => {
   return (
     <Popover
-      open={props.open}
+      open={props?.open}
       anchorEl={props.anchor}
       onClose={props.onClose}
       anchorOrigin={{
@@ -27,7 +27,7 @@ const VTTaskPopover = (props) => {
     >
       <Box padding="15px" width="250px">
         <Item item xs>
-          <Typography component="subtitle1">{props.task?.taskName}</Typography>
+          <Typography component="h6">{props.task?.taskName}</Typography>
         </Item>
         <Item>
           <FormLabel>Data</FormLabel>
@@ -65,14 +65,17 @@ const VTTaskPopover = (props) => {
             <FormGroup style={{
                 padding: "5px 0px"
             }}>
-              <FormLabel>Data</FormLabel>
-              <TextField label="Comment" variant="filled" />
+              <FormLabel>Process Name</FormLabel>
+              <TextField placeholder="Comment" variant="filled" value={props.task?.processName}>
+                
+              </TextField>
             </FormGroup>
             <FormGroup style={{
                 padding: "5px 0px"
             }}>
-              <FormLabel>Data</FormLabel>
-              <TextField label="Comment" variant="filled" />
+              <FormLabel>Priority</FormLabel>
+              <TextField placeholder="Comment" value={props.task?.priority} variant="filled" />
+                
             </FormGroup>
             <FormGroup style={{
                 padding: "5px 0px"
