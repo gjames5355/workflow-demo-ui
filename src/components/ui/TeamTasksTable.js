@@ -1,15 +1,16 @@
-import * as React from "react"
-import { useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { DataGrid } from "@material-ui/data-grid"
+import { GlobalContext } from "../../context/GlobalContext"
 import IconButton from "@material-ui/core/IconButton"
 import FlagIcon from "@material-ui/icons/Flag"
 import ChatBubbleIcon from "@material-ui/icons/ChatBubble"
 import TodayIcon from "@material-ui/icons/Today"
 import GroupsIcon from "@material-ui/icons/Group"
 import VTTaskPopover from "./task-popover/TaskPopover"
-import VTSnoozePopover from "./snooze-popover/SnoozePopover"
+import SnoozePopover from "./snooze-popover/SnoozePopover"
 import VTFlagPopover from "./flag-popover/FlagPopover"
-import { Box, Grid } from "@material-ui/core"
+import ReassignPopover from "./reassign-popover/ReassignPopover"
+import { Grid } from "@material-ui/core"
 import ErrorIcon from "@material-ui/icons/Error"
 
 const initialRows = [
@@ -63,21 +64,41 @@ const initialRows = [
 ]
 
 export default function DataTable() {
-  const [rows, setRows] = useState(initialRows)
+  const { filterValue, setCount } = useContext(GlobalContext);
+  const [data, setData] = useState(initialRows);
   const [selectedTask, setSelectedTask] = useState({
     open: false,
     openSnooze: false,
     openFlag: false,
+    openAssign: false,
   })
   const [anchorEl, setAnchorEl] = useState(null);
   const [anchorElSnooze, setAnchorElSnooze] = useState(null);
   const [anchorElFlag, setAnchorElFlag] = useState(null);
+
+  useEffect(() => {
+    const filteredRows = initialRows.filter(r => 
+      r.processName.toLowerCase().includes(filterValue.toLowerCase()) 
+      || r.taskName.toLowerCase().includes(filterValue.toLowerCase())
+      || r.primaryVendor.toLowerCase().includes(filterValue.toLowerCase())
+      || r.proceedingType.toLowerCase().includes(filterValue.toLowerCase())
+      || r.client.toLowerCase().includes(filterValue.toLowerCase())
+      || r.division.toLowerCase().includes(filterValue.toLowerCase())
+      || r.priority.toLowerCase().includes(filterValue.toLowerCase())
+      );
+      setData(filteredRows);
+  }, [filterValue])
+
+  const handleSelectRow = e => {
+    setCount(e.length);
+  }
 
   const closeModal = () => {
     setSelectedTask({
       task: undefined,
       open: false,
       openSnooze: false,
+      openAssign: false,
     });
     setAnchorEl(null);
     setAnchorElSnooze(null);
@@ -257,6 +278,11 @@ export default function DataTable() {
           setAnchorEl(event.currentTarget)
         }
 
+        const onGroupIconClick = e => {
+          setSelectedTask(prev => ({...prev, openAssign: true, task: params.row}));
+          setAnchorEl(e.currentTarget)
+        }
+        
         return (
           <div>
             <VTTaskPopover
@@ -265,18 +291,19 @@ export default function DataTable() {
               anchorE1={anchorEl}
               onClose={closeModal}
             ></VTTaskPopover>
-            <VTSnoozePopover
+            <SnoozePopover
               task={selectedTask.task}
               open={selectedTask.openSnooze}
               anchorE1={anchorElSnooze}
               onClose={closeModal}
-            ></VTSnoozePopover>
+            ></SnoozePopover>
             <VTFlagPopover
               task={selectedTask.task}
               open={selectedTask.openFlag}
               anchorE1={anchorElFlag}
               onClose={closeModal}
             ></VTFlagPopover>
+            <ReassignPopover isOpen={selectedTask.openAssign} anchor={anchorEl} onClose={closeModal}/>
             <IconButton onClick={onFlagHandler} style={{ color: "red" }}>
               <FlagIcon />
             </IconButton>
@@ -290,7 +317,7 @@ export default function DataTable() {
               />
             </IconButton>
             <IconButton>
-              <GroupsIcon style={{ color: "#104B67" }} />
+              <GroupsIcon style={{ color: "#104B67" }} onClick={onGroupIconClick}/>
             </IconButton>
           </div>
         )
@@ -301,12 +328,13 @@ export default function DataTable() {
   return (
     <div style={{ height: 400, width: "100%" }}>
       <DataGrid
-        rows={rows}
+        rows={data}
         columns={columns}
         pageSize={2}
         onColumnOrderChange
         checkboxSelection
         disableSelectionOnClick
+        onSelectionModelChange={handleSelectRow}
       />
     </div>
   )

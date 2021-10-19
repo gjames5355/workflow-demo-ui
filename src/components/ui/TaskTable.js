@@ -1,14 +1,15 @@
-import * as React from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { DataGrid } from "@material-ui/data-grid"
+import { GlobalContext } from "../../context/GlobalContext"
 import IconButton from "@material-ui/core/IconButton"
 import FlagIcon from "@material-ui/icons/Flag"
 import ChatBubbleIcon from "@material-ui/icons/ChatBubble"
 import TodayIcon from "@material-ui/icons/Today"
 import GroupsIcon from "@material-ui/icons/Group"
-import { useState } from "react"
 import VTTaskPopover from "./task-popover/TaskPopover"
 import SnoozePopover from "./snooze-popover/SnoozePopover"
 import VTFlagPopover from "./flag-popover/FlagPopover"
+import ReassignPopover from "./reassign-popover/ReassignPopover"
 
 const initialRows = [
   {
@@ -60,25 +61,46 @@ const initialRows = [
 ]
 
 export default function DataTable() {
-  const [rows, setRows] = useState(initialRows)
+  const { filterValue, setCount } = useContext(GlobalContext)
+  const [data, setData] = useState(initialRows)
   const [selectedTask, setSelectedTask] = useState({
     open: false,
     openSnooze: false,
     openFlag: false,
+    openAssign: false,
   })
   const [anchorEl, setAnchorEl] = useState(null)
   const [anchorElSnooze, setAnchorElSnooze] = useState(null)
   const [anchorElFlag, setAnchorElFlag] = useState(null)
+
+  useEffect(() => {
+    const filteredRows = initialRows.filter(
+      (r) =>
+        r.processName.toLowerCase().includes(filterValue.toLowerCase()) ||
+        r.taskName.toLowerCase().includes(filterValue.toLowerCase()) ||
+        r.primaryVendor.toLowerCase().includes(filterValue.toLowerCase()) ||
+        r.proceedingType.toLowerCase().includes(filterValue.toLowerCase()) ||
+        r.client.toLowerCase().includes(filterValue.toLowerCase()) ||
+        r.division.toLowerCase().includes(filterValue.toLowerCase()) ||
+        r.priority.toLowerCase().includes(filterValue.toLowerCase())
+    )
+    setData(filteredRows)
+  }, [filterValue])
 
   const closeModal = () => {
     setSelectedTask({
       task: undefined,
       open: false,
       openSnooze: false,
+      openAssign: false,
     })
     setAnchorEl(null)
     setAnchorElSnooze(null)
     setAnchorElFlag(null)
+  }
+
+  const handleSelectRow = (e) => {
+    setCount(e.length)
   }
 
   const columns = [
@@ -232,6 +254,15 @@ export default function DataTable() {
           setAnchorEl(event.currentTarget)
         }
 
+        const onGroupIconClick = (e) => {
+          setSelectedTask((prev) => ({
+            ...prev,
+            openAssign: true,
+            task: params.row,
+          }))
+          setAnchorEl(e.currentTarget)
+        }
+
         let priorityColor = null
         switch (params.row.priority) {
           case "High":
@@ -265,12 +296,12 @@ export default function DataTable() {
               anchorE1={anchorElFlag}
               onClose={closeModal}
             ></VTFlagPopover>
-            <IconButton
-              onClick={onFlagHandler}
-              style={{
-                color: priorityColor,
-              }}
-            >
+            <ReassignPopover
+              isOpen={selectedTask.openAssign}
+              anchor={anchorEl}
+              onClose={closeModal}
+            />
+            <IconButton onClick={onFlagHandler} style={{ color: "red" }}>
               <FlagIcon />
             </IconButton>
             <IconButton onClick={onCommentHandler}>
@@ -283,7 +314,10 @@ export default function DataTable() {
               />
             </IconButton>
             <IconButton>
-              <GroupsIcon style={{ color: "#104B67" }} />
+              <GroupsIcon
+                onClick={onGroupIconClick}
+                style={{ color: "#104B67" }}
+              />
             </IconButton>
           </div>
         )
@@ -294,12 +328,13 @@ export default function DataTable() {
   return (
     <div style={{ height: 400, width: "100%" }}>
       <DataGrid
-        rows={rows}
+        rows={data}
         columns={columns}
         pageSize={5}
         onColumnOrderChange
         checkboxSelection
         disableSelectionOnClick
+        onSelectionModelChange={handleSelectRow}
       />
     </div>
   )

@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "1.25rem",
   },
   accordion1: {
-    marginTop: "35px",
+    marginTop: "15px",
   },
   accordion2: {
     marginTop: "35px",
@@ -46,7 +46,7 @@ const TaskGroups = () => {
 
   return (
     <div>
-      <Accordion className={classes.accordion1}>
+      <Accordion className={classes.accordion1} defaultExpanded={true}>
         <AccordionSummary
           className={classes.accordionSummary1}
           expandIcon={<ExpandMoreIcon />}

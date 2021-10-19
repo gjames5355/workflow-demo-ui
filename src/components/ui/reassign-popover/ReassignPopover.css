@@ -1,0 +1,37 @@
+.row-actions {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.popper {
+    min-width: 50px;
+}
+
+.popper-content {
+    padding: 15px;
+}
+
+.popper-main {
+    width: 80%;
+    margin-bottom: 10px;
+}
+
+.popper-item {
+    margin: 5px;
+    padding-bottom: 5px;
+}
+
+.popper-close-btn {
+    position: absolute;
+    top: 16px;
+    right: 10px;
+    min-width: 20px;
+    cursor: pointer
+}
+
+.popper-bottom {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
