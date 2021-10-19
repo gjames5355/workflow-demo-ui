@@ -66,7 +66,7 @@ const VTTaskPopover = (props) => {
                 padding: "5px 0px"
             }}>
               <FormLabel>Process Name</FormLabel>
-              <TextField placeholder="Comment" variant="filled" value={props.task?.processName}>
+              <TextField placeholder="Process Name" variant="filled" value={props.task?.processName}>
                 
               </TextField>
             </FormGroup>
@@ -74,20 +74,20 @@ const VTTaskPopover = (props) => {
                 padding: "5px 0px"
             }}>
               <FormLabel>Priority</FormLabel>
-              <TextField placeholder="Comment" value={props.task?.priority} variant="filled" />
+              <TextField placeholder="Priority" value={props.task?.priority} variant="filled" />
                 
             </FormGroup>
             <FormGroup style={{
                 padding: "5px 0px"
             }}>
               <FormLabel>Division</FormLabel>
-              <TextField label="Comment" variant="filled" value={props.task?.division} />
+              <TextField variant="filled" value={props.task?.division} />
             </FormGroup>
             <FormGroup style={{
                 padding: "5px 0px"
             }}>
               <FormLabel>Child Division</FormLabel>
-              <TextField label="Comment" variant="filled" value={props.task?.childDivision} />
+              <TextField variant="filled" value={props.task?.childDivision} />
             </FormGroup>
           </Grid>
         </Box>
