@@ -95,12 +95,7 @@ export default function DataTable() {
     {
       field: "division",
       headerName: "Division",
-      description: "This column has a value getter and is not sortable.",
       width: 200,
-      // valueGetter: (params) =>
-      //   `${params.getValue(params.id, "firstName") || ""} ${
-      //     params.getValue(params.id, "lastName") || ""
-      //   }`,
     },
     {
       field: "childDivision",
