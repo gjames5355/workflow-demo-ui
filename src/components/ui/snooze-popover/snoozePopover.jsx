@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const VTSnoozePopover = (props) => {
+const SnoozePopover = (props) => {
   const classes = useStyles()
   return (
     <Popover
@@ -123,4 +123,4 @@ const VTSnoozePopover = (props) => {
   )
 }
 
-export default VTSnoozePopover
+export default SnoozePopover
