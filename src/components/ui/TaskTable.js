@@ -10,16 +10,26 @@ import  VTTaskPopover  from './task-popover/TaskPopover';
  
 
 const initialRows = [
-  { id: 1, processName: "Snow", taskName: "Jon", age: 35 },
-  { id: 2, processName: "Lannister", taskName: "Cersei", age: 42 },
-  { id: 3, processName: "Lannister", taskName: "Jaime", age: 45 },
-  { id: 4, processName: "Stark", taskName: "Arya", age: 16 },
-  { id: 5, processName: "Targaryen", taskName: "Daenerys", age: null },
-  { id: 6, processName: "Melisandre", taskName: null, age: 150 },
-  { id: 7, processName: "Clifford", taskName: "Ferrara", age: 44 },
-  { id: 8, processName: "Frances", taskName: "Rossini", age: 36 },
-  { id: 9, processName: "Roxie", taskName: "Harvey", age: 65 },
-]
+  {
+    id: 1,
+    processName: "Produce MPEG",
+    taskName: "Stich MPEG",
+    priority: "High",
+    division: "South Carolina",
+    date_time: "10/18/21 9:00AM",
+    client: "Kassel McVey",
+    case: "Addison, Lavaunda Vs. South Carolina Dept Of Trans",
+    primaryVendor: "Solange Ruiz-Uribe",
+    deliveryMethod: "Expedited",
+    deliveryDays: 3,
+    jobDueDate: "10/21/2021",
+    scheduleCity: "Columbia",
+    proceedingType: "Depositions",
+    litigationType: "Personal Injury/Negligence",
+    jobNumber: 4520001,
+    status: "New",
+  },
+];
 
 
 export default function DataTable() {
@@ -205,7 +215,8 @@ export default function DataTable() {
       <DataGrid
         rows={rows}
         columns={columns}
-        pageSize={5}
+        pageSize={1}
+        onColumnOrderChange
         checkboxSelection
         disableSelectionOnClick
       />

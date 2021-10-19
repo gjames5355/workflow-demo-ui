@@ -5,7 +5,7 @@ import ArrowForwardIcon from "@material-ui/icons/ArrowForward"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 import Typography from "@material-ui/core/Typography"
 import { makeStyles } from "@material-ui/core/styles"
-import DataTable from "./TaskTable"
+import DataTable from "./TeamTasksTable"
 const useStyles = makeStyles((theme) => ({
   title: {
     ...theme.typography.tab,
@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const TaskGroups = () => {
+const TeamTasks = () => {
   const classes = useStyles()
 
   return (
@@ -68,4 +68,4 @@ const TaskGroups = () => {
   )
 }
 
-export default TaskGroups
+export default TeamTasks
