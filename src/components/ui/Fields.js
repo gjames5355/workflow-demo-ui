@@ -58,18 +58,6 @@ const Fields = () => {
             to="/team"
             label="Team Tasks"
           />
-          <Tab
-            className={classes.tab}
-            component={Link}
-            to="/jobs"
-            label="Jobs"
-          />
-          <Tab
-            className={classes.tab}
-            component={Link}
-            to="/management"
-            label="Team Management"
-          />
         </Tabs>
         <Button
           color="primary"

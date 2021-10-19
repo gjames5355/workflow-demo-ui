@@ -31,6 +31,25 @@ const initialRows = [
     jobNumber: 4520001,
     status: "New",
   },
+  {
+    id: 2,
+    processName: "Produce JPG",
+    taskName: "Stich JPG",
+    priority: "High",
+    division: "South Carolina",
+    date_time: "10/18/21 9:00AM",
+    client: "Kassel McVey",
+    case: "Addison, Lavaunda Vs. South Carolina Dept Of Trans",
+    primaryVendor: "Solange Ruiz-Uribe",
+    deliveryMethod: "Expedited",
+    deliveryDays: 3,
+    jobDueDate: "10/21/2021",
+    scheduleCity: "Columbia",
+    proceedingType: "Depositions",
+    litigationType: "Personal Injury/Negligence",
+    jobNumber: 4520001,
+    status: "New",
+  },
 ]
 
 export default function DataTable() {
@@ -42,9 +61,9 @@ export default function DataTable() {
     openFlag: false,
     openAssign: false,
   })
-  const [anchorEl, setAnchorEl] = useState(null);
-  const [anchorElSnooze, setAnchorElSnooze] = useState(null);
-  const [anchorElFlag, setAnchorElFlag] = useState(null);
+  const [anchorEl, setAnchorEl] = useState(null)
+  const [anchorElSnooze, setAnchorElSnooze] = useState(null)
+  const [anchorElFlag, setAnchorElFlag] = useState(null)
 
 
   useEffect(() => {
@@ -166,8 +185,8 @@ export default function DataTable() {
       editable: false,
     },
     {
-      field: "type",
-      headerName: "Type",
+      field: "litigationType",
+      headerName: "Litigation Type",
       width: 200,
       editable: false,
     },
@@ -201,28 +220,29 @@ export default function DataTable() {
       width: 200,
       renderCell: (params) => {
         const onCommentHandler = (event) => {
+          console.log("row", params.row)
           setSelectedTask({
             open: true,
             task: params.row,
-          });
-          setAnchorEl(event.currentTarget);
+          })
+          setAnchorEl(event.currentTarget)
         }
 
         const onSnoozeHandler = (event) => {
           setSelectedTask({
             openSnooze: true,
             task: params.row,
-          });
-          setAnchorElSnooze(event.currentTarget);
-        };
+          })
+          setAnchorElSnooze(event.currentTarget)
+        }
 
         const onFlagHandler = (event) => {
           setSelectedTask({
             openFlag: true,
             task: params.row,
-          });
-          setAnchorEl(event.currentTarget);
-        };
+          })
+          setAnchorEl(event.currentTarget)
+        }
 
         const onGroupIconClick = e => {
           setSelectedTask(prev => ({...prev, openAssign: true, task: params.row}));
@@ -277,7 +297,7 @@ export default function DataTable() {
       <DataGrid
         rows={data}
         columns={columns}
-        pageSize={1}
+        pageSize={5}
         onColumnOrderChange
         checkboxSelection
         disableSelectionOnClick
