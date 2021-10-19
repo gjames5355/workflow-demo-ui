@@ -58,7 +58,7 @@ const VTSnoozePopover = (props) => {
               <FormControlLabel
                 value="snooze"
                 control={<Radio />}
-                label="Znoose"
+                label="Znooze"
               />
               <Grid container spacing={1}>
                 <Grid item md={3}>

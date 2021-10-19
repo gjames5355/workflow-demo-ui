@@ -9,6 +9,8 @@ import GroupsIcon from "@material-ui/icons/Group"
 import VTTaskPopover from "./task-popover/TaskPopover"
 import VTSnoozePopover from "./snooze-popover/SnoozePopover"
 import VTFlagPopover from "./flag-popover/FlagPopover"
+import { Box, Grid } from "@material-ui/core"
+import ErrorIcon from "@material-ui/icons/Error"
 
 const initialRows = [
   {
@@ -17,7 +19,9 @@ const initialRows = [
     taskName: "QC Original Files",
     priority: "Normal",
     division: "Maryland",
-    date_time: "10/7/21 9:00AM",
+    childDivision: "Columbia",
+    dateDime: "10/18/2021 9:00 AM",
+    thirdParty: "Third Party",
     client: "Litigation Services LLC",
     case: "Dorsey, Bessie Et Al. v. Lm General Insurance Company",
     primaryVendor: "Cappy Hallock",
@@ -39,7 +43,8 @@ const initialRows = [
     taskName: "Review/ QC Files/ Prepare PIP Video",
     priority: "Urgent",
     division: "Houston",
-    date_time: "10/8/2021  1:00:00 PM",
+    childDivision: "Ostin",
+    dateDime: "10/8/2021  1:00:00 PM",
     client: "Arnold & Itkin LLP",
     case: "In Re Brenn De Bree, Et Al.",
     primaryVendor: "Joanna Sagastisado",
@@ -115,7 +120,7 @@ export default function DataTable() {
       editable: false,
     },
     {
-      field: "date_time",
+      field: "dateDime",
       headerName: "Date/Time",
       width: 200,
       editable: false,
@@ -191,6 +196,19 @@ export default function DataTable() {
       headerName: "Status",
       width: 200,
       editable: false,
+      renderCell: (params) => {
+        return params.row.status === "Overdue" ? (
+          <Grid container alignItems="center">
+            {" "}
+            <ErrorIcon htmlColor="red" /> {params.row.status}
+          </Grid>
+        ) : (
+          <Grid container alignItems="center">
+            {" "}
+            {params.row.status}
+          </Grid>
+        )
+      },
     },
     {
       field: "assignedDate",
