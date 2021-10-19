@@ -8,19 +8,19 @@ import FormControl from "@material-ui/core/FormControl"
 import Radio from "@material-ui/core/Radio"
 import CalendarTodayOutlined from "@material-ui/icons/CalendarTodayOutlined"
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   flexGrow: {
     flex: "1",
   },
   button: {
-    backgroundColor: "#fff",
-    color: "#3c52b2",
+    backgroundColor: theme.palette.common.white,
+    color: theme.palette.primary.main,
     "&:hover": {
-      backgroundColor: "#3c52b2",
-      color: "#fff",
+      backgroundColor: theme.palette.primary.main,
+      color: theme.palette.common.white,
     },
   },
-})
+}))
 
 const VTSnoozePopover = (props) => {
   const classes = useStyles()
