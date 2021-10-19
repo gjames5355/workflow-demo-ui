@@ -7,7 +7,7 @@ import ChatBubbleIcon from "@material-ui/icons/ChatBubble"
 import TodayIcon from "@material-ui/icons/Today"
 import GroupsIcon from "@material-ui/icons/Group"
 import VTTaskPopover from "./task-popover/TaskPopover"
-import VTSnoozePopover from "./snooze-popover/SnoozePopover"
+import SnoozePopover from "./snooze-popover/SnoozePopover"
 import VTFlagPopover from "./flag-popover/FlagPopover"
 import ReassignPopover from "./reassign-popover/ReassignPopover"
 import { Grid } from "@material-ui/core"
@@ -291,12 +291,12 @@ export default function DataTable() {
               anchorE1={anchorEl}
               onClose={closeModal}
             ></VTTaskPopover>
-            <VTSnoozePopover
+            <SnoozePopover
               task={selectedTask.task}
               open={selectedTask.openSnooze}
               anchorE1={anchorElSnooze}
               onClose={closeModal}
-            ></VTSnoozePopover>
+            ></SnoozePopover>
             <VTFlagPopover
               task={selectedTask.task}
               open={selectedTask.openFlag}

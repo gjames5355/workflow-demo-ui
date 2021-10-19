@@ -46,7 +46,7 @@ const TaskGroups = () => {
 
   return (
     <div>
-      <Accordion className={classes.accordion1} expanded={true}>
+      <Accordion className={classes.accordion1} defaultExpanded={true}>
         <AccordionSummary
           className={classes.accordionSummary1}
           expandIcon={<ExpandMoreIcon />}

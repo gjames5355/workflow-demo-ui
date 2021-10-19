@@ -6,6 +6,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 import Typography from "@material-ui/core/Typography"
 import { makeStyles } from "@material-ui/core/styles"
 import DataTable from "./TeamTasksTable"
+
 const useStyles = makeStyles((theme) => ({
   title: {
     ...theme.typography.tab,
@@ -42,11 +43,11 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const TeamTasks = () => {
-  const classes = useStyles()
+  const classes = useStyles();
 
   return (
     <div>
-      <Accordion className={classes.accordion1} expanded={true}>
+      <Accordion className={classes.accordion1} defaultExpanded={true}>
         <AccordionSummary
           className={classes.accordionSummary1}
           expandIcon={<ExpandMoreIcon />}
