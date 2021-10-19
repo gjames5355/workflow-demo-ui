@@ -53,7 +53,7 @@ const initialRows = [
 ]
 
 export default function DataTable() {
-  const { filterValue } = useContext(GlobalContext);
+  const { filterValue, setCount } = useContext(GlobalContext);
   const [data, setData] = useState(initialRows);
   const [selectedTask, setSelectedTask] = useState({
     open: false,
@@ -73,6 +73,8 @@ export default function DataTable() {
       || r.primaryVendor.toLowerCase().includes(filterValue.toLowerCase())
       || r.proceedingType.toLowerCase().includes(filterValue.toLowerCase())
       || r.client.toLowerCase().includes(filterValue.toLowerCase())
+      || r.division.toLowerCase().includes(filterValue.toLowerCase())
+      || r.priority.toLowerCase().includes(filterValue.toLowerCase())
       );
       setData(filteredRows);
   }, [filterValue])
@@ -88,6 +90,10 @@ export default function DataTable() {
     setAnchorElSnooze(null);
     setAnchorElFlag(null);
   };
+
+  const handleSelectRow = e => {
+    setCount(e.length);
+  }
 
   const columns = [
     {
@@ -301,6 +307,7 @@ export default function DataTable() {
         onColumnOrderChange
         checkboxSelection
         disableSelectionOnClick
+        onSelectionModelChange={handleSelectRow}
       />
     </div>
   )

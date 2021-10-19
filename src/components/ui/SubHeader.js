@@ -1,8 +1,8 @@
 import { Button, makeStyles } from '@material-ui/core';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useLocation } from 'react-router';
-import WorkLoadBar from './WorkLoadBar';
-import { Check, FilterListOutlined } from '@material-ui/icons';
+// import WorkLoadBar from './WorkLoadBar';
+import { Check,  } from '@material-ui/icons';
 import { GlobalContext } from '../../context/GlobalContext';
 
 const useStyles = makeStyles(theme => ({
@@ -63,50 +63,53 @@ const useStyles = makeStyles(theme => ({
 const SubHeader = (props) => {
     const styles = useStyles();
     const location = useLocation();
-    const { count } = useContext(GlobalContext);
-    return (
+    const { count, setCount } = useContext(GlobalContext);
+
+    useEffect(() => {
+        setCount(0)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[location]);
+
+    return count > 0 &&
         <div className={styles.container}>
-            {count > 0 && location.pathname === '/team' ? 
-            <>
-                <div className={styles.buttonContainer}>
-                    <div className={styles.selectedCount}>
-                        <Button className={styles.countButton} startIcon={<Check />} size='medium' color='success' variant='outlined'>Mark {count} as Complete</Button>
-                    </div>
-                    <div className={styles.buttonGroup1}>
-                        <Button className={styles.button1} size='medium' color='primary' variant='outlined'>Claim</Button>
-                        <Button className={styles.button1} size='medium' color='primary' variant='outlined'>Assign</Button>
-                        <Button className={styles.button1} size='medium' color='primary' variant='outlined'>Delegate</Button>
-                    </div>
-                    <div className={styles.buttonGroup2}>
-                        <Button className={styles.button1} size='medium' color='primary' variant='outlined'>Change Priority</Button>
-                    </div>
-                    <div className={styles.buttonGroup3}>
-                        <Button className={styles.button1} size='medium' color='primary' variant='outlined'>Change Due Date</Button>
-                        <Button className={styles.button3} size='medium' color='primary' variant='outlined'>Snooze</Button>
-                    </div>
+            <div className={styles.buttonContainer}>
+                <div className={styles.selectedCount}>
+                    <Button className={styles.countButton} startIcon={<Check />} size='medium' variant='outlined'>Mark {count} as Complete</Button>
                 </div>
-            </> 
-            :<>
-                <div className={styles.subHeaderLeft}>
-                    <div className={styles.filterContainer}>
-                        <FilterListOutlined />
-                    </div>
+                <div className={styles.buttonGroup1}>
+                    {location.pathname === '/team' && <Button className={styles.button1} size='medium' color='primary' variant='outlined'>Claim</Button>}
+                    <Button className={styles.button1} size='medium' color='primary' variant='outlined'>Assign</Button>
+                    <Button className={styles.button1} size='medium' color='primary' variant='outlined'>Refer</Button>
                 </div>
-                <div className={styles.subHeaderRight}>
-                    {location.pathname === '/' ? 
-                        <>
-                            <div className={styles.workLoadBar}></div>
-                            <div className={styles.workLoadBar}>
-                                <WorkLoadBar value={props.value}/>
-                            </div>
-                        </>
-                        : null
-                    }
+                <div className={styles.buttonGroup2}>
+                    <Button className={styles.button1} size='medium' color='primary' variant='outlined'>Change Priority</Button>
                 </div>
-            </>
-            }
+                <div className={styles.buttonGroup3}>
+                    <Button className={styles.button1} size='medium' color='primary' variant='outlined'>Change Due Date</Button>
+                    <Button className={styles.button3} size='medium' color='primary' variant='outlined'>Snooze</Button>
+                </div>
+            </div>
+            {/* :<> */}
+                {/* <div className={styles.subHeaderLeft}> */}
+                    {/* <div className={styles.filterContainer}> */}
+                        {/* <FilterListOutlined /> */}
+                    {/* </div> */}
+                {/* </div> */}
+                {/* <div className={styles.subHeaderRight}> */}
+                    {/* {location.pathname === '/' ?  */}
+                         {/* <> */}
+                            {/* <div className={styles.workLoadBar}></div> */}
+                            {/* <div className={styles.workLoadBar}> */}
+                                {/* <WorkLoadBar value={props.value}/> */}
+                            {/* </div> */}
+                        {/* </> */}
+                         {/* : null */}
+                     {/* } */}
+                {/* </div> */}
+            {/* </> */}
+            {/* } */}
         </div>
-    )
+    ;
 }
 
 export default SubHeader

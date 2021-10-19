@@ -78,6 +78,8 @@ export default function DataTable() {
       || r.primaryVendor.toLowerCase().includes(filterValue.toLowerCase())
       || r.proceedingType.toLowerCase().includes(filterValue.toLowerCase())
       || r.client.toLowerCase().includes(filterValue.toLowerCase())
+      || r.division.toLowerCase().includes(filterValue.toLowerCase())
+      || r.priority.toLowerCase().includes(filterValue.toLowerCase())
       );
       setData(filteredRows);
   }, [filterValue])
