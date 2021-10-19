@@ -1,5 +1,6 @@
-import * as React from "react"
+import React, { useContext, useEffect, useState} from "react"
 import { DataGrid } from "@material-ui/data-grid"
+import { GlobalContext } from "../../context/GlobalContext";
 
 const columns = [
   {
@@ -151,10 +152,23 @@ const rows = [
 ]
 
 export default function DataTable() {
+  const { filterValue } = useContext(GlobalContext);
+  const [data, setData] = useState(rows);
+
+  useEffect(() => {
+    const filteredRows = rows.filter(r => 
+      r.processName.toLowerCase().includes(filterValue.toLowerCase()) 
+      || r.taskName.toLowerCase().includes(filterValue.toLowerCase())
+      || r.primaryVendor.toLowerCase().includes(filterValue.toLowerCase())
+      || r.proceedingType.toLowerCase().includes(filterValue.toLowerCase())
+      || r.client.toLowerCase().includes(filterValue.toLowerCase())
+      );
+      setData(filteredRows);
+  }, [filterValue])
   return (
     <div style={{ height: 400, width: "100%" }}>
       <DataGrid
-        rows={rows}
+        rows={data}
         columns={columns}
         pageSize={1}
         onColumnOrderChange

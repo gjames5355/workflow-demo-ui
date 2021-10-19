@@ -8,12 +8,15 @@ const BorderLinearProgress = styled(LinearProgress)(() => ({
 
 const WorkLoadBar = ({value = 40, ...props}) => {
     return (
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <Box sx={{ width: '100%', mr: 1 }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-around' }}>
+            <Box sx={{ minWidth: 35 }}>
+                <Typography variant="h6" color="inherit">Workload</Typography>
+            </Box>
+            <Box sx={{ width: '55%', mr: 1 }}>
                 <BorderLinearProgress variant="determinate" value={value} />
             </Box>
-            <Box sx={{ minWidth: 35 }}>
-                <Typography variant="subtitle2" color="text.secondary">{value}/100 Tasks</Typography>
+            <Box sx={{ minWidth: 25, fontSize: '0.675rem' }}>
+                <Typography variant="subtitle2" color="inherit">{value}/100 Tasks</Typography>
             </Box>
         </Box>
     )

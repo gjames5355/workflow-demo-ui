@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useContext } from "react"
 import AppBar from "@material-ui/core/AppBar"
 import AccountCircle from "@material-ui/icons/AccountCircle"
 import { makeStyles, alpha } from "@material-ui/core/styles"
@@ -13,6 +13,7 @@ import IconButton from "@material-ui/core/IconButton"
 import PlayCircleFilledWhiteIcon from "@material-ui/icons/PlayCircleFilledWhite"
 
 import logo from "../../assets/logo.png"
+import { GlobalContext } from "../../context/GlobalContext"
 
 function ElevationScroll({ children }) {
   const trigger = useScrollTrigger({
@@ -95,7 +96,8 @@ const useStyles = makeStyles((theme) => ({
 const Header = (props) => {
   const classes = useStyles()
   const [anchorEl, setAnchorEl] = React.useState(null)
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null)
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const { filterValue, setFilterValue } = useContext(GlobalContext);
 
   const isMenuOpen = Boolean(anchorEl)
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl)
@@ -115,6 +117,10 @@ const Header = (props) => {
 
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget)
+  }
+
+  const handleInputChange = e => {
+    setFilterValue(e.target.value)
   }
 
   const menuId = "primary-search-account-menu"
@@ -185,10 +191,12 @@ const Header = (props) => {
                 </div>
                 <InputBase
                   placeholder="Search…"
+                  value={filterValue}
                   classes={{
                     root: classes.inputRoot,
                     input: classes.inputInput,
                   }}
+                  onChange={handleInputChange}
                   inputProps={{ "aria-label": "search" }}
                 />
               </div>
