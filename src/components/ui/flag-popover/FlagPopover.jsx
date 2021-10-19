@@ -2,6 +2,12 @@ import Popover from "@material-ui/core/Popover"
 import { Box, IconButton } from "@material-ui/core"
 import Grid from "@material-ui/core/Grid"
 import FlagIcon from "@material-ui/icons/Flag"
+import { styled } from "@material-ui/styles"
+
+const StyledIconButton = styled(IconButton)({
+  padding: "2px",
+  "border-radius": "5px",
+})
 
 const VTFlagPopover = (props) => {
   return (
@@ -10,7 +16,7 @@ const VTFlagPopover = (props) => {
       anchorEl={props.anchor}
       onClose={props.onClose}
       anchorOrigin={{
-        vertical: 200,
+        vertical: 220,
         horizontal: "right",
       }}
       style={{
@@ -24,24 +30,33 @@ const VTFlagPopover = (props) => {
           padding: "5px",
         }}
       >
-        <Grid>
-          <IconButton>
-            <FlagIcon htmlColor="lightgray" />
-          </IconButton>
-
-          <IconButton>
-            <FlagIcon htmlColor="orange" />
-          </IconButton>
-
-          <IconButton
+        <Grid alignItems="center">
+          <StyledIconButton
             style={{
-              border: "2px solid red",
-              padding: "2px",
-              "border-radius": "5px",
+              border:
+                props.task?.priority === "Low" ? `2px solid lightgray` : "none",
+            }}
+          >
+            <FlagIcon htmlColor="lightgray" />
+          </StyledIconButton>
+
+          <StyledIconButton
+            style={{
+              border:
+                props.task?.priority === "Medium" ? `2px solid orange` : "none",
+            }}
+          >
+            <FlagIcon htmlColor="orange" />
+          </StyledIconButton>
+
+          <StyledIconButton
+            style={{
+              border:
+                props.task?.priority === "High" ? `2px solid red` : "none",
             }}
           >
             <FlagIcon htmlColor="red" />
-          </IconButton>
+          </StyledIconButton>
         </Grid>
       </Box>
     </Popover>
