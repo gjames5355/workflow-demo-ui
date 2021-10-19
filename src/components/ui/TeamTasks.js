@@ -46,7 +46,7 @@ const TeamTasks = () => {
 
   return (
     <div>
-      <Accordion className={classes.accordion1}>
+      <Accordion className={classes.accordion1} expanded={true}>
         <AccordionSummary
           className={classes.accordionSummary1}
           expandIcon={<ExpandMoreIcon />}

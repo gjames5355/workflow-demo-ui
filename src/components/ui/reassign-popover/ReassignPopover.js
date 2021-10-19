@@ -56,9 +56,9 @@ const ReassignPopover = ({ isOpen, anchor, onClose }) => {
                                 label="Reassign"
                             />
                             <FormControlLabel
-                                value="delegate"
+                                value="refer"
                                 control={<Radio />}
-                                label="Delegate"
+                                label="Refer"
                             />
                         </FormControl>
                     </RadioGroup>
