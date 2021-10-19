@@ -6,8 +6,6 @@ import Grid from "@material-ui/core/Grid"
 import Item from "@material-ui/core/Grid"
 import FormLabel from "@material-ui/core/FormLabel"
 import FormGroup from "@material-ui/core/FormGroup"
-import { FormControl, IconButton, InputAdornment } from "@material-ui/core"
-import SearchIcon from "@material-ui/icons/Search"
 import SendIcon from "@material-ui/icons/Send"
 import { InputBase, Paper } from "@material-ui/core"
 

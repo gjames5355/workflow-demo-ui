@@ -6,8 +6,8 @@ import ChatBubbleIcon from "@material-ui/icons/ChatBubble"
 import TodayIcon from "@material-ui/icons/Today"
 import GroupsIcon from "@material-ui/icons/Group"
 import { useState, useRef } from "react"
-import  VTTaskPopover  from './task-popover/TaskPopover';
- 
+import VTTaskPopover from "./task-popover/TaskPopover"
+import VTSnoozePopover from "./snooze-popover/snoozePopover"
 
 const initialRows = [
   {
@@ -29,23 +29,26 @@ const initialRows = [
     jobNumber: 4520001,
     status: "New",
   },
-];
-
+]
 
 export default function DataTable() {
-  const [rows, setRows] = useState(initialRows);
+  const [rows, setRows] = useState(initialRows)
   const [selectedTask, setSelectedTask] = useState({
     open: false,
-  });
-  const [anchorEl, setAnchorEl] = useState(null);
+    openSnooze: false,
+  })
+  const [anchorEl, setAnchorEl] = useState(null)
+  const [anchorELSnooze, setAnchorELSnooze] = useState(null)
 
   const closeModal = () => {
     setSelectedTask({
       task: undefined,
       open: false,
-    });
-    setAnchorEl(null);
-  };
+      openSnooze: false,
+    })
+    setAnchorEl(null)
+    setAnchorELSnooze(null)
+  }
 
   const columns = [
     {
@@ -177,28 +180,45 @@ export default function DataTable() {
       headerName: "Action",
       width: 200,
       renderCell: (params) => {
-
-        
-        const onCommentHandler = (event, action) => {
-          console.log('clicked', event, action, params);
+        const onCommentHandler = () => {
           setSelectedTask({
             open: true,
-            task: params.row
-          });
-          
+            task: params.row,
+          })
         }
-  
+
+        const onSnoozeHandler = () => {
+          setSelectedTask({
+            openSnooze: true,
+            task: params.row,
+          })
+        }
+
         return (
           <div>
-            <VTTaskPopover task={selectedTask.task} open={selectedTask.open} anchorE1={anchorEl} onClose={closeModal} ></VTTaskPopover>
+            <VTTaskPopover
+              task={selectedTask.task}
+              open={selectedTask.open}
+              anchorE1={anchorEl}
+              onClose={closeModal}
+            ></VTTaskPopover>
+            <VTSnoozePopover
+              task={selectedTask.task}
+              open={selectedTask.openSnooze}
+              anchorE1={anchorELSnooze}
+              onClose={closeModal}
+            ></VTSnoozePopover>
             <IconButton style={{ color: "red" }}>
               <FlagIcon />
             </IconButton>
-            <IconButton onClick={(event) => onCommentHandler(event, 'comment')}>
+            <IconButton onClick={onCommentHandler}>
               <ChatBubbleIcon style={{ color: "#104B67" }} />
             </IconButton>
             <IconButton>
-              <TodayIcon style={{ color: "#104B67" }} />
+              <TodayIcon
+                onClick={onSnoozeHandler}
+                style={{ color: "#104B67" }}
+              />
             </IconButton>
             <IconButton>
               <GroupsIcon style={{ color: "#104B67" }} />
@@ -208,7 +228,6 @@ export default function DataTable() {
       },
     },
   ]
-  
 
   return (
     <div style={{ height: 400, width: "100%" }}>
