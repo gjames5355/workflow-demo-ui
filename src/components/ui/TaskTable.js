@@ -5,7 +5,7 @@ import FlagIcon from "@material-ui/icons/Flag"
 import ChatBubbleIcon from "@material-ui/icons/ChatBubble"
 import TodayIcon from "@material-ui/icons/Today"
 import GroupsIcon from "@material-ui/icons/Group"
-import { useState, useRef } from "react"
+import { useState } from "react"
 import VTTaskPopover from "./task-popover/TaskPopover"
 import VTSnoozePopover from "./snooze-popover/SnoozePopover"
 import VTFlagPopover from "./flag-popover/FlagPopover"
@@ -15,6 +15,25 @@ const initialRows = [
     id: 1,
     processName: "Produce MPEG",
     taskName: "Stich MPEG",
+    priority: "High",
+    division: "South Carolina",
+    date_time: "10/18/21 9:00AM",
+    client: "Kassel McVey",
+    case: "Addison, Lavaunda Vs. South Carolina Dept Of Trans",
+    primaryVendor: "Solange Ruiz-Uribe",
+    deliveryMethod: "Expedited",
+    deliveryDays: 3,
+    jobDueDate: "10/21/2021",
+    scheduleCity: "Columbia",
+    proceedingType: "Depositions",
+    litigationType: "Personal Injury/Negligence",
+    jobNumber: 4520001,
+    status: "New",
+  },
+  {
+    id: 2,
+    processName: "Produce JPG",
+    taskName: "Stich JPG",
     priority: "High",
     division: "South Carolina",
     date_time: "10/18/21 9:00AM",
@@ -185,6 +204,7 @@ export default function DataTable() {
       width: 200,
       renderCell: (params) => {
         const onCommentHandler = (event) => {
+          console.log('row', params.row);
           setSelectedTask({
             open: true,
             task: params.row,
@@ -256,7 +276,7 @@ export default function DataTable() {
       <DataGrid
         rows={rows}
         columns={columns}
-        pageSize={1}
+        pageSize={5}
         onColumnOrderChange
         checkboxSelection
         disableSelectionOnClick
