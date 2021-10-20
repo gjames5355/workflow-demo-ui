@@ -13,7 +13,8 @@ import { GlobalContext } from '../context/GlobalContext'
 function App() {
   const [count, setCount] = useState(0);
   const [filterValue, setFilterValue] = useState('');
-  const value = {count, setCount, filterValue, setFilterValue}
+  const [selectedRows, setSelectedRows] = useState([]);
+  const value = {count, setCount, filterValue, setFilterValue, selectedRows, setSelectedRows}
 
   return (
     <GlobalContext.Provider value={value}>

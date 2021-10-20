@@ -63,13 +63,15 @@ const useStyles = makeStyles((theme) => ({
 const SubHeader = (props) => {
   const styles = useStyles()
   const location = useLocation()
-  const { count, setCount } = useContext(GlobalContext)
+  const { count, setCount, selectedRows, setSelectedRows } = useContext(GlobalContext)
 
   useEffect(() => {
     setCount(0)
+    setSelectedRows([]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location])
-
+  const newTaskSelected = !!selectedRows.find(x => x.status === 'New');
+  
   return (
     count > 0 && (
       <div className={styles.container}>
@@ -95,22 +97,36 @@ const SubHeader = (props) => {
                 Claim
               </Button>
             )}
-            <Button
-              className={styles.button1}
-              size="medium"
-              color="primary"
-              variant="outlined"
-            >
-              Unclaim
-            </Button>
-            <Button
-              className={styles.button1}
-              size="medium"
-              color="primary"
-              variant="outlined"
-            >
-              Refer
-            </Button>
+            {newTaskSelected ?
+                <>
+                    <Button
+                        className={styles.button1}
+                        size="medium"
+                        color="primary"
+                        variant="outlined"
+                        >
+                        Assign
+                    </Button>
+                </>
+                :<>
+                    <Button
+                        className={styles.button1}
+                        size="medium"
+                        color="primary"
+                        variant="outlined"
+                        >
+                        Unclaim
+                    </Button>
+                    <Button
+                        className={styles.button1}
+                        size="medium"
+                        color="primary"
+                        variant="outlined"
+                        >
+                        Refer
+                    </Button>
+                </>
+            }
           </div>
           <div className={styles.buttonGroup2}>
             <Button
