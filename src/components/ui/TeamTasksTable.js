@@ -19,8 +19,9 @@ const initialRows = [
     processName: "Produce MPEG",
     taskName: "QC Original Files",
     priority: "Normal",
+    jobNumber: 4544414,
     division: "Maryland",
-    childDivision: "Columbia",
+    childDivision: "",
     dateDime: "10/18/2021 9:00 AM",
     thirdParty: "Third Party",
     client: "Litigation Services LLC",
@@ -32,7 +33,6 @@ const initialRows = [
     scheduleCity: "Baltimore",
     proceedingType: "Depositions",
     litigationType: "CR Referral",
-    jobNumber: 4544414,
     status: "Assgined",
     assignedDate: "10/18/2021",
     taskDueDate: "10/21/2021",
@@ -43,8 +43,9 @@ const initialRows = [
     processName: "Produce MPEG",
     taskName: "Review/ QC Files/ Prepare PIP Video",
     priority: "Urgent",
+    jobNumber: 4572355,
     division: "Houston",
-    childDivision: "Ostin",
+    childDivision: "",
     dateDime: "10/8/2021  1:00:00 PM",
     client: "Arnold & Itkin LLP",
     case: "In Re Brenn De Bree, Et Al.",
@@ -55,42 +56,65 @@ const initialRows = [
     scheduleCity: "Houston",
     proceedingType: "Depositions",
     litigationType: "Misc/Unknowns",
-    jobNumber: 4572355,
     status: "Overdue",
     assignedDate: "10/20/2021",
     taskDueDate: "10/20/2021",
     assignedTo: "dmcclutchy",
   },
+  {
+    id: 3,
+    processName: "Produce MPEG",
+    taskName: "Stich MPEG",
+    priority: "High",
+    jobNumber: 4520001,
+    division: "South Carolina",
+    childDivision: "",
+    dateDime: "10/18/2021 9:00AM",
+    thirdParty: "",
+    client: "Kassel McVey",
+    case: "Addison, Lavaunda Vs. South Carolina Dept Of Trans",
+    primaryVendor: "Solange Ruiz-Uribe",
+    deliveryMethod: "Expedited",
+    deliveryDays: 3,
+    jobDueDate: "10/21/2021",
+    scheduleCity: "Columbia",
+    proceedingType: "Depositions",
+    assignedDate: "10/18/2021",
+    litigationType: "Personal Injury/Negligence",
+    taskDueDate: "10/21/2021",
+    status: "New",
+  },
 ]
 
 export default function DataTable() {
-  const { filterValue, setCount } = useContext(GlobalContext);
-  const [data, setData] = useState(initialRows);
+  const { filterValue, setCount } = useContext(GlobalContext)
+  const [data, setData] = useState(initialRows)
   const [selectedTask, setSelectedTask] = useState({
     open: false,
     openSnooze: false,
     openFlag: false,
     openAssign: false,
   })
-  const [anchorEl, setAnchorEl] = useState(null);
-  const [anchorElSnooze, setAnchorElSnooze] = useState(null);
-  const [anchorElFlag, setAnchorElFlag] = useState(null);
+  const [anchorEl, setAnchorEl] = useState(null)
+  const [anchorElSnooze, setAnchorElSnooze] = useState(null)
+  const [anchorElFlag, setAnchorElFlag] = useState(null)
 
   useEffect(() => {
-    const filteredRows = initialRows.filter(r => 
-      r.processName.toLowerCase().includes(filterValue.toLowerCase()) 
-      || r.taskName.toLowerCase().includes(filterValue.toLowerCase())
-      || r.primaryVendor.toLowerCase().includes(filterValue.toLowerCase())
-      || r.proceedingType.toLowerCase().includes(filterValue.toLowerCase())
-      || r.client.toLowerCase().includes(filterValue.toLowerCase())
-      || r.division.toLowerCase().includes(filterValue.toLowerCase())
-      || r.priority.toLowerCase().includes(filterValue.toLowerCase())
-      );
-      setData(filteredRows);
+    const filteredRows = initialRows.filter(
+      (r) =>
+        r.processName.toLowerCase().includes(filterValue.toLowerCase()) ||
+        r.taskName.toLowerCase().includes(filterValue.toLowerCase()) ||
+        r.primaryVendor.toLowerCase().includes(filterValue.toLowerCase()) ||
+        r.proceedingType.toLowerCase().includes(filterValue.toLowerCase()) ||
+        r.client.toLowerCase().includes(filterValue.toLowerCase()) ||
+        r.division.toLowerCase().includes(filterValue.toLowerCase()) ||
+        r.priority.toLowerCase().includes(filterValue.toLowerCase())
+    )
+    setData(filteredRows)
   }, [filterValue])
 
-  const handleSelectRow = e => {
-    setCount(e.length);
+  const handleSelectRow = (e) => {
+    setCount(e.length)
   }
 
   const closeModal = () => {
@@ -99,11 +123,11 @@ export default function DataTable() {
       open: false,
       openSnooze: false,
       openAssign: false,
-    });
-    setAnchorEl(null);
-    setAnchorElSnooze(null);
-    setAnchorElFlag(null);
-  };
+    })
+    setAnchorEl(null)
+    setAnchorElSnooze(null)
+    setAnchorElFlag(null)
+  }
 
   const columns = [
     {
@@ -125,14 +149,15 @@ export default function DataTable() {
       editable: false,
     },
     {
+      field: "jobNumber",
+      headerName: "Job Number",
+      width: 200,
+      editable: false,
+    },
+    {
       field: "division",
       headerName: "Division",
-      description: "This column has a value getter and is not sortable.",
       width: 200,
-      // valueGetter: (params) =>
-      //   `${params.getValue(params.id, "firstName") || ""} ${
-      //     params.getValue(params.id, "lastName") || ""
-      //   }`,
     },
     {
       field: "childDivision",
@@ -207,12 +232,6 @@ export default function DataTable() {
       editable: false,
     },
     {
-      field: "jobNumber",
-      headerName: "Job Number",
-      width: 200,
-      editable: false,
-    },
-    {
       field: "status",
       headerName: "Status",
       width: 200,
@@ -278,11 +297,15 @@ export default function DataTable() {
           setAnchorEl(event.currentTarget)
         }
 
-        const onGroupIconClick = e => {
-          setSelectedTask(prev => ({...prev, openAssign: true, task: params.row}));
+        const onGroupIconClick = (e) => {
+          setSelectedTask((prev) => ({
+            ...prev,
+            openAssign: true,
+            task: params.row,
+          }))
           setAnchorEl(e.currentTarget)
         }
-        
+
         return (
           <div>
             <VTTaskPopover
@@ -303,7 +326,11 @@ export default function DataTable() {
               anchorE1={anchorElFlag}
               onClose={closeModal}
             ></VTFlagPopover>
-            <ReassignPopover isOpen={selectedTask.openAssign} anchor={anchorEl} onClose={closeModal}/>
+            <ReassignPopover
+              isOpen={selectedTask.openAssign}
+              anchor={anchorEl}
+              onClose={closeModal}
+            />
             <IconButton onClick={onFlagHandler} style={{ color: "red" }}>
               <FlagIcon />
             </IconButton>
@@ -317,7 +344,10 @@ export default function DataTable() {
               />
             </IconButton>
             <IconButton>
-              <GroupsIcon style={{ color: "#104B67" }} onClick={onGroupIconClick}/>
+              <GroupsIcon
+                style={{ color: "#104B67" }}
+                onClick={onGroupIconClick}
+              />
             </IconButton>
           </div>
         )
@@ -330,7 +360,7 @@ export default function DataTable() {
       <DataGrid
         rows={data}
         columns={columns}
-        pageSize={2}
+        pageSize={3}
         onColumnOrderChange
         checkboxSelection
         disableSelectionOnClick
