@@ -87,7 +87,7 @@ const initialRows = [
 ]
 
 export default function DataTable() {
-  const { filterValue, setCount } = useContext(GlobalContext)
+  const { filterValue, setCount, setSelectedRows } = useContext(GlobalContext)
   const [data, setData] = useState(initialRows)
   const [selectedTask, setSelectedTask] = useState({
     open: false,
@@ -114,6 +114,11 @@ export default function DataTable() {
   }, [filterValue])
 
   const handleSelectRow = (e) => {
+    const rows = []
+    e.forEach(item => {
+      rows.push(initialRows.find(x => x.id === item));
+    });
+    setSelectedRows(rows);
     setCount(e.length)
   }
 

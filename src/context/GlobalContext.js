@@ -4,5 +4,7 @@ export const GlobalContext = React.createContext({
     count: 0,
     setCount: () => {},
     filterValue: '',
-    setFilterValue: () => {}
+    setFilterValue: () => {},
+    selectedRows: [],
+    setSelectedRows: () => {}
 })
