@@ -56,7 +56,7 @@ const TaskGroups = () => {
           <Typography className={classes.title}>Urgent Tasks</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <DataTable />
+          <DataTable type='urgent' />
         </AccordionDetails>
       </Accordion>
 
@@ -70,7 +70,7 @@ const TaskGroups = () => {
           <Typography className={classes.title}>Active Tasks</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <DataTable />
+          <DataTable type='active' />
         </AccordionDetails>
       </Accordion>
 
@@ -84,7 +84,7 @@ const TaskGroups = () => {
           <Typography className={classes.title}>Snoozed Tasks</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <DataTable />
+          <DataTable type='snoozed' />
         </AccordionDetails>
       </Accordion>
 

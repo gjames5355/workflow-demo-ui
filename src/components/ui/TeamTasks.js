@@ -59,7 +59,7 @@ const TeamTasks = () => {
           </Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <DataTable />
+          <DataTable type='urgent-unclaimed' />
         </AccordionDetails>
       </Accordion>
 
@@ -73,7 +73,7 @@ const TeamTasks = () => {
           <Typography className={classes.title}>Unclaimed task</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <DataTable />
+          <DataTable type='unclaimed' />
         </AccordionDetails>
       </Accordion>
 
@@ -87,7 +87,7 @@ const TeamTasks = () => {
           <Typography className={classes.title}>Claimed Tasks</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <DataTable />
+          <DataTable type='claimed' />
         </AccordionDetails>
       </Accordion>
 
