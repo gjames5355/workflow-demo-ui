@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, LinearProgress, styled, Typography } from '@material-ui/core';
+import { Box, LinearProgress, styled, Typography } from '@mui/material';
 
 const BorderLinearProgress = styled(LinearProgress)(() => ({
   height: 20,

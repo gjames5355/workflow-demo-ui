@@ -9,8 +9,8 @@ import {
   RadioGroup,
   FormControlLabel,
   Radio,
-} from "@material-ui/core"
-import CheckCircleIcon from "@material-ui/icons/CheckCircle"
+} from "@mui/material"
+import CheckCircleIcon from "@mui/icons-material/CheckCircle"
 import "./ReassignPopover.css"
 
 const users = [

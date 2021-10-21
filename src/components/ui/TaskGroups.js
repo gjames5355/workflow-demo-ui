@@ -1,10 +1,10 @@
-import Accordion from "@material-ui/core/Accordion"
-import AccordionSummary from "@material-ui/core/AccordionSummary"
-import AccordionDetails from "@material-ui/core/AccordionDetails"
-import ArrowForwardIcon from "@material-ui/icons/ArrowForward"
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
-import Typography from "@material-ui/core/Typography"
-import { makeStyles } from "@material-ui/core/styles"
+import Accordion from "@mui/material/Accordion"
+import AccordionSummary from "@mui/material/AccordionSummary"
+import AccordionDetails from "@mui/material/AccordionDetails"
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward"
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
+import Typography from "@mui/material/Typography"
+import makeStyles from '@mui/styles/makeStyles';
 import DataTable from "./TaskTable"
 const useStyles = makeStyles((theme) => ({
   title: {

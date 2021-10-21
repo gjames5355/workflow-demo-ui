@@ -1,11 +1,11 @@
-import { createTheme } from "@material-ui/core/styles"
+import { createTheme, adaptV4Theme } from "@mui/material/styles";
 
 const veritextBlue = "#0C79C8"
 const veritextSecondary = "#A9D1F8"
 const veritextWhite = "#fff"
 const veritextGreen = "#57AE86"
 
-export default createTheme({
+export default createTheme(adaptV4Theme({
   palette: {
     common: {
       blue: veritextBlue,
@@ -28,4 +28,4 @@ export default createTheme({
       fontSize: "1rem",
     },
   },
-})
+}))

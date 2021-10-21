@@ -1,8 +1,8 @@
-import Popover from "@material-ui/core/Popover"
-import { Box, IconButton } from "@material-ui/core"
-import Grid from "@material-ui/core/Grid"
-import FlagIcon from "@material-ui/icons/Flag"
-import { styled } from "@material-ui/styles"
+import Popover from "@mui/material/Popover"
+import { Box, IconButton } from "@mui/material"
+import Grid from "@mui/material/Grid"
+import FlagIcon from "@mui/icons-material/Flag"
+import { styled } from "@mui/styles"
 
 const StyledIconButton = styled(IconButton)({
   padding: "2px",

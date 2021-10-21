@@ -1,8 +1,9 @@
-import { Button, makeStyles } from "@material-ui/core"
+import { Button } from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
 import React, { useContext, useEffect } from "react"
 import { useLocation } from "react-router"
 // import WorkLoadBar from './WorkLoadBar';
-import { Check } from "@material-ui/icons"
+import { Check } from "@mui/icons-material"
 import { GlobalContext } from "../../context/GlobalContext"
 
 const useStyles = makeStyles((theme) => ({

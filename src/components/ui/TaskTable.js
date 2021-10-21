@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from "react"
 import { DataGrid } from "@material-ui/data-grid"
 import { GlobalContext } from "../../context/GlobalContext"
-import IconButton from "@material-ui/core/IconButton"
-import FlagIcon from "@material-ui/icons/Flag"
-import ChatBubbleIcon from "@material-ui/icons/ChatBubble"
-import TodayIcon from "@material-ui/icons/Today"
-import GroupsIcon from "@material-ui/icons/Group"
+import IconButton from "@mui/material/IconButton"
+import FlagIcon from "@mui/icons-material/Flag"
+import ChatBubbleIcon from "@mui/icons-material/ChatBubble"
+import TodayIcon from "@mui/icons-material/Today"
+import GroupsIcon from "@mui/icons-material/Group"
 import VTTaskPopover from "./task-popover/TaskPopover"
 import SnoozePopover from "./snooze-popover/SnoozePopover"
 import VTFlagPopover from "./flag-popover/FlagPopover"
@@ -278,26 +278,26 @@ export default function DataTable() {
               anchor={anchorEl}
               onClose={closeModal}
             />
-            <IconButton onClick={onFlagHandler} style={{ color: "red" }}>
+            <IconButton onClick={onFlagHandler} style={{ color: "red" }} size="large">
               <FlagIcon />
             </IconButton>
-            <IconButton onClick={onCommentHandler}>
+            <IconButton onClick={onCommentHandler} size="large">
               <ChatBubbleIcon style={{ color: "#104B67" }} />
             </IconButton>
-            <IconButton>
+            <IconButton size="large">
               <TodayIcon
                 onClick={onSnoozeHandler}
                 style={{ color: "#104B67" }}
               />
             </IconButton>
-            <IconButton>
+            <IconButton size="large">
               <GroupsIcon
                 onClick={onGroupIconClick}
                 style={{ color: "#104B67" }}
               />
             </IconButton>
           </div>
-        )
+        );
       },
     },
   ]

@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react"
-import Button from "@material-ui/core/Button"
+import Button from "@mui/material/Button"
 import { Link } from "react-router-dom"
-import { makeStyles } from "@material-ui/core/styles"
-import RefreshIcon from "@material-ui/icons/Refresh"
-import Tabs from "@material-ui/core/Tabs"
-import Tab from "@material-ui/core/Tab"
-import Toolbar from "@material-ui/core/Toolbar"
+import makeStyles from '@mui/styles/makeStyles';
+import RefreshIcon from "@mui/icons-material/Refresh"
+import Tabs from "@mui/material/Tabs"
+import Tab from "@mui/material/Tab"
+import Toolbar from "@mui/material/Toolbar"
 
 const useStyles = makeStyles((theme) => ({
   tab: {
