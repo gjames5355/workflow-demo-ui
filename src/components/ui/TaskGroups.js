@@ -21,13 +21,13 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "35px",
   },
   accordionSummary1: {
-    backgroundColor: "#FBD250",
+    backgroundColor: "#E35C5C",
   },
   accordionSummary2: {
     backgroundColor: "#63B0F3",
   },
   accordionSummary3: {
-    backgroundColor: "#E35C5C",
+    backgroundColor: "#FBD250",
   },
   paragraph: {
     ...theme.typography.tab,
@@ -53,7 +53,35 @@ const TaskGroups = () => {
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Typography className={classes.title}></Typography>
+          <Typography className={classes.title}>Urgent Tasks</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <DataTable />
+        </AccordionDetails>
+      </Accordion>
+
+      <Accordion className={classes.accordion2} defaultExpanded={true}>
+        <AccordionSummary
+          className={classes.accordionSummary2}
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+          <Typography className={classes.title}>Active Tasks</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <DataTable />
+        </AccordionDetails>
+      </Accordion>
+
+      <Accordion className={classes.accordion3} defaultExpanded={true}>
+        <AccordionSummary
+          className={classes.accordionSummary3}
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+          <Typography className={classes.title}>Snoozed Tasks</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <DataTable />
