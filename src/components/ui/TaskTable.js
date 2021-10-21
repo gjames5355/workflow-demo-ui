@@ -37,7 +37,7 @@ const initialRows = [
   },
 ]
 
-export default function DataTable() {
+const DataTable = ({ type }) => {
   const { filterValue, setCount } = useContext(GlobalContext)
   const [data, setData] = useState(initialRows)
   const [selectedTask, setSelectedTask] = useState({
@@ -51,18 +51,40 @@ export default function DataTable() {
   const [anchorElFlag, setAnchorElFlag] = useState(null)
 
   useEffect(() => {
-    const filteredRows = initialRows.filter(
-      (r) =>
-        r.processName.toLowerCase().includes(filterValue.toLowerCase()) ||
-        r.taskName.toLowerCase().includes(filterValue.toLowerCase()) ||
-        r.primaryVendor.toLowerCase().includes(filterValue.toLowerCase()) ||
-        r.proceedingType.toLowerCase().includes(filterValue.toLowerCase()) ||
-        r.client.toLowerCase().includes(filterValue.toLowerCase()) ||
-        r.division.toLowerCase().includes(filterValue.toLowerCase()) ||
-        r.priority.toLowerCase().includes(filterValue.toLowerCase())
-    )
-    setData(filteredRows)
-  }, [filterValue])
+    const urgentTasks = initialRows.filter(x => x.priority === 'Urgent');
+    const activeTasks = initialRows.filter(x => x.status !== 'New');
+    const snoozedTasks = initialRows.filter(x => x.status === 'Snoozed');
+
+    switch (type) {
+      case 'urgent':
+        setData(urgentTasks);
+        break;
+      case 'active':
+        setData(activeTasks);
+        break;
+      case 'snoozed':
+        setData(snoozedTasks);
+        break;
+      default:
+        break;
+    }
+  }, [type])
+
+  useEffect(() => {
+    if(filterValue) {
+      const filteredRows = data.filter(
+        (r) =>
+          r.processName.toLowerCase().includes(filterValue.toLowerCase()) ||
+          r.taskName.toLowerCase().includes(filterValue.toLowerCase()) ||
+          r.primaryVendor.toLowerCase().includes(filterValue.toLowerCase()) ||
+          r.proceedingType.toLowerCase().includes(filterValue.toLowerCase()) ||
+          r.client.toLowerCase().includes(filterValue.toLowerCase()) ||
+          r.division.toLowerCase().includes(filterValue.toLowerCase()) ||
+          r.priority.toLowerCase().includes(filterValue.toLowerCase())
+      )
+      setData(filteredRows)
+    }
+  }, [filterValue, data])
 
   const closeModal = () => {
     setSelectedTask({
@@ -240,18 +262,18 @@ export default function DataTable() {
           setAnchorEl(e.currentTarget)
         }
 
-        let priorityColor = null
-        switch (params.row.priority) {
-          case "High":
-            priorityColor = "red"
-            break
-          case "Medium":
-            priorityColor = "orange"
-            break
-          default:
-            priorityColor = "lightgray"
-            break
-        }
+        // let priorityColor = null
+        // switch (params.row.priority) {
+        //   case "High":
+        //     priorityColor = "red"
+        //     break
+        //   case "Medium":
+        //     priorityColor = "orange"
+        //     break
+        //   default:
+        //     priorityColor = "lightgray"
+        //     break
+        // }
 
         return (
           <div>
@@ -316,3 +338,5 @@ export default function DataTable() {
     </div>
   )
 }
+
+export default DataTable;

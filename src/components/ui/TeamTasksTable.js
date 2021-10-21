@@ -86,9 +86,9 @@ const initialRows = [
   },
 ]
 
-export default function DataTable() {
+export const DataTable = ({ type }) => {
   const { filterValue, setCount, setSelectedRows } = useContext(GlobalContext)
-  const [data, setData] = useState(initialRows)
+  const [data, setData] = useState([])
   const [selectedTask, setSelectedTask] = useState({
     open: false,
     openSnooze: false,
@@ -100,18 +100,40 @@ export default function DataTable() {
   const [anchorElFlag, setAnchorElFlag] = useState(null)
 
   useEffect(() => {
-    const filteredRows = initialRows.filter(
-      (r) =>
-        r.processName.toLowerCase().includes(filterValue.toLowerCase()) ||
-        r.taskName.toLowerCase().includes(filterValue.toLowerCase()) ||
-        r.primaryVendor.toLowerCase().includes(filterValue.toLowerCase()) ||
-        r.proceedingType.toLowerCase().includes(filterValue.toLowerCase()) ||
-        r.client.toLowerCase().includes(filterValue.toLowerCase()) ||
-        r.division.toLowerCase().includes(filterValue.toLowerCase()) ||
-        r.priority.toLowerCase().includes(filterValue.toLowerCase())
-    )
-    setData(filteredRows)
-  }, [filterValue])
+    const urgentUnclaimed = initialRows.filter(x => x.priority === 'Urgent');
+    const unclaimed = initialRows.filter(x => x.status === 'New');
+    const claimed = initialRows.filter(x => x.status !== 'New' && x.priority !== 'Urgent');
+    console.debug(type, urgentUnclaimed)
+    switch (type) {
+      case 'urgent-unclaimed':
+        setData(urgentUnclaimed);
+        break;
+      case 'unclaimed':
+        setData(unclaimed);
+        break;
+      case 'claimed':
+        setData(claimed);
+        break;
+      default:
+        break;
+    }
+  }, [type])  
+
+  useEffect(() => {
+    if (filterValue) {
+      const filteredRows = data.filter(
+        (r) =>
+          r.processName.toLowerCase().includes(filterValue.toLowerCase()) ||
+          r.taskName.toLowerCase().includes(filterValue.toLowerCase()) ||
+          r.primaryVendor.toLowerCase().includes(filterValue.toLowerCase()) ||
+          r.proceedingType.toLowerCase().includes(filterValue.toLowerCase()) ||
+          r.client.toLowerCase().includes(filterValue.toLowerCase()) ||
+          r.division.toLowerCase().includes(filterValue.toLowerCase()) ||
+          r.priority.toLowerCase().includes(filterValue.toLowerCase())
+      )
+      setData(filteredRows)
+    }
+  }, [filterValue, data])
 
   const handleSelectRow = (e) => {
     const rows = []
@@ -374,3 +396,5 @@ export default function DataTable() {
     </div>
   )
 }
+
+export default DataTable;
