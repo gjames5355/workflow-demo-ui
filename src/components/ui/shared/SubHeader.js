@@ -3,7 +3,7 @@ import React, { useContext, useEffect } from "react"
 import { useLocation } from "react-router"
 // import WorkLoadBar from './WorkLoadBar';
 import { Check } from "@material-ui/icons"
-import { GlobalContext } from "../../context/GlobalContext"
+import { GlobalContext } from "../../../context/GlobalContext"
 
 const useStyles = makeStyles((theme) => ({
   container: {

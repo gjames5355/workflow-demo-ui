@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 import { ThemeProvider } from "@material-ui/core/styles"
 import Divider from "@material-ui/core/Divider"
-import Fields from "./ui/Fields"
-import Header from "./ui/Header"
-import theme from "./ui/Theme"
-import TaskGroups from "./ui/TaskGroups"
-import SubHeader from "./ui/SubHeader"
-import TeamTasks from "./ui/TeamTasks"
+import Fields from "./ui/shared/Fields"
+import Header from "./ui/shared/Header"
+import theme from "./ui/shared/Theme"
+import PersonalTasks from "./ui/shared/PersonalTasks"
+import SubHeader from "./ui/shared/SubHeader"
+import TeamTasks from "./ui/shared/TeamTasks"
 import { GlobalContext } from '../context/GlobalContext'
 
 function App() {
@@ -27,7 +27,7 @@ function App() {
           <SubHeader />
           <Switch>
             <Route exact path="/">
-              <TaskGroups />
+              <PersonalTasks />
             </Route>
             <Route exact path="/team">
               <TeamTasks />
@@ -40,7 +40,7 @@ function App() {
             />
           </Switch>
         </Router>
-        {/* <TaskGroups /> */}
+        {/* <PersonalTasks /> */}
       </ThemeProvider>
     </GlobalContext.Provider>
   )
