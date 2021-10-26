@@ -11,6 +11,19 @@ import SnoozePopover from "./snooze-popover/SnoozePopover"
 import VTFlagPopover from "./flag-popover/FlagPopover"
 import ReassignPopover from "./reassign-popover/ReassignPopover"
 
+import { gql, useQuery } from '@apollo/client';
+
+const tasksQuery = gql`
+  query {
+      tasks {
+        id
+        title
+        status
+      }
+    }
+`;
+
+
 const initialRows = [
   {
     id: 1,
@@ -48,7 +61,11 @@ export default function DataTable() {
   })
   const [anchorEl, setAnchorEl] = useState(null)
   const [anchorElSnooze, setAnchorElSnooze] = useState(null)
-  const [anchorElFlag, setAnchorElFlag] = useState(null)
+  const [anchorElFlag, setAnchorElFlag] = useState(null);
+  const taskResult = useQuery(tasksQuery);
+  const loading = taskResult.loading;
+  const taskData = taskResult.data?.tasks || [];
+
 
   useEffect(() => {
     const filteredRows = initialRows.filter(
@@ -61,7 +78,7 @@ export default function DataTable() {
         r.division.toLowerCase().includes(filterValue.toLowerCase()) ||
         r.priority.toLowerCase().includes(filterValue.toLowerCase())
     )
-    setData(filteredRows)
+    setData(filteredRows);
   }, [filterValue])
 
   const closeModal = () => {
@@ -82,7 +99,7 @@ export default function DataTable() {
 
   const columns = [
     {
-      field: "processName",
+      field: "title",
       headerName: "Process Name",
       width: 200,
       editable: false,
@@ -228,7 +245,8 @@ export default function DataTable() {
             openFlag: true,
             task: params.row,
           })
-          setAnchorEl(event.currentTarget)
+          setAnchorEl(event.currentTarget);
+          console.log('taskData', taskData);
         }
 
         const onGroupIconClick = (e) => {
@@ -305,7 +323,8 @@ export default function DataTable() {
   return (
     <div style={{ height: 400, width: "100%" }}>
       <DataGrid
-        rows={data}
+
+        rows={taskData}
         columns={columns}
         pageSize={5}
         onColumnOrderChange
