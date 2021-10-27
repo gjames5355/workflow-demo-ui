@@ -25,6 +25,9 @@ const useStyles = makeStyles((theme) => ({
   accordionSummary3: {
     backgroundColor: "#FBD250",
   },
+  accordionDetails: {
+    minHeight: '470px',
+  },
   paragraph: {
     ...theme.typography.tab,
     color: "#63B0F3",
@@ -46,7 +49,8 @@ const TeamTasks = () => {
         classes={{
           accordion: classes.accordion1,
           title: classes.title,
-          summary: classes.accordionSummary1
+          summary: classes.accordionSummary1,
+          details: classes.accordionDetails
           }} 
         type='urgent-unclaimed'
         title='Urgent Unclaimed Tasks'
@@ -56,7 +60,8 @@ const TeamTasks = () => {
         classes={{
           accordion: classes.accordion3,
           title: classes.title,
-          summary: classes.accordionSummary3
+          summary: classes.accordionSummary3,
+          details: classes.accordionDetails
           }} 
         type='unclaimed'
         title='Unclaimed Tasks'
@@ -66,7 +71,8 @@ const TeamTasks = () => {
         classes={{
           accordion: classes.accordion2,
           title: classes.title,
-          summary: classes.accordionSummary2
+          summary: classes.accordionSummary2,
+          details: classes.accordionDetails
           }} 
         type='claimed'
         title='Claimed Tasks'

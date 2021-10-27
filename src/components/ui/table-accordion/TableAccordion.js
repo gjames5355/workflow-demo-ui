@@ -14,7 +14,7 @@ const TableAccordion = ({classes, title, type}) => {
             >
                 <Typography className={classes.title}>{title}</Typography>
             </AccordionSummary>
-            <AccordionDetails>
+            <AccordionDetails className={classes.details}>
                 <DataTable type={type} />
             </AccordionDetails>
         </Accordion>
