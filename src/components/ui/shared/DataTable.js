@@ -41,10 +41,10 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const DataTable = ({ type }) => {
+const DataTable = ({ type, data }) => {
   const { setCount } = useContext(GlobalContext)
   const location = useLocation();
-  const [data, setData] = useState(location.pathname === '/team' ? GROUP_TASKS : PERSONAL_TASKS);
+  // const [data, setData] = useState(location.pathname === '/team' ? GROUP_TASKS : PERSONAL_TASKS);
   const [columns, setColumns] = useState([]);
   const [inputValue, setInputValue] = useState('');
   const classes = useStyles();
@@ -83,7 +83,7 @@ const DataTable = ({ type }) => {
   }, [location])
 
   useEffect(() => {
-    if(!inputValue) {
+    /* if(!inputValue) {
       const urgentTasks = PERSONAL_TASKS.filter(x => x.priority === 'Urgent');
       const activeTasks = PERSONAL_TASKS.filter(x => x.status !== 'New');
       const snoozedTasks = PERSONAL_TASKS.filter(x => x.status === 'Snoozed');
@@ -113,7 +113,7 @@ const DataTable = ({ type }) => {
         default:
           break;
       }
-    }
+    } */
   }, [type, inputValue])
 
   useEffect(() => {
@@ -128,7 +128,7 @@ const DataTable = ({ type }) => {
           r.division.toLowerCase().includes(inputValue.toLowerCase()) ||
           r.priority.toLowerCase().includes(inputValue.toLowerCase())
       )
-      setData(filteredRows)
+      // setData(filteredRows)
     } else {
       //setData()
     }

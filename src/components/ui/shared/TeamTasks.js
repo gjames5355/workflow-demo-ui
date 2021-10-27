@@ -1,6 +1,7 @@
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward"
 import { makeStyles } from "@material-ui/core/styles"
 import TableAccordion from "../table-accordion/TableAccordion"
+import AddTaskButton from "../add-task-modal/AddTaskModal"
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -43,8 +44,13 @@ const useStyles = makeStyles((theme) => ({
 const TeamTasks = () => {
   const classes = useStyles()
 
+  const onSaveTask = (event) => {
+    event.preventDefault()
+  }
+
   return (
     <div>
+      <AddTaskButton onSaveTask={onSaveTask} />
       <TableAccordion 
         classes={{
           accordion: classes.accordion1,

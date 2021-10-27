@@ -1,6 +1,10 @@
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward"
 import { makeStyles } from "@material-ui/core/styles"
 import TableAccordion from "../table-accordion/TableAccordion";
+import AddTaskButton from "../add-task-modal/AddTaskModal";
+import { PERSONAL_TASKS } from "../../../constants/constants";
+import { useEffect, useState } from "react";
+
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -42,9 +46,52 @@ const useStyles = makeStyles((theme) => ({
 
 const PersonalTasks = () => {
   const classes = useStyles()
+  const [data, setData] = useState(PERSONAL_TASKS)
+
+  const urgentTaskData = data.filter(item => item.priority==='Urgent')
+  const newTasksData = data.filter(item => item.priority==='New')
+  const snoozedTasksData = data.filter(item => item.priority==='Snoozed')
+
+  const onSaveTask = (event) => {
+    
+    console.log('taskName', event.target.title.value);
+    const newTask = {
+      id: event.target.title.value,
+      processName: "Produce MPEG 2",
+      taskName: "Stich MPEG",
+      priority: event.target.priority.value,
+      jobNumber: 4520001,
+      division: "South Carolina",
+      childDivision: "",
+      dateDime: "10/18/2021 9:00AM",
+      thirdParty: "Third Party",
+      client: "Kassel McVey",
+      case: "Addison, Lavaunda Vs. South Carolina Dept Of Trans",
+      primaryVendor: "Solange Ruiz-Uribe",
+      deliveryMethod: "Expedited",
+      deliveryDays: 3,
+      jobDueDate: "10/21/2021",
+      scheduleCity: "Columbia",
+      proceedingType: "Depositions",
+      assignedDate: "10/18/2021",
+      litigationType: "Personal Injury/Negligence",
+      taskDueDate: "10/21/2021",
+      status: "New",
+    }
+
+    const newData = [...data]
+    newData.push(newTask)
+    setData(newData)
+    
+  }
+
+  /* useEffect(() => {
+    setUrgentTasksData(prev => [...prev])
+  }, []) */
 
   return (
     <div>
+      <AddTaskButton onSaveTask={onSaveTask} />
       <TableAccordion 
         classes={{
           accordion: classes.accordion1,
@@ -54,6 +101,7 @@ const PersonalTasks = () => {
           }} 
         type='urgent'
         title='Urgent Tasks'
+        data={urgentTaskData}
       />
 
       <TableAccordion 
@@ -65,6 +113,7 @@ const PersonalTasks = () => {
           }} 
         type='active'
         title='Active Tasks'
+        data={newTasksData}
       />
 
       <TableAccordion 
@@ -76,6 +125,7 @@ const PersonalTasks = () => {
           }} 
         type='snoozed'
         title='Snoozed Tasks'
+        data={snoozedTasksData}
       />
 
       <p className={classes.paragraph}>
