@@ -7,7 +7,7 @@ import Typography from "@material-ui/core/Typography"
 import { makeStyles } from "@material-ui/core/styles"
 import DataTable from "./TaskTable"
 import AddTaskButton from "./add-task-modal/AddTaskModal"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 const useStyles = makeStyles((theme) => ({
   title: {
     ...theme.typography.tab,
@@ -43,15 +43,42 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
+let initialRows = [
+  {
+    id: 1,
+    processName: "Produce MPEG",
+    taskName: "Stich MPEG",
+    priority: "Normal",
+    jobNumber: 4520001,
+    division: "South Carolina",
+    childDivision: "",
+    dateDime: "10/18/2021 9:00AM",
+    thirdParty: "Third Party",
+    client: "Kassel McVey",
+    case: "Addison, Lavaunda Vs. South Carolina Dept Of Trans",
+    primaryVendor: "Solange Ruiz-Uribe",
+    deliveryMethod: "Expedited",
+    deliveryDays: 3,
+    jobDueDate: "10/21/2021",
+    scheduleCity: "Columbia",
+    proceedingType: "Depositions",
+    assignedDate: "10/18/2021",
+    litigationType: "Personal Injury/Negligence",
+    taskDueDate: "10/21/2021",
+    status: "Assigned",
+  },
+]
+
 
 const TaskGroups = () => {
   const classes = useStyles()
-  const [newTask, setNewTask] = useState(null)
+  const [rowsData, setRowsData] = useState(initialRows)
 
 
   const onSaveTask = (event) => {
     event.preventDefault()
-    setNewTask({
+    const newRowsData = [...rowsData];
+    newRowsData.push({
       id: 6,
       processName: "Produce MPEG 2",
       jobNumber: 4520001,
@@ -74,7 +101,11 @@ const TaskGroups = () => {
       priority: event.target.priority?.value,
       status: "New"
     })
+
+    setRowsData(newRowsData);
+    console.log('newRows', rowsData);
   }
+
 
   return (
     <div>
@@ -89,7 +120,7 @@ const TaskGroups = () => {
           <Typography className={classes.title}>Urgent Tasks</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <DataTable type='urgent' newTask={newTask} />
+          <DataTable rows={rowsData} type='urgent' />
         </AccordionDetails>
       </Accordion>
 
@@ -103,7 +134,7 @@ const TaskGroups = () => {
           <Typography className={classes.title}>Active Tasks</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <DataTable type='active' newTask={newTask} />
+          <DataTable rows={rowsData} type='active' />
         </AccordionDetails>
       </Accordion>
 
@@ -117,7 +148,7 @@ const TaskGroups = () => {
           <Typography className={classes.title}>Snoozed Tasks</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <DataTable type='snoozed' newTask={newTask} />
+          <DataTable rows={rowsData} type='snoozed' />
         </AccordionDetails>
       </Accordion>
 

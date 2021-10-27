@@ -37,10 +37,10 @@ let initialRows = [
   },
 ]
 
-const DataTable = ({ type, newTask }) => {
+const DataTable = ({ type, rows }) => {
   const { filterValue, setCount } = useContext(GlobalContext)
   
-  const [data, setData] = useState(initialRows)
+  const [data, setData] = useState(rows)
   const [selectedTask, setSelectedTask] = useState({
     open: false,
     openSnooze: false,
@@ -50,20 +50,18 @@ const DataTable = ({ type, newTask }) => {
   const [anchorEl, setAnchorEl] = useState(null)
   const [anchorElSnooze, setAnchorElSnooze] = useState(null)
   const [anchorElFlag, setAnchorElFlag] = useState(null)
-
+  console.log('rows', rows);
 
   useEffect(() => {
-    if (newTask) {
-      const newData = initialRows.concat(newTask)
-      initialRows = newData
-    console.log('newData', newData);
-    }
-    
-    
+    setData(rows)
+  }, [rows])
 
-    const urgentTasks = initialRows.filter(x => x?.priority === 'Urgent');
-    const activeTasks = initialRows.filter(x => x?.status !== 'New');
-    const snoozedTasks = initialRows.filter(x => x?.status === 'Snoozed');
+
+  useEffect(() => {  
+
+    const urgentTasks = rows.filter(x => x?.priority === 'Urgent');
+    const activeTasks = rows.filter(x => x?.status !== 'New');
+    const snoozedTasks = rows.filter(x => x?.status === 'Snoozed');
 
     switch (type) {
       case 'urgent':
@@ -79,7 +77,7 @@ const DataTable = ({ type, newTask }) => {
         break;
     }
 
-  }, [type, newTask])
+  }, [type])
 
   useEffect(() => {
     if(filterValue) {
@@ -93,7 +91,7 @@ const DataTable = ({ type, newTask }) => {
           r.division.toLowerCase().includes(filterValue.toLowerCase()) ||
           r.priority.toLowerCase().includes(filterValue.toLowerCase())
       )
-      setData(filteredRows)
+      // setData(filteredRows)
     }
   }, [filterValue, data])
 

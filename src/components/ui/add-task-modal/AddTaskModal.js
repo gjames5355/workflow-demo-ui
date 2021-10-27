@@ -35,13 +35,14 @@ const AddTaskModal = (props) => {
             id="title"
             label="Title"
             fullWidth
-            variant="standard"
+            variant="outlined"
             required
           />
 
           <FormControl fullWidth>
             <InputLabel id="select-priority">Priority</InputLabel>
             <Select
+            variant="outlined"
             required
               labelId="select-priority"
               id="priority"
