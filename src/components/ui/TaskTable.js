@@ -11,10 +11,10 @@ import SnoozePopover from "./snooze-popover/SnoozePopover"
 import VTFlagPopover from "./flag-popover/FlagPopover"
 import ReassignPopover from "./reassign-popover/ReassignPopover"
 
-const initialRows = [
+let initialRows = [
   {
     id: 1,
-    processName: "Produce MPEG",
+  processName: "Produce MPEG",
     taskName: "Stich MPEG",
     priority: "Normal",
     jobNumber: 4520001,
@@ -37,8 +37,9 @@ const initialRows = [
   },
 ]
 
-const DataTable = ({ type }) => {
+const DataTable = ({ type, newTask }) => {
   const { filterValue, setCount } = useContext(GlobalContext)
+  
   const [data, setData] = useState(initialRows)
   const [selectedTask, setSelectedTask] = useState({
     open: false,
@@ -50,10 +51,19 @@ const DataTable = ({ type }) => {
   const [anchorElSnooze, setAnchorElSnooze] = useState(null)
   const [anchorElFlag, setAnchorElFlag] = useState(null)
 
+
   useEffect(() => {
-    const urgentTasks = initialRows.filter(x => x.priority === 'Urgent');
-    const activeTasks = initialRows.filter(x => x.status !== 'New');
-    const snoozedTasks = initialRows.filter(x => x.status === 'Snoozed');
+    if (newTask) {
+      const newData = initialRows.concat(newTask)
+      initialRows = newData
+    console.log('newData', newData);
+    }
+    
+    
+
+    const urgentTasks = initialRows.filter(x => x?.priority === 'Urgent');
+    const activeTasks = initialRows.filter(x => x?.status !== 'New');
+    const snoozedTasks = initialRows.filter(x => x?.status === 'Snoozed');
 
     switch (type) {
       case 'urgent':
@@ -68,7 +78,8 @@ const DataTable = ({ type }) => {
       default:
         break;
     }
-  }, [type])
+
+  }, [type, newTask])
 
   useEffect(() => {
     if(filterValue) {

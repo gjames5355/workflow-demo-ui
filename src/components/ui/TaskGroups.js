@@ -6,6 +6,8 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 import Typography from "@material-ui/core/Typography"
 import { makeStyles } from "@material-ui/core/styles"
 import DataTable from "./TaskTable"
+import AddTaskButton from "./add-task-modal/AddTaskModal"
+import { useState } from "react"
 const useStyles = makeStyles((theme) => ({
   title: {
     ...theme.typography.tab,
@@ -41,11 +43,42 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
+
 const TaskGroups = () => {
   const classes = useStyles()
+  const [newTask, setNewTask] = useState(null)
+
+
+  const onSaveTask = (event) => {
+    event.preventDefault()
+    setNewTask({
+      id: 6,
+      processName: "Produce MPEG 2",
+      jobNumber: 4520001,
+      division: "South Carolina",
+      childDivision: "",
+      dateDime: "10/18/2021 9:00AM",
+      thirdParty: "Third Party",
+      client: "Kassel McVey",
+      case: "Addison, Lavaunda Vs. South Carolina Dept Of Trans",
+      primaryVendor: "Solange Ruiz-Uribe",
+      deliveryMethod: "Expedited",
+      deliveryDays: 3,
+      jobDueDate: "10/21/2021",
+      scheduleCity: "Columbia",
+      proceedingType: "Depositions",
+      assignedDate: "10/18/2021",
+      litigationType: "Personal Injury/Negligence",
+      taskDueDate: "10/21/2021",
+      taskName: event.target.title.value,
+      priority: event.target.priority?.value,
+      status: "New"
+    })
+  }
 
   return (
     <div>
+      <AddTaskButton onSaveTask={onSaveTask} />
       <Accordion className={classes.accordion1} defaultExpanded={true}>
         <AccordionSummary
           className={classes.accordionSummary1}
@@ -56,7 +89,7 @@ const TaskGroups = () => {
           <Typography className={classes.title}>Urgent Tasks</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <DataTable type='urgent' />
+          <DataTable type='urgent' newTask={newTask} />
         </AccordionDetails>
       </Accordion>
 
@@ -70,7 +103,7 @@ const TaskGroups = () => {
           <Typography className={classes.title}>Active Tasks</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <DataTable type='active' />
+          <DataTable type='active' newTask={newTask} />
         </AccordionDetails>
       </Accordion>
 
@@ -84,7 +117,7 @@ const TaskGroups = () => {
           <Typography className={classes.title}>Snoozed Tasks</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <DataTable type='snoozed' />
+          <DataTable type='snoozed' newTask={newTask} />
         </AccordionDetails>
       </Accordion>
 
