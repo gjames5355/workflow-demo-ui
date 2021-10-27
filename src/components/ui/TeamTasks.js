@@ -6,6 +6,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 import Typography from "@material-ui/core/Typography"
 import { makeStyles } from "@material-ui/core/styles"
 import DataTable from "./TeamTasksTable"
+import AddTaskButton from "./add-task-modal/AddTaskModal"
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -45,8 +46,15 @@ const useStyles = makeStyles((theme) => ({
 const TeamTasks = () => {
   const classes = useStyles()
 
+  const onSaveTask = (event) => {
+    event.preventDefault()
+    
+    
+  }
+
   return (
     <div>
+      <AddTaskButton onSaveTask={onSaveTask} />
       <Accordion className={classes.accordion1} defaultExpanded={true}>
         <AccordionSummary
           className={classes.accordionSummary1}

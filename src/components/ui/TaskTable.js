@@ -11,36 +11,11 @@ import SnoozePopover from "./snooze-popover/SnoozePopover"
 import VTFlagPopover from "./flag-popover/FlagPopover"
 import ReassignPopover from "./reassign-popover/ReassignPopover"
 
-let initialRows = [
-  {
-    id: 1,
-  processName: "Produce MPEG",
-    taskName: "Stich MPEG",
-    priority: "Normal",
-    jobNumber: 4520001,
-    division: "South Carolina",
-    childDivision: "",
-    dateDime: "10/18/2021 9:00AM",
-    thirdParty: "Third Party",
-    client: "Kassel McVey",
-    case: "Addison, Lavaunda Vs. South Carolina Dept Of Trans",
-    primaryVendor: "Solange Ruiz-Uribe",
-    deliveryMethod: "Expedited",
-    deliveryDays: 3,
-    jobDueDate: "10/21/2021",
-    scheduleCity: "Columbia",
-    proceedingType: "Depositions",
-    assignedDate: "10/18/2021",
-    litigationType: "Personal Injury/Negligence",
-    taskDueDate: "10/21/2021",
-    status: "Assigned",
-  },
-]
 
 const DataTable = ({ type, rows }) => {
   const { filterValue, setCount } = useContext(GlobalContext)
   
-  const [data, setData] = useState(rows)
+  const [data, setData] = useState([])
   const [selectedTask, setSelectedTask] = useState({
     open: false,
     openSnooze: false,
@@ -50,18 +25,14 @@ const DataTable = ({ type, rows }) => {
   const [anchorEl, setAnchorEl] = useState(null)
   const [anchorElSnooze, setAnchorElSnooze] = useState(null)
   const [anchorElFlag, setAnchorElFlag] = useState(null)
-  console.log('rows', rows);
 
-  useEffect(() => {
-    setData(rows)
-  }, [rows])
+  const urgentTasks = rows.filter(x => x?.priority === 'Urgent');
+  const activeTasks = rows.filter(x => x?.status !== 'New');
+  const snoozedTasks = rows.filter(x => x?.status === 'Snoozed');
 
+  
 
   useEffect(() => {  
-
-    const urgentTasks = rows.filter(x => x?.priority === 'Urgent');
-    const activeTasks = rows.filter(x => x?.status !== 'New');
-    const snoozedTasks = rows.filter(x => x?.status === 'Snoozed');
 
     switch (type) {
       case 'urgent':
