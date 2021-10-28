@@ -84,6 +84,10 @@ const PersonalTasks = () => {
     
   }
 
+  const handleChange = (newData) => {
+    setData(newData)
+  }
+
   return (
     <div>
       <AddTaskButton onSaveTask={onSaveTask} />
@@ -97,6 +101,7 @@ const PersonalTasks = () => {
         type='urgent'
         title='Urgent Tasks'
         data={urgentTaskData}
+        handleChange={handleChange}
       />
 
       <TableAccordion 
@@ -109,6 +114,7 @@ const PersonalTasks = () => {
         type='active'
         title='Active Tasks'
         data={newTasksData}
+        handleChange={handleChange}
       />
 
       <TableAccordion 
@@ -121,6 +127,7 @@ const PersonalTasks = () => {
         type='snoozed'
         title='Snoozed Tasks'
         data={snoozedTasksData}
+        handleChange={handleChange}
       />
 
       <p className={classes.paragraph}>

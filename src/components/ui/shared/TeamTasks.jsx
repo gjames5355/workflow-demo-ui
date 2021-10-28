@@ -82,6 +82,10 @@ const TeamTasks = () => {
     setData(newData)
   }
 
+  const handleChange = (newData) => {
+    setData(newData)
+  }
+
   return (
     <div>
       <AddTaskButton onSaveTask={onSaveTask} />
@@ -95,6 +99,7 @@ const TeamTasks = () => {
         type='urgent-unclaimed'
         title='Urgent Unclaimed Tasks'
         data={urgentUnclaimed}
+        handleChange={handleChange}
       />
 
       <TableAccordion 
@@ -107,6 +112,7 @@ const TeamTasks = () => {
         type='unclaimed'
         title='Unclaimed Tasks'
         data={unclaimed}
+        handleChange={handleChange}
       />
 
       <TableAccordion 
@@ -119,6 +125,7 @@ const TeamTasks = () => {
         type='claimed'
         title='Claimed Tasks'
         data={claimed}
+        handleChange={handleChange}
       />
 
       <p className={classes.paragraph}>

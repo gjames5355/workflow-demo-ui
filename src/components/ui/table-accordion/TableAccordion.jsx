@@ -3,19 +3,19 @@ import React from 'react';
 import DataTable from '../shared/DataTable';
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
-const TableAccordion = ({classes, title, type, data}) => {
+const TableAccordion = (props) => {
     return (
-        <Accordion className={classes.accordion} defaultExpanded={true}>
+        <Accordion className={props.classes.accordion} defaultExpanded={true}>
             <AccordionSummary
-                className={classes.summary}
+                className={props.classes.summary}
                 expandIcon={<ExpandMoreIcon />}
                 aria-controls="panel1a-content"
                 id="panel1a-header"
             >
-                <Typography className={classes.title}>{title}</Typography>
+                <Typography className={props.classes.title}>{props.title}</Typography>
             </AccordionSummary>
-            <AccordionDetails className={classes.details}>
-                <DataTable type={type} data={data} />
+            <AccordionDetails className={props.classes.details}>
+                <DataTable type={props.type} data={props.data} handleChange={props.handleChange} />
             </AccordionDetails>
         </Accordion>
     )

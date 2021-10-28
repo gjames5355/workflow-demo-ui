@@ -41,12 +41,14 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const DataTable = ({ type, data }) => {
+const DataTable = ({ type, data, handleChange}) => {
+  console.log("typeofd", data);
   const { setCount } = useContext(GlobalContext)
   const location = useLocation();
   const [columns, setColumns] = useState([]);
   const [inputValue, setInputValue] = useState('');
   const classes = useStyles();
+  const [innerData, setInnerData] = useState(data)
 
   useEffect(() => {
     const tableType = location.pathname === '/team' ? 'team' : 'personal';
@@ -80,6 +82,21 @@ const DataTable = ({ type, data }) => {
       setColumns([...cols, assignedTo, actions]);
     }
   }, [location])
+
+  useEffect(() => {
+    if(inputValue) {
+      data.filter(
+        (r) =>
+          r.processName.toLowerCase().includes(inputValue.toLowerCase()) ||
+          r.taskName.toLowerCase().includes(inputValue.toLowerCase()) ||
+          r.primaryVendor.toLowerCase().includes(inputValue.toLowerCase()) ||
+          r.proceedingType.toLowerCase().includes(inputValue.toLowerCase()) ||
+          r.client.toLowerCase().includes(inputValue.toLowerCase()) ||
+          r.division.toLowerCase().includes(inputValue.toLowerCase()) ||
+          r.priority.toLowerCase().includes(inputValue.toLowerCase())
+      )
+    }
+  }, [inputValue])
 
   const handleSelectRow = (e) => {
     setCount(e.length)
