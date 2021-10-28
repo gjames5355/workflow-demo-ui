@@ -54,7 +54,6 @@ const PersonalTasks = () => {
 
   const onSaveTask = (event) => {
     
-    console.log('taskName', event.target.title.value);
     const newTask = {
       id: event.target.title.value,
       processName: event.target.processName.value,

@@ -53,7 +53,6 @@ const TeamTasks = () => {
   const claimed = data.filter(x => x.status !== 'New' && x.priority !== 'Urgent')
 
   const onSaveTask = (event) => {
-    console.log('saving');
     const newTask = {
       id: event.target.title.value,
       processName: event.target.processName.value,
