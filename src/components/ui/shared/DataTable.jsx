@@ -81,59 +81,6 @@ const DataTable = ({ type, data }) => {
     }
   }, [location])
 
-  useEffect(() => {
-    /* if(!inputValue) {
-      const urgentTasks = PERSONAL_TASKS.filter(x => x.priority === 'Urgent');
-      const activeTasks = PERSONAL_TASKS.filter(x => x.status !== 'New');
-      const snoozedTasks = PERSONAL_TASKS.filter(x => x.status === 'Snoozed');
-      const urgentUnclaimed = GROUP_TASKS.filter(x => x.priority === 'Urgent');
-      const unclaimed = GROUP_TASKS.filter(x => x.status === 'New');
-      const claimed = GROUP_TASKS.filter(x => x.status !== 'New' && x.priority !== 'Urgent');
-
-      switch (type) {
-        case 'urgent':
-          setData(urgentTasks);
-          break;
-        case 'active':
-          setData(activeTasks);
-          break;
-        case 'snoozed':
-          setData(snoozedTasks);
-          break;
-        case 'urgent-unclaimed':
-          setData(urgentUnclaimed);
-          break;
-        case 'unclaimed':
-          setData(unclaimed);
-          break;
-        case 'claimed':
-          setData(claimed);
-          break;
-        default:
-          break;
-      }
-    } */
-  }, [type, inputValue])
-
-  useEffect(() => {
-    if(inputValue) {
-      const filteredRows = data.filter(
-        (r) =>
-          r.processName.toLowerCase().includes(inputValue.toLowerCase()) ||
-          r.taskName.toLowerCase().includes(inputValue.toLowerCase()) ||
-          r.primaryVendor.toLowerCase().includes(inputValue.toLowerCase()) ||
-          r.proceedingType.toLowerCase().includes(inputValue.toLowerCase()) ||
-          r.client.toLowerCase().includes(inputValue.toLowerCase()) ||
-          r.division.toLowerCase().includes(inputValue.toLowerCase()) ||
-          r.priority.toLowerCase().includes(inputValue.toLowerCase())
-      )
-      // setData(filteredRows)
-    } else {
-      //setData()
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [inputValue])
-
   const handleSelectRow = (e) => {
     setCount(e.length)
   }
