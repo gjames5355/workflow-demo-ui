@@ -42,7 +42,6 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const DataTable = ({ type, data, handleChange}) => {
-  console.log("typeofd", data);
   const { setCount } = useContext(GlobalContext)
   const location = useLocation();
   const [columns, setColumns] = useState([]);
@@ -85,7 +84,7 @@ const DataTable = ({ type, data, handleChange}) => {
 
   useEffect(() => {
     if(inputValue) {
-      data.filter(
+      const filteredData = data.filter(
         (r) =>
           r.processName.toLowerCase().includes(inputValue.toLowerCase()) ||
           r.taskName.toLowerCase().includes(inputValue.toLowerCase()) ||
@@ -95,6 +94,8 @@ const DataTable = ({ type, data, handleChange}) => {
           r.division.toLowerCase().includes(inputValue.toLowerCase()) ||
           r.priority.toLowerCase().includes(inputValue.toLowerCase())
       )
+
+      setInnerData(filteredData)
     }
   }, [inputValue])
 
@@ -124,7 +125,7 @@ const DataTable = ({ type, data, handleChange}) => {
         />
       </div>
       <DataGrid
-        rows={data}
+        rows={inputValue ? innerData : data}
         columns={columns}
         pageSize={5}
         onColumnOrderChange
