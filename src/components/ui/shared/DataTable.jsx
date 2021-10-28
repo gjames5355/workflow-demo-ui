@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react"
 import { DataGrid } from "@material-ui/data-grid"
 import { GlobalContext } from "../../../context/GlobalContext"
-import { PERSONAL_TASKS, TABLE_COLUMNS, GROUP_TASKS } from "../../../constants/constants"
+import { TABLE_COLUMNS } from "../../../constants/constants"
 import Actions from "../actions/Actions"
 import { useLocation } from "react-router"
 import TeamStatus from "../team-status/TeamStatus"
