@@ -46,8 +46,6 @@ const AddTaskModal = (props) => {
         <Dialog onClose={onClose} open={isOpen}>
             <DialogTitle>Create Task</DialogTitle>
 
-
-
             <form onSubmit={handlerSubmit}>
                 <DialogContent>
 
@@ -75,8 +73,6 @@ const AddTaskModal = (props) => {
 
                     />
 
-
-
                     <FormControl margin={"1"}
                         fullWidth>
                         <InputLabel id="priority-label">Priority</InputLabel>
@@ -93,8 +89,6 @@ const AddTaskModal = (props) => {
 
                         >
                             <MenuItem value="Urgent">Urgent</MenuItem>
-                            <MenuItem value="Mid">Mid</MenuItem>
-                            <MenuItem value="Low">Low</MenuItem>
                         </Select>
                     </FormControl>
 
