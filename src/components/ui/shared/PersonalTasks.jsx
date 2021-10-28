@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles"
 import TableAccordion from "../table-accordion/TableAccordion";
 import AddTaskButton from "../add-task-modal/AddTaskModal";
 import { PERSONAL_TASKS } from "../../../constants/constants";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -49,7 +49,7 @@ const PersonalTasks = () => {
   const [data, setData] = useState(PERSONAL_TASKS)
 
   const urgentTaskData = data.filter(item => item.priority==='Urgent')
-  const newTasksData = data.filter(item => item.priority==='New')
+  const newTasksData = data.filter(item => item.status==='New')
   const snoozedTasksData = data.filter(item => item.priority==='Snoozed')
 
   const onSaveTask = (event) => {
@@ -75,7 +75,7 @@ const PersonalTasks = () => {
       assignedDate: "10/18/2021",
       litigationType: "Personal Injury/Negligence",
       taskDueDate: event.target.duedate.value,
-      status: "New",
+      status: event.target.status.value,
     }
 
     const newData = [...data]

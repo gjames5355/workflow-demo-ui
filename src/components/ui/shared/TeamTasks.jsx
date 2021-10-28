@@ -74,7 +74,7 @@ const TeamTasks = () => {
       assignedDate: "10/18/2021",
       litigationType: "Personal Injury/Negligence",
       taskDueDate: event.target.duedate.value,
-      status: "New",
+      status: event.target.status.value,
     }
 
     const newData = [...data]
