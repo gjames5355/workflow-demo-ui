@@ -57,15 +57,15 @@ const PersonalTasks = () => {
     console.log('taskName', event.target.title.value);
     const newTask = {
       id: event.target.title.value,
-      processName: "Produce MPEG 2",
-      taskName: "Stich MPEG",
+      processName: event.target.processName.value,
+      taskName: event.target.title.value,
       priority: event.target.priority.value,
       jobNumber: 4520001,
-      division: "South Carolina",
+      division: event.target.division.value,
       childDivision: "",
       dateDime: "10/18/2021 9:00AM",
       thirdParty: "Third Party",
-      client: "Kassel McVey",
+      client: event.target.client.value,
       case: "Addison, Lavaunda Vs. South Carolina Dept Of Trans",
       primaryVendor: "Solange Ruiz-Uribe",
       deliveryMethod: "Expedited",
@@ -75,7 +75,7 @@ const PersonalTasks = () => {
       proceedingType: "Depositions",
       assignedDate: "10/18/2021",
       litigationType: "Personal Injury/Negligence",
-      taskDueDate: "10/21/2021",
+      taskDueDate: event.target.duedate.value,
       status: "New",
     }
 
@@ -84,10 +84,6 @@ const PersonalTasks = () => {
     setData(newData)
     
   }
-
-  /* useEffect(() => {
-    setUrgentTasksData(prev => [...prev])
-  }, []) */
 
   return (
     <div>

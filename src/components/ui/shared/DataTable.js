@@ -44,7 +44,6 @@ const useStyles = makeStyles(theme => ({
 const DataTable = ({ type, data }) => {
   const { setCount } = useContext(GlobalContext)
   const location = useLocation();
-  // const [data, setData] = useState(location.pathname === '/team' ? GROUP_TASKS : PERSONAL_TASKS);
   const [columns, setColumns] = useState([]);
   const [inputValue, setInputValue] = useState('');
   const classes = useStyles();

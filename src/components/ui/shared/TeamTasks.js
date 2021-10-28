@@ -2,6 +2,8 @@ import ArrowForwardIcon from "@material-ui/icons/ArrowForward"
 import { makeStyles } from "@material-ui/core/styles"
 import TableAccordion from "../table-accordion/TableAccordion"
 import AddTaskButton from "../add-task-modal/AddTaskModal"
+import { GROUP_TASKS } from "../../../constants/constants"
+import { useState } from "react"
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -42,10 +44,43 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const TeamTasks = () => {
+
   const classes = useStyles()
+  const [data, setData] = useState(GROUP_TASKS)
+
+  const urgentUnclaimed = data.filter(item => item.priority==='Urgent')
+  const unclaimed = data.filter(item => item.status==='New')
+  const claimed = data.filter(x => x.status !== 'New' && x.priority !== 'Urgent')
 
   const onSaveTask = (event) => {
-    event.preventDefault()
+    console.log('saving');
+    const newTask = {
+      id: event.target.title.value,
+      processName: event.target.processName.value,
+      taskName: event.target.title.value,
+      priority: event.target.priority.value,
+      jobNumber: 4520001,
+      division: event.target.division.value,
+      childDivision: "",
+      dateDime: "10/18/2021 9:00AM",
+      thirdParty: "Third Party",
+      client: event.target.client.value,
+      case: "Addison, Lavaunda Vs. South Carolina Dept Of Trans",
+      primaryVendor: "Solange Ruiz-Uribe",
+      deliveryMethod: "Expedited",
+      deliveryDays: 3,
+      jobDueDate: "10/21/2021",
+      scheduleCity: "Columbia",
+      proceedingType: "Depositions",
+      assignedDate: "10/18/2021",
+      litigationType: "Personal Injury/Negligence",
+      taskDueDate: event.target.duedate.value,
+      status: "New",
+    }
+
+    const newData = [...data]
+    newData.push(newTask)
+    setData(newData)
   }
 
   return (
@@ -60,6 +95,7 @@ const TeamTasks = () => {
           }} 
         type='urgent-unclaimed'
         title='Urgent Unclaimed Tasks'
+        data={urgentUnclaimed}
       />
 
       <TableAccordion 
@@ -71,6 +107,7 @@ const TeamTasks = () => {
           }} 
         type='unclaimed'
         title='Unclaimed Tasks'
+        data={unclaimed}
       />
 
       <TableAccordion 
@@ -82,6 +119,7 @@ const TeamTasks = () => {
           }} 
         type='claimed'
         title='Claimed Tasks'
+        data={claimed}
       />
 
       <p className={classes.paragraph}>
