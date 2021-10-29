@@ -1,9 +1,7 @@
-import React, { useContext, useState } from "react"
+import React from "react"
 import AppBar from "@material-ui/core/AppBar"
 import AccountCircle from "@material-ui/icons/AccountCircle"
 import { makeStyles, alpha } from "@material-ui/core/styles"
-import InputBase from "@material-ui/core/InputBase"
-import SearchIcon from "@material-ui/icons/Search"
 import Toolbar from "@material-ui/core/Toolbar"
 import useScrollTrigger from "@material-ui/core/useScrollTrigger"
 import MenuItem from "@material-ui/core/MenuItem"
@@ -11,10 +9,8 @@ import Menu from "@material-ui/core/Menu"
 import MoreIcon from "@material-ui/icons/MoreVert"
 import IconButton from "@material-ui/core/IconButton"
 import PlayCircleFilledWhiteIcon from "@material-ui/icons/PlayCircleFilledWhite"
-import _ from 'lodash'
 
 import logo from "../../../assets/logo.png"
-import { GlobalContext } from "../../../context/GlobalContext"
 
 function ElevationScroll({ children }) {
   const trigger = useScrollTrigger({
@@ -97,9 +93,7 @@ const useStyles = makeStyles((theme) => ({
 const Header = () => {
   const classes = useStyles()
   const [anchorEl, setAnchorEl] = React.useState(null)
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-  const { setFilterValue } = useContext(GlobalContext);
-  const [inputValue, setInputValue] = useState('');
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null)
 
   const isMenuOpen = Boolean(anchorEl)
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl)
@@ -120,12 +114,6 @@ const Header = () => {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget)
   }
-
-  const handleInputChange = e => {
-    setInputValue(e.target.value);
-    debouncedCall(e.target.value);
-  }
-  const [debouncedCall] = useState(() => _.debounce(setFilterValue, 400))
 
   const menuId = "primary-search-account-menu"
   const renderMenu = (
@@ -189,21 +177,6 @@ const Header = () => {
               <img src={logo} height="45px" alt="logo" />
 
               <div className={classes.grow} />
-              <div className={classes.search}>
-                <div className={classes.searchIcon}>
-                  <SearchIcon />
-                </div>
-                <InputBase
-                  placeholder="Search…"
-                  value={inputValue}
-                  classes={{
-                    root: classes.inputRoot,
-                    input: classes.inputInput,
-                  }}
-                  onChange={handleInputChange}
-                  inputProps={{ "aria-label": "search" }}
-                />
-              </div>
               <div className={classes.sectionDesktop}>
                 <IconButton aria-label="show play button" color="inherit">
                   <PlayCircleFilledWhiteIcon />
