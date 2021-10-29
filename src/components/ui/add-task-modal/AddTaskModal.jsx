@@ -6,16 +6,12 @@ import {
   TextField,
   DialogActions,
   FormControl,
-  InputLabel,
   Select,
   MenuItem,
   Box,
-  OutlinedInput,
-  makeStyles,
 } from "@material-ui/core"
 
 import FormLabel from "@material-ui/core/FormLabel"
-import Grid from "@material-ui/core/Grid"
 import Item from "@material-ui/core/Grid"
 
 import { useContext, useState } from "react"
@@ -64,7 +60,6 @@ const AddTaskModal = ({ onClose, isOpen, onSaveTask }) => {
                 fullWidth
                 variant="outlined"
                 required
-                margin="dense"
               />
             </Item>
 
@@ -78,7 +73,6 @@ const AddTaskModal = ({ onClose, isOpen, onSaveTask }) => {
                 fullWidth
                 variant="outlined"
                 required
-                margin="dense"
               />
             </Item>
 

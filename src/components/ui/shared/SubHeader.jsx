@@ -1,7 +1,6 @@
 import { Button, makeStyles } from "@material-ui/core"
 import React, { useContext, useEffect } from "react"
 import { useLocation } from "react-router"
-// import WorkLoadBar from './WorkLoadBar';
 import { Check } from "@material-ui/icons"
 import { GlobalContext } from "../../../context/GlobalContext"
 
@@ -72,7 +71,7 @@ const SubHeader = (props) => {
     setSelectedRows([])
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location])
-  const newTaskSelected = !!selectedRows.find((x) => x.status === "New")
+  // const newTaskSelected = !!selectedRows.find((x) => x.status === "New")
 
   const unAssignedTaskSelected = selectedRows.every(
     (x) => !x.assignedTo || x.assignedTo === ""
@@ -164,25 +163,6 @@ const SubHeader = (props) => {
             </Button>
           </div>
         </div>
-        {/* :<> */}
-        {/* <div className={styles.subHeaderLeft}> */}
-        {/* <div className={styles.filterContainer}> */}
-        {/* <FilterListOutlined /> */}
-        {/* </div> */}
-        {/* </div> */}
-        {/* <div className={styles.subHeaderRight}> */}
-        {/* {location.pathname === '/' ?  */}
-        {/* <> */}
-        {/* <div className={styles.workLoadBar}></div> */}
-        {/* <div className={styles.workLoadBar}> */}
-        {/* <WorkLoadBar value={props.value}/> */}
-        {/* </div> */}
-        {/* </> */}
-        {/* : null */}
-        {/* } */}
-        {/* </div> */}
-        {/* </> */}
-        {/* } */}
       </div>
     )
   )

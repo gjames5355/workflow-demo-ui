@@ -97,7 +97,7 @@ const DataTable = ({ type, data, handleChange }) => {
 
       setInnerData(filteredData)
     }
-  }, [inputValue])
+  }, [inputValue, data])
 
   const handleSelectRow = (e) => {
     setCount(e.length)
@@ -129,7 +129,7 @@ const DataTable = ({ type, data, handleChange }) => {
       <DataGrid
         rows={inputValue ? innerData : data}
         columns={columns}
-        pageSize={5}
+        // pageSize={5}
         onColumnOrderChange
         checkboxSelection
         disableSelectionOnClick
