@@ -181,10 +181,9 @@ const AddTaskModal = ({ onClose, isOpen, onSaveTask }) => {
   )
 }
 
-const AddTaskButton = (props) => {
+const AddTaskButton = ({onSaveTask}) => {
   const { count } = useContext(GlobalContext)
   const [isModalOpen, setModalOpen] = useState(false)
-  const { onSaveTask } = props
 
   const onAddTaskHandler = () => {
     setModalOpen(true)
