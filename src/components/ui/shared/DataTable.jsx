@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react"
 import { DataGrid } from "@material-ui/data-grid"
 import { GlobalContext } from "../../../context/GlobalContext"
-import { PERSONAL_TASKS, TABLE_COLUMNS, GROUP_TASKS } from "../../../constants/constants"
+import { TABLE_COLUMNS } from "../../../constants/constants"
 import Actions from "../actions/Actions"
 import { useLocation } from "react-router"
 import TeamStatus from "../team-status/TeamStatus"
@@ -41,13 +41,13 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const DataTable = ({ type }) => {
+const DataTable = ({ type, data, handleChange}) => {
   const { setCount } = useContext(GlobalContext)
   const location = useLocation();
-  const [data, setData] = useState(location.pathname === '/team' ? GROUP_TASKS : PERSONAL_TASKS);
   const [columns, setColumns] = useState([]);
   const [inputValue, setInputValue] = useState('');
   const classes = useStyles();
+  const [innerData, setInnerData] = useState(data)
 
   useEffect(() => {
     const tableType = location.pathname === '/team' ? 'team' : 'personal';
@@ -83,42 +83,8 @@ const DataTable = ({ type }) => {
   }, [location])
 
   useEffect(() => {
-    if(!inputValue) {
-      const urgentTasks = PERSONAL_TASKS.filter(x => x.priority === 'Urgent');
-      const activeTasks = PERSONAL_TASKS.filter(x => x.status !== 'New');
-      const snoozedTasks = PERSONAL_TASKS.filter(x => x.status === 'Snoozed');
-      const urgentUnclaimed = GROUP_TASKS.filter(x => x.priority === 'Urgent');
-      const unclaimed = GROUP_TASKS.filter(x => x.status === 'New');
-      const claimed = GROUP_TASKS.filter(x => x.status !== 'New' && x.priority !== 'Urgent');
-
-      switch (type) {
-        case 'urgent':
-          setData(urgentTasks);
-          break;
-        case 'active':
-          setData(activeTasks);
-          break;
-        case 'snoozed':
-          setData(snoozedTasks);
-          break;
-        case 'urgent-unclaimed':
-          setData(urgentUnclaimed);
-          break;
-        case 'unclaimed':
-          setData(unclaimed);
-          break;
-        case 'claimed':
-          setData(claimed);
-          break;
-        default:
-          break;
-      }
-    }
-  }, [type, inputValue])
-
-  useEffect(() => {
     if(inputValue) {
-      const filteredRows = data.filter(
+      const filteredData = data.filter(
         (r) =>
           r.processName.toLowerCase().includes(inputValue.toLowerCase()) ||
           r.taskName.toLowerCase().includes(inputValue.toLowerCase()) ||
@@ -128,11 +94,9 @@ const DataTable = ({ type }) => {
           r.division.toLowerCase().includes(inputValue.toLowerCase()) ||
           r.priority.toLowerCase().includes(inputValue.toLowerCase())
       )
-      setData(filteredRows)
-    } else {
-      //setData()
+
+      setInnerData(filteredData)
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inputValue])
 
   const handleSelectRow = (e) => {
@@ -161,7 +125,7 @@ const DataTable = ({ type }) => {
         />
       </div>
       <DataGrid
-        rows={data}
+        rows={inputValue ? innerData : data}
         columns={columns}
         pageSize={5}
         onColumnOrderChange

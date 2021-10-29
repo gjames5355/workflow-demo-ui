@@ -3,7 +3,8 @@ import React from 'react';
 import DataTable from '../shared/DataTable';
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
-const TableAccordion = ({classes, title, type}) => {
+const TableAccordion = ({classes, title, type, data, handleChange }) => {
+
     return (
         <Accordion className={classes.accordion} defaultExpanded={true}>
             <AccordionSummary
@@ -15,7 +16,7 @@ const TableAccordion = ({classes, title, type}) => {
                 <Typography className={classes.title}>{title}</Typography>
             </AccordionSummary>
             <AccordionDetails className={classes.details}>
-                <DataTable type={type} />
+                <DataTable type={type} data={data} handleChange={handleChange} />
             </AccordionDetails>
         </Accordion>
     )
