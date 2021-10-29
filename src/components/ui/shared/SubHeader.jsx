@@ -1,7 +1,6 @@
 import { Button, makeStyles } from "@material-ui/core"
 import React, { useContext, useEffect } from "react"
 import { useLocation } from "react-router"
-// import WorkLoadBar from './WorkLoadBar';
 import { Check } from "@material-ui/icons"
 import { GlobalContext } from "../../../context/GlobalContext"
 
@@ -63,15 +62,27 @@ const useStyles = makeStyles((theme) => ({
 const SubHeader = (props) => {
   const styles = useStyles()
   const location = useLocation()
-  const { count, setCount, selectedRows, setSelectedRows } = useContext(GlobalContext)
+  const { count, setCount, selectedRows, setSelectedRows } = useContext(
+    GlobalContext
+  )
 
   useEffect(() => {
     setCount(0)
-    setSelectedRows([]);
+    setSelectedRows([])
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location])
-  const newTaskSelected = !!selectedRows.find(x => x.status === 'New');
-  
+  // const newTaskSelected = !!selectedRows.find((x) => x.status === "New")
+
+  const unAssignedTaskSelected = selectedRows.every(
+    (x) => !x.assignedTo || x.assignedTo === ""
+  )
+
+  const assignedTaskSelected = selectedRows.every(
+    (x) => x.assignedTo && x.assignedTo !== ""
+  )
+
+  const locationTrue = location.pathname === "/team"
+
   return (
     count > 0 && (
       <div className={styles.container}>
@@ -82,6 +93,7 @@ const SubHeader = (props) => {
               startIcon={<Check />}
               size="medium"
               variant="outlined"
+              disabled={locationTrue && unAssignedTaskSelected}
             >
               Mark {count} as Complete
             </Button>
@@ -93,40 +105,31 @@ const SubHeader = (props) => {
                 size="medium"
                 color="primary"
                 variant="outlined"
+                disabled={locationTrue && assignedTaskSelected}
               >
                 Claim
               </Button>
             )}
-            {newTaskSelected ?
-                <>
-                    <Button
-                        className={styles.button1}
-                        size="medium"
-                        color="primary"
-                        variant="outlined"
-                        >
-                        Assign
-                    </Button>
-                </>
-                :<>
-                    <Button
-                        className={styles.button1}
-                        size="medium"
-                        color="primary"
-                        variant="outlined"
-                        >
-                        Unclaim
-                    </Button>
-                    <Button
-                        className={styles.button1}
-                        size="medium"
-                        color="primary"
-                        variant="outlined"
-                        >
-                        Refer
-                    </Button>
-                </>
-            }
+            <>
+              <Button
+                className={styles.button1}
+                size="medium"
+                color="primary"
+                variant="outlined"
+                disabled={locationTrue && unAssignedTaskSelected}
+              >
+                Unclaim
+              </Button>
+              <Button
+                className={styles.button1}
+                size="medium"
+                color="primary"
+                variant="outlined"
+                disabled={locationTrue && unAssignedTaskSelected}
+              >
+                Assign
+              </Button>
+            </>
           </div>
           <div className={styles.buttonGroup2}>
             <Button
@@ -134,6 +137,7 @@ const SubHeader = (props) => {
               size="medium"
               color="primary"
               variant="outlined"
+              disabled={locationTrue && unAssignedTaskSelected}
             >
               Change Priority
             </Button>
@@ -144,6 +148,7 @@ const SubHeader = (props) => {
               size="medium"
               color="primary"
               variant="outlined"
+              disabled={locationTrue && unAssignedTaskSelected}
             >
               Change Due Date
             </Button>
@@ -152,30 +157,12 @@ const SubHeader = (props) => {
               size="medium"
               color="primary"
               variant="outlined"
+              disabled={locationTrue && unAssignedTaskSelected}
             >
               Snooze
             </Button>
           </div>
         </div>
-        {/* :<> */}
-        {/* <div className={styles.subHeaderLeft}> */}
-        {/* <div className={styles.filterContainer}> */}
-        {/* <FilterListOutlined /> */}
-        {/* </div> */}
-        {/* </div> */}
-        {/* <div className={styles.subHeaderRight}> */}
-        {/* {location.pathname === '/' ?  */}
-        {/* <> */}
-        {/* <div className={styles.workLoadBar}></div> */}
-        {/* <div className={styles.workLoadBar}> */}
-        {/* <WorkLoadBar value={props.value}/> */}
-        {/* </div> */}
-        {/* </> */}
-        {/* : null */}
-        {/* } */}
-        {/* </div> */}
-        {/* </> */}
-        {/* } */}
       </div>
     )
   )

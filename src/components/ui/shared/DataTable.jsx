@@ -8,11 +8,11 @@ import TeamStatus from "../team-status/TeamStatus"
 import SearchIcon from "@material-ui/icons/Search"
 import { InputBase, makeStyles, alpha } from "@material-ui/core"
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   search: {
     position: "relative",
     borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.common.black , 0.15),
+    backgroundColor: alpha(theme.palette.common.black, 0.15),
     marginRight: theme.spacing(2),
     marginLeft: 0,
     marginBottom: 10,
@@ -41,24 +41,24 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const DataTable = ({ type, data, handleChange}) => {
-  const { setCount } = useContext(GlobalContext)
-  const location = useLocation();
-  const [columns, setColumns] = useState([]);
-  const [inputValue, setInputValue] = useState('');
-  const classes = useStyles();
+const DataTable = ({ type, data, handleChange }) => {
+  const { setCount, setSelectedRows } = useContext(GlobalContext)
+  const location = useLocation()
+  const [columns, setColumns] = useState([])
+  const [inputValue, setInputValue] = useState("")
+  const classes = useStyles()
   const [innerData, setInnerData] = useState(data)
 
   useEffect(() => {
-    const tableType = location.pathname === '/team' ? 'team' : 'personal';
-    const cols = [...TABLE_COLUMNS];
+    const tableType = location.pathname === "/team" ? "team" : "personal"
+    const cols = [...TABLE_COLUMNS]
     const actions = {
       field: "action",
       headerName: "Action",
       width: 200,
-      renderCell: (params) => <Actions params={params} />
-    };
-  
+      renderCell: (params) => <Actions params={params} />,
+    }
+
     const teamStatus = {
       field: "status",
       headerName: "Status",
@@ -74,16 +74,16 @@ const DataTable = ({ type, data, handleChange}) => {
       editable: false,
     }
 
-    if (tableType === 'personal') {
+    if (tableType === "personal") {
       setColumns([...cols, actions])
     } else {
-      cols.splice(17, 0, teamStatus);
-      setColumns([...cols, assignedTo, actions]);
+      cols.splice(17, 0, teamStatus)
+      setColumns([...cols, assignedTo, actions])
     }
   }, [location])
 
   useEffect(() => {
-    if(inputValue) {
+    if (inputValue) {
       const filteredData = data.filter(
         (r) =>
           r.processName.toLowerCase().includes(inputValue.toLowerCase()) ||
@@ -97,14 +97,16 @@ const DataTable = ({ type, data, handleChange}) => {
 
       setInnerData(filteredData)
     }
-  }, [inputValue])
+  }, [inputValue, data])
 
   const handleSelectRow = (e) => {
     setCount(e.length)
+    const selectedRowData = data.filter((row) => e.includes(row.id))
+    setSelectedRows(selectedRowData)
   }
 
-  const handleInputChange = e => {
-    setInputValue(e.target.value);
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value)
   }
 
   return (
@@ -127,7 +129,7 @@ const DataTable = ({ type, data, handleChange}) => {
       <DataGrid
         rows={inputValue ? innerData : data}
         columns={columns}
-        pageSize={5}
+        // pageSize={5}
         onColumnOrderChange
         checkboxSelection
         disableSelectionOnClick
@@ -137,4 +139,4 @@ const DataTable = ({ type, data, handleChange}) => {
   )
 }
 
-export default DataTable;
+export default DataTable
