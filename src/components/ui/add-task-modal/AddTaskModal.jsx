@@ -114,7 +114,7 @@ const AddTaskModal = ({ onClose, isOpen, onSaveTask }) => {
                   onChange={handleChange}
                 >
                   <MenuItem value="dallas">Dallas</MenuItem>
-                  <MenuItem value="houston">houston</MenuItem>
+                  <MenuItem value="houston">Houston</MenuItem>
                 </Select>
               </FormControl>
             </Item>
@@ -181,7 +181,7 @@ const AddTaskModal = ({ onClose, isOpen, onSaveTask }) => {
   )
 }
 
-const AddTaskButton = ({onSaveTask}) => {
+const AddTaskButton = ({ onSaveTask }) => {
   const { count } = useContext(GlobalContext)
   const [isModalOpen, setModalOpen] = useState(false)
 
