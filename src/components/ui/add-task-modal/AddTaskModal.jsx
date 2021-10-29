@@ -21,8 +21,7 @@ import Item from "@material-ui/core/Grid"
 import { useContext, useState } from "react"
 import { GlobalContext } from "../../../context/GlobalContext"
 
-const AddTaskModal = (props) => {
-  const { onClose, isOpen, onSaveTask } = props
+const AddTaskModal = ({ onClose, isOpen, onSaveTask }) => {
   const currentDate = new Date()
   const defaultDate = `${currentDate.getFullYear()}-${
     currentDate.getMonth() + 1
@@ -93,7 +92,7 @@ const AddTaskModal = (props) => {
                   id="priority-control"
                   name="priority"
                   value={form.priority}
-                  onChange={handleChange.bind(this)}
+                  onChange={handleChange}
                   margin="dense"
                 >
                   <MenuItem value="Urgent">Urgent</MenuItem>
@@ -112,7 +111,7 @@ const AddTaskModal = (props) => {
                   id="division"
                   name="division"
                   value={form.division}
-                  onChange={handleChange.bind(this)}
+                  onChange={handleChange}
                 >
                   <MenuItem value="dallas">Dallas</MenuItem>
                   <MenuItem value="houston">houston</MenuItem>
@@ -130,7 +129,7 @@ const AddTaskModal = (props) => {
                   id="client"
                   name="client"
                   value={form.client}
-                  onChange={handleChange.bind(this)}
+                  onChange={handleChange}
                 >
                   <MenuItem value="arnold_itkin">Arnold & Itkin LLP</MenuItem>
                   <MenuItem value="garret_shawn">Shawn</MenuItem>
@@ -161,7 +160,7 @@ const AddTaskModal = (props) => {
                   id="status-control"
                   name="status"
                   value={form.status}
-                  onChange={handleChange.bind(this)}
+                  onChange={handleChange}
                   margin="dense"
                 >
                   <MenuItem value="New">New</MenuItem>
