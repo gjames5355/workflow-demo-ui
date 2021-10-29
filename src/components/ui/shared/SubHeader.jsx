@@ -111,40 +111,26 @@ const SubHeader = (props) => {
                 Claim
               </Button>
             )}
-            {newTaskSelected ? (
-              <>
-                <Button
-                  className={styles.button1}
-                  size="medium"
-                  color="primary"
-                  variant="outlined"
-                  disabled={locationTrue && assignedTaskSelected}
-                >
-                  Assign
-                </Button>
-              </>
-            ) : (
-              <>
-                <Button
-                  className={styles.button1}
-                  size="medium"
-                  color="primary"
-                  variant="outlined"
-                  disabled={locationTrue && unAssignedTaskSelected}
-                >
-                  Unclaim
-                </Button>
-                <Button
-                  className={styles.button1}
-                  size="medium"
-                  color="primary"
-                  variant="outlined"
-                  disabled={locationTrue && unAssignedTaskSelected}
-                >
-                  Refer
-                </Button>
-              </>
-            )}
+            <>
+              <Button
+                className={styles.button1}
+                size="medium"
+                color="primary"
+                variant="outlined"
+                disabled={locationTrue && unAssignedTaskSelected}
+              >
+                Unclaim
+              </Button>
+              <Button
+                className={styles.button1}
+                size="medium"
+                color="primary"
+                variant="outlined"
+                disabled={locationTrue && unAssignedTaskSelected}
+              >
+                Assign
+              </Button>
+            </>
           </div>
           <div className={styles.buttonGroup2}>
             <Button
