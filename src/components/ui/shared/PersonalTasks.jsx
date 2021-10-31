@@ -1,10 +1,9 @@
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward"
 import { makeStyles } from "@material-ui/core/styles"
-import TableAccordion from "../table-accordion/TableAccordion";
-import AddTaskButton from "../add-task-modal/AddTaskModal";
-import { PERSONAL_TASKS } from "../../../constants/constants";
-import { useState } from "react";
-
+import TableAccordion from "../table-accordion/TableAccordion"
+import AddTaskButton from "../add-task-modal/AddTaskModal"
+import { PERSONAL_TASKS } from "../../../constants/constants"
+import { useState } from "react"
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -30,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#FBD250",
   },
   accordionDetails: {
-    minHeight: '470px',
+    minHeight: "470px",
   },
   paragraph: {
     ...theme.typography.tab,
@@ -48,40 +47,28 @@ const PersonalTasks = () => {
   const classes = useStyles()
   const [data, setData] = useState(PERSONAL_TASKS)
 
-  const urgentTaskData = data.filter(item => item.priority==='Urgent')
-  const newTasksData = data.filter(item => item.status==='New')
-  const snoozedTasksData = data.filter(item => item.priority==='Snoozed')
+  const urgentTaskData = data.filter((item) => item.priority === "Urgent")
+  const newTasksData = data.filter((item) => item.status === "New")
+  const snoozedTasksData = data.filter((item) => item.priority === "Snoozed")
 
   const onSaveTask = (event) => {
-    
     const newTask = {
       id: event.target.title.value,
+      jobNumber: 4520001,
       processName: event.target.processName.value,
       taskName: event.target.title.value,
-      priority: event.target.priority.value,
-      jobNumber: 4520001,
-      division: event.target.division.value,
-      childDivision: "",
-      dateDime: "10/18/2021 9:00AM",
-      thirdParty: "Third Party",
-      client: event.target.client.value,
-      case: "Addison, Lavaunda Vs. South Carolina Dept Of Trans",
-      primaryVendor: "Solange Ruiz-Uribe",
-      deliveryMethod: "Expedited",
-      deliveryDays: 3,
-      jobDueDate: "10/21/2021",
-      scheduleCity: "Columbia",
-      proceedingType: "Depositions",
-      assignedDate: "10/18/2021",
-      litigationType: "Personal Injury/Negligence",
       taskDueDate: event.target.duedate.value,
-      status: event.target.status.value,
+      taskStatus: event.target.taskStatus.value,
+      priority: event.target.priority.value,
+      earliestVideoOrderDays: 5,
+      earliestVideoOrderDueDate: "10/18/2021",
+      caseName: "Addison, Lavaunda Vs. South Carolina Dept Of Trans",
+      division: event.target.division.value,
     }
 
     const newData = [...data]
     newData.push(newTask)
     setData(newData)
-    
   }
 
   const handleChange = (newData) => {
@@ -91,41 +78,41 @@ const PersonalTasks = () => {
   return (
     <div>
       <AddTaskButton onSaveTask={onSaveTask} />
-      <TableAccordion 
+      <TableAccordion
         classes={{
           accordion: classes.accordion1,
           title: classes.title,
           summary: classes.accordionSummary1,
           details: classes.accordionDetails,
-          }} 
-        type='urgent'
-        title='Urgent Tasks'
+        }}
+        type="urgent"
+        title="Urgent Tasks"
         data={urgentTaskData}
         handleChange={handleChange}
       />
 
-      <TableAccordion 
+      <TableAccordion
         classes={{
           accordion: classes.accordion2,
           title: classes.title,
           summary: classes.accordionSummary2,
           details: classes.accordionDetails,
-          }} 
-        type='active'
-        title='Active Tasks'
+        }}
+        type="active"
+        title="Active Tasks"
         data={newTasksData}
         handleChange={handleChange}
       />
 
-      <TableAccordion 
+      <TableAccordion
         classes={{
           accordion: classes.accordion3,
           title: classes.title,
           summary: classes.accordionSummary3,
           details: classes.accordionDetails,
-          }} 
-        type='snoozed'
-        title='Snoozed Tasks'
+        }}
+        type="snoozed"
+        title="Snoozed Tasks"
         data={snoozedTasksData}
         handleChange={handleChange}
       />

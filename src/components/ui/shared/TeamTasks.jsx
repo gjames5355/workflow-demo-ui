@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#FBD250",
   },
   accordionDetails: {
-    minHeight: '470px',
+    minHeight: "470px",
   },
   paragraph: {
     ...theme.typography.tab,
@@ -44,37 +44,28 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const TeamTasks = () => {
-
   const classes = useStyles()
   const [data, setData] = useState(GROUP_TASKS)
 
-  const urgentUnclaimed = data.filter(item => item.priority==='Urgent')
-  const unclaimed = data.filter(item => item.status==='New')
-  const claimed = data.filter(x => x.status !== 'New' && x.priority !== 'Urgent')
+  const urgentUnclaimed = data.filter((item) => item.priority === "Urgent")
+  const unclaimed = data.filter((item) => item.taskStatus === "New")
+  const claimed = data.filter(
+    (x) => x.taskStatus !== "New" && x.priority !== "Urgent"
+  )
 
   const onSaveTask = (event) => {
     const newTask = {
       id: event.target.title.value,
+      jobNumber: 4520001,
       processName: event.target.processName.value,
       taskName: event.target.title.value,
-      priority: event.target.priority.value,
-      jobNumber: 4520001,
-      division: event.target.division.value,
-      childDivision: "",
-      dateDime: "10/18/2021 9:00AM",
-      thirdParty: "Third Party",
-      client: event.target.client.value,
-      case: "Addison, Lavaunda Vs. South Carolina Dept Of Trans",
-      primaryVendor: "Solange Ruiz-Uribe",
-      deliveryMethod: "Expedited",
-      deliveryDays: 3,
-      jobDueDate: "10/21/2021",
-      scheduleCity: "Columbia",
-      proceedingType: "Depositions",
-      assignedDate: "10/18/2021",
-      litigationType: "Personal Injury/Negligence",
       taskDueDate: event.target.duedate.value,
-      status: event.target.status.value,
+      taskStatus: event.target.taskStatus.value,
+      priority: event.target.priority.value,
+      earliestVideoOrderDays: 5,
+      earliestVideoOrderDueDate: "10/18/2021",
+      caseName: "Addison, Lavaunda Vs. South Carolina Dept Of Trans",
+      division: event.target.division.value,
     }
 
     const newData = [...data]
@@ -89,41 +80,41 @@ const TeamTasks = () => {
   return (
     <div>
       <AddTaskButton onSaveTask={onSaveTask} />
-      <TableAccordion 
+      <TableAccordion
         classes={{
           accordion: classes.accordion1,
           title: classes.title,
           summary: classes.accordionSummary1,
-          details: classes.accordionDetails
-          }} 
-        type='urgent-unclaimed'
-        title='Urgent Unclaimed Tasks'
+          details: classes.accordionDetails,
+        }}
+        type="urgent-unclaimed"
+        title="Urgent Unclaimed Tasks"
         data={urgentUnclaimed}
         handleChange={handleChange}
       />
 
-      <TableAccordion 
+      <TableAccordion
         classes={{
           accordion: classes.accordion3,
           title: classes.title,
           summary: classes.accordionSummary3,
-          details: classes.accordionDetails
-          }} 
-        type='unclaimed'
-        title='Unclaimed Tasks'
+          details: classes.accordionDetails,
+        }}
+        type="unclaimed"
+        title="Unclaimed Tasks"
         data={unclaimed}
         handleChange={handleChange}
       />
 
-      <TableAccordion 
+      <TableAccordion
         classes={{
           accordion: classes.accordion2,
           title: classes.title,
           summary: classes.accordionSummary2,
-          details: classes.accordionDetails
-          }} 
-        type='claimed'
-        title='Claimed Tasks'
+          details: classes.accordionDetails,
+        }}
+        type="claimed"
+        title="Claimed Tasks"
         data={claimed}
         handleChange={handleChange}
       />

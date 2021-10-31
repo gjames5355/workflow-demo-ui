@@ -60,8 +60,8 @@ const DataTable = ({ type, data, handleChange }) => {
     }
 
     const teamStatus = {
-      field: "status",
-      headerName: "Status",
+      field: "taskStatus",
+      headerName: "Task Status",
       width: 200,
       editable: false,
       renderCell: (params) => <TeamStatus params={params} />,
