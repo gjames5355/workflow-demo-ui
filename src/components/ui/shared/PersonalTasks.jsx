@@ -47,9 +47,9 @@ const useStyles = makeStyles((theme) => ({
 const PersonalTasks = () => {
   const classes = useStyles()
   const [data, setData] = useState(PERSONAL_TASKS)
-  
+
   const urgentTaskData = data.filter((item) => item.priority === "Urgent")
-  const newTasksData = data.filter((item) => item.taskStatus === "New")
+  const newTasksData = data.filter((item) => item.priority !== "Urgent")
   const snoozedTasksData = data.filter((item) => item.priority === "Snoozed")
 
   const onSaveTask = (event) => {
@@ -68,7 +68,7 @@ const PersonalTasks = () => {
     }
     // console.log(event.target.taskDueDate)
     // console.log(event.target.taskDueDate.value)
-   
+
     const newData = [...data]
     newData.push(newTask)
     console.log(newData)
