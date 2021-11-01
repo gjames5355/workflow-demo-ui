@@ -54,17 +54,23 @@ const TeamTasks = () => {
   )
 
   const onSaveTask = (event) => {
+    const taskDueDate = event.target.taskDueDate.value
+    const earliestVideoOrderDueDate =
+      event.target.earliestVideoOrderDueDate.value
+    const formattedTaskDueDate = `${taskDueDate[5]}${taskDueDate[6]}/${taskDueDate[8]}${taskDueDate[9]}/${taskDueDate[0]}${taskDueDate[1]}${taskDueDate[2]}${taskDueDate[3]}`
+    const formattedEarliestVideoOrderDueDate = `${earliestVideoOrderDueDate[5]}${earliestVideoOrderDueDate[6]}/${earliestVideoOrderDueDate[8]}${earliestVideoOrderDueDate[9]}/${earliestVideoOrderDueDate[0]}${earliestVideoOrderDueDate[1]}${earliestVideoOrderDueDate[2]}${earliestVideoOrderDueDate[3]}`
+
     const newTask = {
       id: event.target.jobNumber.value,
       jobNumber: event.target.jobNumber.value,
       processName: event.target.processName.value,
       taskName: event.target.taskName.value,
-      taskDueDate: event.target.taskDueDate.value,
+      taskDueDate: formattedTaskDueDate,
       taskStatus: event.target.taskStatus.value,
       priority: event.target.priority.value,
       earliestVideoOrderDays: event.target.earliestVideoOrderDays.value,
       caseName: event.target.caseName.value,
-      earliestVideoOrderDueDate: event.target.taskDueDate.value,
+      earliestVideoOrderDueDate: formattedEarliestVideoOrderDueDate,
       division: event.target.division.value,
       assignedTo: event.target.assignedTo.value,
     }

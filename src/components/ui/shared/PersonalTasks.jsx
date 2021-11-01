@@ -75,7 +75,6 @@ const PersonalTasks = () => {
 
     const newData = [...data]
     newData.push(newTask)
-    console.log(newData)
     setData(newData)
   }
 
