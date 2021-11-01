@@ -66,7 +66,7 @@ const TeamTasks = () => {
       caseName: event.target.caseName.value,
       earliestVideoOrderDueDate: event.target.taskDueDate.value,
       division: event.target.division.value,
-      assignedTo: event.target.assginedTo,
+      assignedTo: event.target.assignedTo.value,
     }
 
     const newData = [...data]
