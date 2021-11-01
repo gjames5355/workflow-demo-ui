@@ -58,6 +58,12 @@ const Fields = () => {
             to="/team"
             label="Team Tasks"
           />
+          <Tab
+            className={classes.tab}
+            component={Link}
+            to="/completed"
+            label="Completed Tasks"
+          />
         </Tabs>
         <Button
           color="primary"
