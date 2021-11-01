@@ -40,12 +40,13 @@ const AddTaskModal = ({ onClose, isOpen, onSaveTask }) => {
     const newTask = { ...form }
     console.log(newTask, event)
     newTask[event.target.name] = event.target.value
+    console.log(event.target.value)
     setForm(newTask)
   }
 
   const handlerSubmit = (event) => {
     event.preventDefault()
-    onSaveTask(event)
+    onSaveTask()
     onClose()
   }
 
@@ -65,6 +66,9 @@ const AddTaskModal = ({ onClose, isOpen, onSaveTask }) => {
                 id="jobNumber"
                 fullWidth
                 variant="outlined"
+                value={form.jobNumber}
+                onChange={handleChange}
+                name="jobNumber"
               />
             </Item>
 
@@ -78,6 +82,9 @@ const AddTaskModal = ({ onClose, isOpen, onSaveTask }) => {
                 fullWidth
                 variant="outlined"
                 required
+                name="processName"
+                value={form.processName}
+                onChange={handleChange}
               />
             </Item>
 
@@ -90,6 +97,9 @@ const AddTaskModal = ({ onClose, isOpen, onSaveTask }) => {
                 fullWidth
                 variant="outlined"
                 required
+                name="taskName"
+                value={form.taskName}
+                onChange={handleChange}
               />
             </Item>
             <Item>
@@ -153,6 +163,9 @@ const AddTaskModal = ({ onClose, isOpen, onSaveTask }) => {
                 fullWidth
                 variant="outlined"
                 required
+                name="division"
+                value={form.division}
+                onChange={handleChange}
               ></TextField>
             </Item>
           </Box>
