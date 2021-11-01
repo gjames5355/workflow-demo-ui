@@ -48,12 +48,15 @@ const PersonalTasks = () => {
   const [data, setData] = useState(PERSONAL_TASKS)
 
   const urgentTaskData = data.filter((item) => item.priority === "Urgent")
-  const newTasksData = data.filter((item) => item.priority !== "Urgent")
+  const newTasksData = data.filter(
+    (item) => item.priority !== "Urgent" && item.priority !== "Snoozed"
+  )
   const snoozedTasksData = data.filter((item) => item.priority === "Snoozed")
 
   const onSaveTask = (event) => {
     const taskDueDate = event.target.taskDueDate.value
-    const earliestVideoOrderDueDate = event.target.taskDueDate.value
+    const earliestVideoOrderDueDate =
+      event.target.earliestVideoOrderDueDate.value
     const formattedTaskDueDate = `${taskDueDate[5]}${taskDueDate[6]}/${taskDueDate[8]}${taskDueDate[9]}/${taskDueDate[0]}${taskDueDate[1]}${taskDueDate[2]}${taskDueDate[3]}`
     const formattedEarliestVideoOrderDueDate = `${earliestVideoOrderDueDate[5]}${earliestVideoOrderDueDate[6]}/${earliestVideoOrderDueDate[8]}${earliestVideoOrderDueDate[9]}/${earliestVideoOrderDueDate[0]}${earliestVideoOrderDueDate[1]}${earliestVideoOrderDueDate[2]}${earliestVideoOrderDueDate[3]}`
     const newTask = {
