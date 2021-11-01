@@ -118,11 +118,6 @@ const TeamTasks = () => {
         data={claimed}
         handleChange={handleChange}
       />
-
-      <p className={classes.paragraph}>
-        View Completed Tasks
-        <ArrowForwardIcon className={classes.arrowIcon} />
-      </p>
     </div>
   )
 }
