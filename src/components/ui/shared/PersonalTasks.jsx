@@ -65,6 +65,7 @@ const PersonalTasks = () => {
       caseName: event.target.caseName.value,
       earliestVideoOrderDueDate: event.target.taskDueDate.value,
       division: event.target.division.value,
+      assignedTo: event.target.assignedTo,
     }
     // console.log(event.target.taskDueDate)
     // console.log(event.target.taskDueDate.value)
