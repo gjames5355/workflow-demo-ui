@@ -23,16 +23,22 @@ const AddTaskModal = ({ onClose, isOpen, onSaveTask }) => {
     currentDate.getMonth() + 1
   }-${currentDate.getDate()}`
   const [form, setForm] = useState({
+    jobNumber: "",
+    processName: "",
+    taskName: "",
+    taskDueDate: defaultDate,
+    taskStatus: "",
     priority: "",
-    division: "",
-    client: "",
-    dueDate: defaultDate,
-    status: "",
-    deliveryMethod: "",
+    earliestVideoOrderDays: 0,
+    divsion: "",
+    caseName: "",
   })
+
+  console.log(form)
 
   const handleChange = (event) => {
     const newTask = { ...form }
+    console.log(newTask, event)
     newTask[event.target.name] = event.target.value
     setForm(newTask)
   }
@@ -51,15 +57,14 @@ const AddTaskModal = ({ onClose, isOpen, onSaveTask }) => {
         <DialogContent>
           <Box padding="15px">
             <Item>
-              <FormLabel>Name: </FormLabel>
+              <FormLabel>Job Number: </FormLabel>
 
               <TextField
                 autoFocus
                 margin="dense"
-                id="title"
+                id="jobNumber"
                 fullWidth
                 variant="outlined"
-                required
               />
             </Item>
 
@@ -77,6 +82,50 @@ const AddTaskModal = ({ onClose, isOpen, onSaveTask }) => {
             </Item>
 
             <Item>
+              <FormLabel>Task Name: </FormLabel>
+
+              <TextField
+                margin="dense"
+                id="taskName"
+                fullWidth
+                variant="outlined"
+                required
+              />
+            </Item>
+            <Item>
+              <FormLabel>Task Due Date: </FormLabel>
+              <FormControl margin="dense" fullWidth>
+                <TextField
+                  id="duedate"
+                  name="taskDueDate"
+                  variant="outlined"
+                  type="date"
+                  value={form.taskDueDate}
+                  onChange={handleChange}
+                />
+              </FormControl>
+            </Item>
+            {/* <Item>
+              <FormLabel>Task Status: </FormLabel>
+              <FormControl margin="dense" fullWidth>
+                <Select
+                  variant="outlined"
+                  required
+                  labelId="status-label"
+                  label="Status"
+                  id="status-control"
+                  name="status"
+                  value={form.status}
+                  onChange={handleChange}
+                  margin="dense"
+                >
+                  <MenuItem value="New">New</MenuItem>
+                  <MenuItem value="Assigned">Assigned</MenuItem>
+                </Select>
+              </FormControl>
+            </Item> */}
+
+            {/* <Item>
               <FormLabel>Priority: </FormLabel>
 
               <FormControl margin="dense" fullWidth>
@@ -94,73 +143,17 @@ const AddTaskModal = ({ onClose, isOpen, onSaveTask }) => {
                   <MenuItem value="High">High</MenuItem>
                 </Select>
               </FormControl>
-            </Item>
+            </Item> */}
             <Item>
               <FormLabel>Division: </FormLabel>
-              <FormControl margin="dense" fullWidth>
-                <Select
-                  variant="outlined"
-                  required
-                  labelId="select-division"
-                  id="division"
-                  name="division"
-                  value={form.division}
-                  onChange={handleChange}
-                >
-                  <MenuItem value="dallas">Dallas</MenuItem>
-                  <MenuItem value="houston">Houston</MenuItem>
-                </Select>
-              </FormControl>
-            </Item>
 
-            <Item>
-              <FormLabel>Client: </FormLabel>
-              <FormControl margin="dense" fullWidth>
-                <Select
-                  variant="outlined"
-                  required
-                  labelId="select-client"
-                  id="client"
-                  name="client"
-                  value={form.client}
-                  onChange={handleChange}
-                >
-                  <MenuItem value="arnold_itkin">Arnold & Itkin LLP</MenuItem>
-                  <MenuItem value="garret_shawn">Shawn</MenuItem>
-                </Select>
-              </FormControl>
-            </Item>
-            <Item>
-              <FormLabel>Due Date: </FormLabel>
-              <FormControl margin="dense" fullWidth>
-                <TextField
-                  id="duedate"
-                  name="dueDate"
-                  variant="outlined"
-                  type="date"
-                  value={form.dueDate}
-                  onChange={handleChange}
-                />
-              </FormControl>
-            </Item>
-            <Item>
-              <FormLabel>Status: </FormLabel>
-              <FormControl margin="dense" fullWidth>
-                <Select
-                  variant="outlined"
-                  required
-                  labelId="status-label"
-                  label="Status"
-                  id="status-control"
-                  name="status"
-                  value={form.status}
-                  onChange={handleChange}
-                  margin="dense"
-                >
-                  <MenuItem value="New">New</MenuItem>
-                  <MenuItem value="Assigned">Assigned</MenuItem>
-                </Select>
-              </FormControl>
+              <TextField
+                margin="dense"
+                id="division"
+                fullWidth
+                variant="outlined"
+                required
+              ></TextField>
             </Item>
           </Box>
         </DialogContent>

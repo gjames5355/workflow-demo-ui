@@ -53,18 +53,19 @@ const PersonalTasks = () => {
 
   const onSaveTask = (event) => {
     const newTask = {
-      id: event.target.title.value,
+      // id: event.target.title.value,
       jobNumber: 4520001,
       processName: event.target.processName.value,
-      taskName: event.target.title.value,
-      taskDueDate: event.target.duedate.value,
-      taskStatus: event.target.taskStatus.value,
-      priority: event.target.priority.value,
-      earliestVideoOrderDays: 5,
-      earliestVideoOrderDueDate: "10/18/2021",
-      caseName: "Addison, Lavaunda Vs. South Carolina Dept Of Trans",
+      taskName: event.target.taskName.value,
+      taskDueDate: event.target.taskDuedate.value,
+      // taskStatus: event.target.taskStatus.value,
+      // priority: event.target.priority.value,
+      // earliestVideoOrderDays: 5,
+      // earliestVideoOrderDueDate: event.target.taskDueDate.value,
       division: event.target.division.value,
     }
+    console.log(event.target.taskDueDate)
+    console.log(event.target.taskDueDate.value)
 
     const newData = [...data]
     newData.push(newTask)
