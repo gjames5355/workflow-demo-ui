@@ -18,19 +18,19 @@ import { useContext, useState } from "react"
 import { GlobalContext } from "../../../context/GlobalContext"
 
 const AddTaskModal = ({ onClose, isOpen, onSaveTask }) => {
-  const currentDate = new Date()
-  const defaultDate = `${currentDate.getFullYear()}-${
-    currentDate.getMonth() + 1
-  }-${currentDate.getDate()}`
+  // const currentDate = new Date()
+  // const defaultDate = `${currentDate.getFullYear()}-${
+  //   currentDate.getMonth() + 1
+  // }-${currentDate.getDate()}`
   const [form, setForm] = useState({
     jobNumber: "",
     processName: "",
     taskName: "",
-    taskDueDate: defaultDate,
+    taskDueDate: "",
     taskStatus: "",
     priority: "",
     earliestVideoOrderDays: "",
-    earliestVideoOrderDueDate: defaultDate,
+    earliestVideoOrderDueDate: "",
     division: "",
     caseName: "",
     assignedTo: "",
@@ -41,6 +41,7 @@ const AddTaskModal = ({ onClose, isOpen, onSaveTask }) => {
   const handleChange = (event) => {
     const newTask = { ...form }
     newTask[event.target.name] = event.target.value
+
     setForm(newTask)
   }
 
@@ -49,11 +50,11 @@ const AddTaskModal = ({ onClose, isOpen, onSaveTask }) => {
       jobNumber: "",
       processName: "",
       taskName: "",
-      taskDueDate: defaultDate,
+      taskDueDate: "",
       taskStatus: "",
       priority: "",
       earliestVideoOrderDays: "",
-      earliestVideoOrderDueDate: defaultDate,
+      earliestVideoOrderDueDate: "",
       division: "",
       caseName: "",
       assignedTo: "",
