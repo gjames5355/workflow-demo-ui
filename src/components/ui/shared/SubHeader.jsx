@@ -1,8 +1,7 @@
 import { Button, makeStyles } from "@material-ui/core"
-import React, { useContext, useEffect } from "react"
+import React, { useEffect } from "react"
 import { useLocation } from "react-router"
 import { Check } from "@material-ui/icons"
-import { GlobalContext } from "../../../context/GlobalContext"
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -13,11 +12,11 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "12px",
   },
   subHeaderRight: {
-    width: "50%",
+    width: "70%",
     display: "flex",
   },
   subHeaderLeft: {
-    width: "50%",
+    width: "30%",
   },
   workLoadBar: {
     width: "50%",
@@ -35,12 +34,12 @@ const useStyles = makeStyles((theme) => ({
   },
   selectedCount: {
     display: "flex",
-    width: "30%",
+    width: "15%",
   },
   buttonGroup1: {
     display: "flex",
-    width: "21%",
-    justifyContent: "space-around",
+    width: "35%",
+    justifyContent: "space-evenly",
   },
   buttonGroup2: {
     width: "10%",
@@ -48,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
   },
   buttonGroup3: {
     display: "flex",
-    width: "20%",
+    width: "25%",
     justifyContent: "space-around",
   },
   button1: {
@@ -59,25 +58,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const SubHeader = (props) => {
+const SubHeader = ({count, handleCount, rows, handleRows}) => {
   const styles = useStyles()
   const location = useLocation()
-  const { count, setCount, selectedRows, setSelectedRows } = useContext(
-    GlobalContext
-  )
 
   useEffect(() => {
-    setCount(0)
-    setSelectedRows([])
+    handleCount(0)
+    handleRows([])
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location])
   // const newTaskSelected = !!selectedRows.find((x) => x.status === "New")
 
-  const unAssignedTaskSelected = selectedRows.every(
+  const unAssignedTaskSelected = rows.every(
     (x) => !x.assignedTo || x.assignedTo === ""
   )
 
-  const assignedTaskSelected = selectedRows.every(
+  const assignedTaskSelected = rows.every(
     (x) => x.assignedTo && x.assignedTo !== ""
   )
 

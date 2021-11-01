@@ -6,7 +6,6 @@ import Fields from "./ui/shared/Fields"
 import Header from "./ui/shared/Header"
 import theme from "./ui/shared/Theme"
 import PersonalTasks from "./ui/shared/PersonalTasks"
-import SubHeader from "./ui/shared/SubHeader"
 import TeamTasks from "./ui/shared/TeamTasks"
 import { GlobalContext } from '../context/GlobalContext'
 
@@ -24,7 +23,6 @@ function App() {
           <Divider />
           <Fields />
           <Divider />
-          <SubHeader />
           <Switch>
             <Route exact path="/">
               <PersonalTasks />

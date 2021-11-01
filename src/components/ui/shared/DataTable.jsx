@@ -1,14 +1,19 @@
-import React, { useContext, useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { DataGrid } from "@material-ui/data-grid"
-import { GlobalContext } from "../../../context/GlobalContext"
 import { TABLE_COLUMNS } from "../../../constants/constants"
 import Actions from "../actions/Actions"
 import { useLocation } from "react-router"
 import TeamStatus from "../team-status/TeamStatus"
 import SearchIcon from "@material-ui/icons/Search"
 import { InputBase, makeStyles, alpha } from "@material-ui/core"
+import SubHeader from "./SubHeader"
 
 const useStyles = makeStyles((theme) => ({
+  container: {
+    width: '100%',
+    display: 'flex',
+    alignItems: 'center',
+  },
   search: {
     position: "relative",
     borderRadius: theme.shape.borderRadius,
@@ -17,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 0,
     marginBottom: 10,
     width: "20%",
+    maxHeight: '35px',
   },
   searchIcon: {
     padding: theme.spacing(0, 2),
@@ -39,15 +45,19 @@ const useStyles = makeStyles((theme) => ({
       width: "20ch",
     },
   },
+  buttonsContainer: {
+    width: '80%'
+  }
 }))
 
-const DataTable = ({ type, data, handleChange }) => {
-  const { setCount, setSelectedRows } = useContext(GlobalContext)
+const DataTable = ({ data }) => {
+  const [selectedRows, setSelectedRows ] = useState([])
   const location = useLocation()
   const [columns, setColumns] = useState([])
   const [inputValue, setInputValue] = useState("")
   const classes = useStyles()
   const [innerData, setInnerData] = useState(data)
+  const [count, setCount] = useState(0)
 
   useEffect(() => {
     const tableType = location.pathname === "/team" ? "team" : "personal"
@@ -86,13 +96,16 @@ const DataTable = ({ type, data, handleChange }) => {
     if (inputValue) {
       const filteredData = data.filter(
         (r) =>
+          r.jobNumber.toString().includes(inputValue.toLowerCase()) ||
           r.processName.toLowerCase().includes(inputValue.toLowerCase()) ||
           r.taskName.toLowerCase().includes(inputValue.toLowerCase()) ||
-          r.primaryVendor.toLowerCase().includes(inputValue.toLowerCase()) ||
-          r.proceedingType.toLowerCase().includes(inputValue.toLowerCase()) ||
-          r.client.toLowerCase().includes(inputValue.toLowerCase()) ||
-          r.division.toLowerCase().includes(inputValue.toLowerCase()) ||
-          r.priority.toLowerCase().includes(inputValue.toLowerCase())
+          r.taskDueDate.toLowerCase().includes(inputValue.toLowerCase()) ||
+          r.taskStatus.toLowerCase().includes(inputValue.toLowerCase()) ||
+          r.earliestVideoOrderDays.toString().includes(inputValue.toLowerCase()) ||
+          r.earliestVideoOrderDueDate.toLowerCase().includes(inputValue.toLowerCase()) ||
+          r.priority.toLowerCase().includes(inputValue.toLowerCase()) ||
+          r.caseName.toLowerCase().includes(inputValue.toLowerCase()) ||
+          r.division.toLowerCase().includes(inputValue.toLowerCase())
       )
 
       setInnerData(filteredData)
@@ -111,20 +124,30 @@ const DataTable = ({ type, data, handleChange }) => {
 
   return (
     <div style={{ height: 400, width: "100%" }}>
-      <div className={classes.search}>
-        <div className={classes.searchIcon}>
-          <SearchIcon />
+      <div className={classes.container}>
+        <div className={classes.search}>
+          <div className={classes.searchIcon}>
+            <SearchIcon />
+          </div>
+          <InputBase
+            placeholder="Search…"
+            value={inputValue}
+            classes={{
+              root: classes.inputRoot,
+              input: classes.inputInput,
+            }}
+            onChange={handleInputChange}
+            inputProps={{ "aria-label": "search" }}
+          />
         </div>
-        <InputBase
-          placeholder="Search…"
-          value={inputValue}
-          classes={{
-            root: classes.inputRoot,
-            input: classes.inputInput,
-          }}
-          onChange={handleInputChange}
-          inputProps={{ "aria-label": "search" }}
-        />
+        <div className={classes.buttonsContainer}>
+          <SubHeader 
+            count={count}
+            handleCount={setCount}
+            rows={selectedRows}
+            handleRows={setSelectedRows}
+          />
+        </div>
       </div>
       <DataGrid
         rows={inputValue ? innerData : data}
