@@ -55,17 +55,18 @@ const TeamTasks = () => {
 
   const onSaveTask = (event) => {
     const newTask = {
-      id: event.target.title.value,
-      jobNumber: 4520001,
+      id: event.target.jobNumber.value,
+      jobNumber: event.target.jobNumber.value,
       processName: event.target.processName.value,
-      taskName: event.target.title.value,
-      taskDueDate: event.target.duedate.value,
+      taskName: event.target.taskName.value,
+      taskDueDate: event.target.taskDueDate.value,
       taskStatus: event.target.taskStatus.value,
       priority: event.target.priority.value,
-      earliestVideoOrderDays: 5,
-      earliestVideoOrderDueDate: "10/18/2021",
-      caseName: "Addison, Lavaunda Vs. South Carolina Dept Of Trans",
+      earliestVideoOrderDays: event.target.earliestVideoOrderDays.value,
+      caseName: event.target.caseName.value,
+      earliestVideoOrderDueDate: event.target.taskDueDate.value,
       division: event.target.division.value,
+      assignedTo: event.target.assginedTo,
     }
 
     const newData = [...data]
