@@ -284,6 +284,7 @@ const AddTaskButton = ({ onSaveTask }) => {
           style={{
             padding: "10px",
           }}
+          disabled
         >
           Add Task
         </Button>
