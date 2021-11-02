@@ -36,8 +36,6 @@ const AddTaskModal = ({ onClose, isOpen, onSaveTask }) => {
     assignedTo: "",
   })
 
-  console.log(form)
-
   const handleChange = (event) => {
     const newTask = { ...form }
     newTask[event.target.name] = event.target.value

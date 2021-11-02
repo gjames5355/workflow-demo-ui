@@ -3,7 +3,6 @@ import TableAccordion from "../table-accordion/TableAccordion"
 import AddTaskButton from "../add-task-modal/AddTaskModal"
 import { PERSONAL_TASKS } from "../../../constants/constants"
 import { useState } from "react"
-import { gridColumnsTotalWidthSelector } from "@material-ui/data-grid"
 
 const useStyles = makeStyles((theme) => ({
   title: {
