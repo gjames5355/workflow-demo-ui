@@ -7,12 +7,13 @@ import TeamStatus from "../team-status/TeamStatus"
 import SearchIcon from "@material-ui/icons/Search"
 import { InputBase, makeStyles, alpha } from "@material-ui/core"
 import SubHeader from "./SubHeader"
+import "../OverDueStyling/OverDueRow.css"
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    width: '100%',
-    display: 'flex',
-    alignItems: 'center',
+    width: "100%",
+    display: "flex",
+    alignItems: "center",
   },
   search: {
     position: "relative",
@@ -22,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 0,
     marginBottom: 10,
     width: "20%",
-    maxHeight: '35px',
+    maxHeight: "35px",
   },
   searchIcon: {
     padding: theme.spacing(0, 2),
@@ -46,12 +47,12 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   buttonsContainer: {
-    width: '80%'
-  }
+    width: "80%",
+  },
 }))
 
 const DataTable = ({ data }) => {
-  const [selectedRows, setSelectedRows ] = useState([])
+  const [selectedRows, setSelectedRows] = useState([])
   const location = useLocation()
   const [columns, setColumns] = useState([])
   const [inputValue, setInputValue] = useState("")
@@ -101,8 +102,12 @@ const DataTable = ({ data }) => {
           r.taskName.toLowerCase().includes(inputValue.toLowerCase()) ||
           r.taskDueDate.toLowerCase().includes(inputValue.toLowerCase()) ||
           r.taskStatus.toLowerCase().includes(inputValue.toLowerCase()) ||
-          r.earliestVideoOrderDays.toString().includes(inputValue.toLowerCase()) ||
-          r.earliestVideoOrderDueDate.toLowerCase().includes(inputValue.toLowerCase()) ||
+          r.earliestVideoOrderDays
+            .toString()
+            .includes(inputValue.toLowerCase()) ||
+          r.earliestVideoOrderDueDate
+            .toLowerCase()
+            .includes(inputValue.toLowerCase()) ||
           r.priority.toLowerCase().includes(inputValue.toLowerCase()) ||
           r.caseName.toLowerCase().includes(inputValue.toLowerCase()) ||
           r.division.toLowerCase().includes(inputValue.toLowerCase())
@@ -141,7 +146,7 @@ const DataTable = ({ data }) => {
           />
         </div>
         <div className={classes.buttonsContainer}>
-          <SubHeader 
+          <SubHeader
             count={count}
             handleCount={setCount}
             rows={selectedRows}
@@ -150,6 +155,7 @@ const DataTable = ({ data }) => {
         </div>
       </div>
       <DataGrid
+        getRowClassName={(row) => `${row.getValue(row.id, "taskStatus")}-Row`}
         rows={inputValue ? innerData : data}
         columns={columns}
         // pageSize={5}
