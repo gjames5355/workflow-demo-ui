@@ -58,7 +58,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const SubHeader = ({count, handleCount, rows, handleRows}) => {
+const SubHeader = ({
+  count,
+  handleCount,
+  rows,
+  handleRows,
+  onClaim, 
+  onUnclaim,
+  onAssign,
+  onChangePriority,
+  onChangeDueDate
+}) => {
   const styles = useStyles()
   const location = useLocation()
 
@@ -67,7 +77,6 @@ const SubHeader = ({count, handleCount, rows, handleRows}) => {
     handleRows([])
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location])
-  // const newTaskSelected = !!selectedRows.find((x) => x.status === "New")
 
   const unAssignedTaskSelected = rows.every(
     (x) => !x.assignedTo || x.assignedTo === ""
@@ -78,6 +87,10 @@ const SubHeader = ({count, handleCount, rows, handleRows}) => {
   )
 
   const locationTrue = location.pathname === "/team"
+
+  const handleDueDate = () => {
+    //onChangeDueDate()
+  }
 
   return (
     count > 0 && (
@@ -102,6 +115,7 @@ const SubHeader = ({count, handleCount, rows, handleRows}) => {
                 color="primary"
                 variant="outlined"
                 disabled={locationTrue && assignedTaskSelected}
+                onClick={onClaim}
               >
                 Claim
               </Button>
@@ -113,6 +127,7 @@ const SubHeader = ({count, handleCount, rows, handleRows}) => {
                 color="primary"
                 variant="outlined"
                 disabled={locationTrue && unAssignedTaskSelected}
+                onClick={onUnclaim}
               >
                 Unclaim
               </Button>
@@ -122,6 +137,7 @@ const SubHeader = ({count, handleCount, rows, handleRows}) => {
                 color="primary"
                 variant="outlined"
                 disabled={locationTrue && unAssignedTaskSelected}
+                onClick={onAssign}
               >
                 Assign
               </Button>
@@ -134,6 +150,7 @@ const SubHeader = ({count, handleCount, rows, handleRows}) => {
               color="primary"
               variant="outlined"
               disabled={locationTrue && unAssignedTaskSelected}
+              onClick={onChangePriority}
             >
               Change Priority
             </Button>
@@ -145,6 +162,7 @@ const SubHeader = ({count, handleCount, rows, handleRows}) => {
               color="primary"
               variant="outlined"
               disabled={locationTrue && unAssignedTaskSelected}
+              onClick={handleDueDate}
             >
               Change Due Date
             </Button>

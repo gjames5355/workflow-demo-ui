@@ -1,8 +1,8 @@
 import { makeStyles } from "@material-ui/core/styles"
 import TableAccordion from "../table-accordion/TableAccordion"
 import AddTaskButton from "../add-task-modal/AddTaskModal"
-import { GROUP_TASKS } from "../../../constants/constants"
-import { useState } from "react"
+import { useState, useContext, useEffect } from "react"
+import { GlobalContext } from "../../../context/GlobalContext"
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -44,13 +44,16 @@ const useStyles = makeStyles((theme) => ({
 
 const TeamTasks = () => {
   const classes = useStyles()
-  const [data, setData] = useState(GROUP_TASKS)
+  const { groupTasks } = useContext(GlobalContext)
+  const [data, setData] = useState(groupTasks)
 
   const urgentUnclaimed = data.filter((item) => item.priority === "Urgent")
-  const unclaimed = data.filter((item) => item.taskStatus === "New")
-  const claimed = data.filter(
-    (x) => x.taskStatus !== "New" && x.priority !== "Urgent"
-  )
+  const unclaimed = data.filter((item) => item.taskStatus === "New" && item.priority !== 'Urgent')
+  const claimed = data.filter((x) => x.taskStatus !== "New" && x.priority !== "Urgent")
+
+  useEffect(() => {
+    setData(groupTasks)
+  }, [groupTasks])
 
   const onSaveTask = (event) => {
     const taskDueDate = event.target.taskDueDate.value
