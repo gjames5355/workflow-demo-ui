@@ -30,6 +30,10 @@ const Fields = () => {
     setValue(value)
   }
 
+  const refreshPage = () => {
+    window.location.reload()
+  }
+
   useEffect(() => {
     if (window.location.pathname === "/" && value !== 0) {
       setValue(0)
@@ -66,6 +70,7 @@ const Fields = () => {
           />
         </Tabs>
         <Button
+          onClick={refreshPage}
           color="primary"
           className={classes.button}
           startIcon={<RefreshIcon />}
