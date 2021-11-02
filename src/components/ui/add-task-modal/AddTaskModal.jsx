@@ -18,28 +18,51 @@ import { useContext, useState } from "react"
 import { GlobalContext } from "../../../context/GlobalContext"
 
 const AddTaskModal = ({ onClose, isOpen, onSaveTask }) => {
-  const currentDate = new Date()
-  const defaultDate = `${currentDate.getFullYear()}-${
-    currentDate.getMonth() + 1
-  }-${currentDate.getDate()}`
+  // const currentDate = new Date()
+  // const defaultDate = `${currentDate.getFullYear()}-${
+  //   currentDate.getMonth() + 1
+  // }-${currentDate.getDate()}`
   const [form, setForm] = useState({
+    jobNumber: "",
+    processName: "",
+    taskName: "",
+    taskDueDate: "",
+    taskStatus: "",
     priority: "",
+    earliestVideoOrderDays: "",
+    earliestVideoOrderDueDate: "",
     division: "",
-    client: "",
-    dueDate: defaultDate,
-    status: "",
-    deliveryMethod: "",
+    caseName: "",
+    assignedTo: "",
   })
 
   const handleChange = (event) => {
     const newTask = { ...form }
     newTask[event.target.name] = event.target.value
+
     setForm(newTask)
+  }
+
+  const resetForm = () => {
+    setForm({
+      jobNumber: "",
+      processName: "",
+      taskName: "",
+      taskDueDate: "",
+      taskStatus: "",
+      priority: "",
+      earliestVideoOrderDays: "",
+      earliestVideoOrderDueDate: "",
+      division: "",
+      caseName: "",
+      assignedTo: "",
+    })
   }
 
   const handlerSubmit = (event) => {
     event.preventDefault()
     onSaveTask(event)
+    resetForm()
     onClose()
   }
 
@@ -51,15 +74,17 @@ const AddTaskModal = ({ onClose, isOpen, onSaveTask }) => {
         <DialogContent>
           <Box padding="15px">
             <Item>
-              <FormLabel>Name: </FormLabel>
+              <FormLabel>Job Number: </FormLabel>
 
               <TextField
                 autoFocus
                 margin="dense"
-                id="title"
+                id="jobNumber"
                 fullWidth
                 variant="outlined"
-                required
+                value={form.jobNumber}
+                onChange={handleChange}
+                name="jobNumber"
               />
             </Item>
 
@@ -67,13 +92,62 @@ const AddTaskModal = ({ onClose, isOpen, onSaveTask }) => {
               <FormLabel>Process Name: </FormLabel>
 
               <TextField
-                autoFocus
                 margin="dense"
                 id="processName"
                 fullWidth
                 variant="outlined"
                 required
+                name="processName"
+                value={form.processName}
+                onChange={handleChange}
               />
+            </Item>
+
+            <Item>
+              <FormLabel>Task Name: </FormLabel>
+
+              <TextField
+                margin="dense"
+                id="taskName"
+                fullWidth
+                variant="outlined"
+                required
+                name="taskName"
+                value={form.taskName}
+                onChange={handleChange}
+              />
+            </Item>
+            <Item>
+              <FormLabel>Task Due Date: </FormLabel>
+              <FormControl margin="dense" fullWidth>
+                <TextField
+                  id="taskDuedate"
+                  name="taskDueDate"
+                  variant="outlined"
+                  type="date"
+                  value={form.taskDueDate}
+                  onChange={handleChange}
+                />
+              </FormControl>
+            </Item>
+            <Item>
+              <FormLabel>Task Status: </FormLabel>
+              <FormControl margin="dense" fullWidth>
+                <Select
+                  variant="outlined"
+                  required
+                  labelId="status-label"
+                  label="Status"
+                  id="status-control"
+                  name="taskStatus"
+                  value={form.taskStatus}
+                  onChange={handleChange}
+                  margin="dense"
+                >
+                  <MenuItem value="New">New</MenuItem>
+                  <MenuItem value="Assigned">Assigned</MenuItem>
+                </Select>
+              </FormControl>
             </Item>
 
             <Item>
@@ -96,77 +170,85 @@ const AddTaskModal = ({ onClose, isOpen, onSaveTask }) => {
               </FormControl>
             </Item>
             <Item>
-              <FormLabel>Division: </FormLabel>
-              <FormControl margin="dense" fullWidth>
-                <Select
-                  variant="outlined"
-                  required
-                  labelId="select-division"
-                  id="division"
-                  name="division"
-                  value={form.division}
-                  onChange={handleChange}
-                >
-                  <MenuItem value="dallas">Dallas</MenuItem>
-                  <MenuItem value="houston">Houston</MenuItem>
-                </Select>
-              </FormControl>
-            </Item>
+              <FormLabel>Earliest Video Order Days: </FormLabel>
 
-            <Item>
-              <FormLabel>Client: </FormLabel>
-              <FormControl margin="dense" fullWidth>
-                <Select
-                  variant="outlined"
-                  required
-                  labelId="select-client"
-                  id="client"
-                  name="client"
-                  value={form.client}
-                  onChange={handleChange}
-                >
-                  <MenuItem value="arnold_itkin">Arnold & Itkin LLP</MenuItem>
-                  <MenuItem value="garret_shawn">Shawn</MenuItem>
-                </Select>
-              </FormControl>
+              <TextField
+                margin="dense"
+                id="earliestVideoOrderDays"
+                fullWidth
+                variant="outlined"
+                required
+                name="earliestVideoOrderDays"
+                value={form.earliestVideoOrderDays}
+                onChange={handleChange}
+              />
             </Item>
             <Item>
-              <FormLabel>Due Date: </FormLabel>
+              <FormLabel>Earliest Video Order Due Date: </FormLabel>
               <FormControl margin="dense" fullWidth>
                 <TextField
-                  id="duedate"
-                  name="dueDate"
+                  id="earliestVideoOrderDueDate"
+                  name="earliestVideoOrderDueDate"
                   variant="outlined"
                   type="date"
-                  value={form.dueDate}
+                  value={form.earliestVideoOrderDueDate}
                   onChange={handleChange}
                 />
               </FormControl>
             </Item>
             <Item>
-              <FormLabel>Status: </FormLabel>
-              <FormControl margin="dense" fullWidth>
-                <Select
-                  variant="outlined"
-                  required
-                  labelId="status-label"
-                  label="Status"
-                  id="status-control"
-                  name="status"
-                  value={form.status}
-                  onChange={handleChange}
-                  margin="dense"
-                >
-                  <MenuItem value="New">New</MenuItem>
-                  <MenuItem value="Assigned">Assigned</MenuItem>
-                </Select>
-              </FormControl>
+              <FormLabel>Case Name: </FormLabel>
+
+              <TextField
+                margin="dense"
+                id="caseName"
+                fullWidth
+                variant="outlined"
+                required
+                name="caseName"
+                value={form.caseName}
+                onChange={handleChange}
+              ></TextField>
+            </Item>
+            <Item>
+              <FormLabel>Division: </FormLabel>
+
+              <TextField
+                margin="dense"
+                id="division"
+                fullWidth
+                variant="outlined"
+                required
+                name="division"
+                value={form.division}
+                onChange={handleChange}
+              ></TextField>
+            </Item>
+            <Item>
+              <FormLabel>Assigned To: </FormLabel>
+
+              <TextField
+                margin="dense"
+                id="assignedTo"
+                fullWidth
+                variant="outlined"
+                name="assignedTo"
+                value={form.assignedTo}
+                onChange={handleChange}
+              ></TextField>
             </Item>
           </Box>
         </DialogContent>
         <DialogActions>
-          <Button onClick={onClose}>Cancel</Button>
-          <Button type="submit" primary={true}>
+          <Button
+            onClick={() => {
+              onClose()
+              resetForm()
+            }}
+          >
+            Cancel
+          </Button>
+          <Button type="submit" primary="true">
             Save
           </Button>
         </DialogActions>
@@ -202,6 +284,7 @@ const AddTaskButton = ({ onSaveTask }) => {
           style={{
             padding: "10px",
           }}
+          disabled
         >
           Add Task
         </Button>

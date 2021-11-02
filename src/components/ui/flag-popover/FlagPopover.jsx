@@ -30,7 +30,7 @@ const VTFlagPopover = (props) => {
           padding: "5px",
         }}
       >
-        <Grid alignItems="center">
+        <Grid container alignItems="center">
           <StyledIconButton
             style={{
               border:
