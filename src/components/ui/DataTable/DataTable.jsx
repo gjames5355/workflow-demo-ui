@@ -8,12 +8,13 @@ import SearchIcon from '@material-ui/icons/Search'
 import { InputBase, makeStyles, alpha } from '@material-ui/core'
 import SubHeader from '../shared/SubHeader'
 import { GlobalContext } from '../../../context/GlobalContext'
+import '../OverDueStyling/OverDueRow.css'
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    width: '100%',
-    display: 'flex',
-    alignItems: 'center',
+    width: "100%",
+    display: "flex",
+    alignItems: "center",
   },
   search: {
     position: 'relative',
@@ -103,8 +104,12 @@ const DataTable = ({ data, type }) => {
           r.taskName.toLowerCase().includes(inputValue.toLowerCase()) ||
           r.taskDueDate.toLowerCase().includes(inputValue.toLowerCase()) ||
           r.taskStatus.toLowerCase().includes(inputValue.toLowerCase()) ||
-          r.earliestVideoOrderDays.toString().includes(inputValue.toLowerCase()) ||
-          r.earliestVideoOrderDueDate.toLowerCase().includes(inputValue.toLowerCase()) ||
+          r.earliestVideoOrderDays
+            .toString()
+            .includes(inputValue.toLowerCase()) ||
+          r.earliestVideoOrderDueDate
+            .toLowerCase()
+            .includes(inputValue.toLowerCase()) ||
           r.priority.toLowerCase().includes(inputValue.toLowerCase()) ||
           r.caseName.toLowerCase().includes(inputValue.toLowerCase()) ||
           r.division.toLowerCase().includes(inputValue.toLowerCase())
@@ -176,6 +181,7 @@ const DataTable = ({ data, type }) => {
         </div>
       </div>
       <DataGrid
+        getRowClassName={(row) => `${row.getValue(row.id, "taskStatus")}-Row`}
         rows={inputValue ? innerData : data}
         columns={columns}
         // pageSize={5}
