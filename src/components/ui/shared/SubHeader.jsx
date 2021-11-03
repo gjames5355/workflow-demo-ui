@@ -58,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const SubHeader = ({count, handleCount, rows, handleRows}) => {
+const SubHeader = ({ count, handleCount, markCompleted, rows, handleRows }) => {
   const styles = useStyles()
   const location = useLocation()
 
@@ -85,6 +85,7 @@ const SubHeader = ({count, handleCount, rows, handleRows}) => {
         <div className={styles.buttonContainer}>
           <div className={styles.selectedCount}>
             <Button
+              onClick={markCompleted}
               className={styles.countButton}
               startIcon={<Check />}
               size="medium"

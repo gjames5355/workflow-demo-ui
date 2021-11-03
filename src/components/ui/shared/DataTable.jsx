@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const DataTable = ({ data }) => {
+const DataTable = ({ data, allData, setData }) => {
   const [selectedRows, setSelectedRows] = useState([])
   const location = useLocation()
   const [columns, setColumns] = useState([])
@@ -59,7 +59,6 @@ const DataTable = ({ data }) => {
   const classes = useStyles()
   const [innerData, setInnerData] = useState(data)
   const [count, setCount] = useState(0)
-
   useEffect(() => {
     const tableType = location.pathname === "/team" ? "team" : "personal"
     const cols = [...TABLE_COLUMNS]
@@ -127,6 +126,14 @@ const DataTable = ({ data }) => {
     setInputValue(e.target.value)
   }
 
+  const markCompleted = () => {
+    for (const el of selectedRows) {
+      el.taskStatus = "Completed"
+    }
+    const newData = [...allData]
+    setData(newData)
+  }
+
   return (
     <div style={{ height: 400, width: "100%" }}>
       <div className={classes.container}>
@@ -151,6 +158,7 @@ const DataTable = ({ data }) => {
             handleCount={setCount}
             rows={selectedRows}
             handleRows={setSelectedRows}
+            markCompleted={markCompleted}
           />
         </div>
       </div>
@@ -163,6 +171,7 @@ const DataTable = ({ data }) => {
         checkboxSelection
         disableSelectionOnClick
         onSelectionModelChange={handleSelectRow}
+        forceUpdate
       />
     </div>
   )

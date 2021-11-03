@@ -2,7 +2,8 @@ import { makeStyles } from "@material-ui/core/styles"
 import TableAccordion from "../table-accordion/TableAccordion"
 import AddTaskButton from "../add-task-modal/AddTaskModal"
 import { GROUP_TASKS } from "../../../constants/constants"
-import { useState } from "react"
+import { useState, useContext, useEffect } from "react"
+import { GlobalContext } from "../../../context/GlobalContext"
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -45,12 +46,23 @@ const useStyles = makeStyles((theme) => ({
 const TeamTasks = () => {
   const classes = useStyles()
   const [data, setData] = useState(GROUP_TASKS)
-
-  const urgentUnclaimed = data.filter((item) => item.priority === "Urgent")
+  console.log("team task data", data)
+  const { setCompletedTasks } = useContext(GlobalContext)
+  const urgentUnclaimed = data.filter(
+    (item) => item.priority === "Urgent" && item.taskStatus !== "Completed"
+  )
   const unclaimed = data.filter((item) => item.taskStatus === "New")
   const claimed = data.filter(
-    (x) => x.taskStatus !== "New" && x.priority !== "Urgent"
+    (x) =>
+      x.taskStatus !== "New" &&
+      x.priority !== "Urgent" &&
+      x.taskStatus !== "Completed"
   )
+
+  useEffect(() => {
+    const completed = data.filter((item) => item.taskStatus === "Completed")
+    setCompletedTasks(completed)
+  }, [data, setCompletedTasks])
 
   const onSaveTask = (event) => {
     const taskDueDate = event.target.taskDueDate.value
@@ -97,6 +109,8 @@ const TeamTasks = () => {
         title="Urgent Unclaimed Tasks"
         data={urgentUnclaimed}
         handleChange={handleChange}
+        setData={setData}
+        allData={data}
       />
 
       <TableAccordion
@@ -110,6 +124,8 @@ const TeamTasks = () => {
         title="Unclaimed Tasks"
         data={unclaimed}
         handleChange={handleChange}
+        setData={setData}
+        allData={data}
       />
 
       <TableAccordion
@@ -123,6 +139,8 @@ const TeamTasks = () => {
         title="Claimed Tasks"
         data={claimed}
         handleChange={handleChange}
+        setData={setData}
+        allData={data}
       />
     </div>
   )
