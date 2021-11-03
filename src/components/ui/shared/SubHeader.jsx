@@ -1,7 +1,8 @@
 import { Button, makeStyles } from "@material-ui/core"
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { useLocation } from "react-router"
 import { Check } from "@material-ui/icons"
+import MultipleSelectionsModal from "../multiple-selections-modal/MultipleSelectionsModal"
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -61,6 +62,15 @@ const useStyles = makeStyles((theme) => ({
 const SubHeader = ({ count, handleCount, markCompleted, rows, handleRows }) => {
   const styles = useStyles()
   const location = useLocation()
+  const [isModalOpen, setModalOpen] = useState(false)
+
+  const onMultipleCountHandler = () => {
+    setModalOpen(true)
+  }
+
+  const onCloseModal = () => {
+    setModalOpen(false)
+  }
 
   useEffect(() => {
     handleCount(0)
@@ -83,18 +93,40 @@ const SubHeader = ({ count, handleCount, markCompleted, rows, handleRows }) => {
     count > 0 && (
       <div className={styles.container}>
         <div className={styles.buttonContainer}>
-          <div className={styles.selectedCount}>
-            <Button
-              onClick={markCompleted}
-              className={styles.countButton}
-              startIcon={<Check />}
-              size="medium"
-              variant="outlined"
-              disabled={locationTrue && unAssignedTaskSelected}
-            >
-              Mark {count} as Complete
-            </Button>
-          </div>
+          {count === 1 && (
+            <div className={styles.selectedCount}>
+              <Button
+                onClick={markCompleted}
+                className={styles.countButton}
+                startIcon={<Check />}
+                size="medium"
+                variant="outlined"
+                disabled={locationTrue && unAssignedTaskSelected}
+              >
+                Mark {count} as Complete
+              </Button>
+            </div>
+          )}
+          {count > 1 && (
+            <div className={styles.selectedCount}>
+              <Button
+                onClick={onMultipleCountHandler}
+                className={styles.countButton}
+                startIcon={<Check />}
+                size="medium"
+                variant="outlined"
+                disabled={locationTrue && unAssignedTaskSelected}
+              >
+                Mark {count} as Complete
+              </Button>
+              <MultipleSelectionsModal
+                isOpen={isModalOpen}
+                onClose={onCloseModal}
+                markCompleted={markCompleted}
+                count={count}
+              ></MultipleSelectionsModal>
+            </div>
+          )}
           <div className={styles.buttonGroup1}>
             {location.pathname === "/team" && (
               <Button
