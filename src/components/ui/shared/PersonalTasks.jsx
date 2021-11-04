@@ -49,7 +49,6 @@ const PersonalTasks = () => {
 
   useEffect(() => {
     setData(personalTasks)
-    console.debug(personalTasks)
   },[personalTasks])
 
   const urgentTaskData = data.filter((item) => item.priority === "Urgent")

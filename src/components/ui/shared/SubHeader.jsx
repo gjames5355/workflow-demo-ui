@@ -65,9 +65,7 @@ const SubHeader = ({
   handleRows,
   onClaim, 
   onUnclaim,
-  onAssign,
-  onChangePriority,
-  onChangeDueDate
+  onAction,
 }) => {
   const styles = useStyles()
   const location = useLocation()
@@ -88,9 +86,9 @@ const SubHeader = ({
 
   const locationTrue = location.pathname === "/team"
 
-  const handleDueDate = () => {
-    //onChangeDueDate()
-  }
+  // const handleDueDate = () => {
+  //   //onChangeDueDate()
+  // }
 
   return (
     count > 0 && (
@@ -137,7 +135,7 @@ const SubHeader = ({
                 color="primary"
                 variant="outlined"
                 disabled={locationTrue && unAssignedTaskSelected}
-                onClick={onAssign}
+                onClick={() => onAction('assign')}
               >
                 Assign
               </Button>
@@ -150,7 +148,7 @@ const SubHeader = ({
               color="primary"
               variant="outlined"
               disabled={locationTrue && unAssignedTaskSelected}
-              onClick={onChangePriority}
+              onClick={() => onAction('priority')}
             >
               Change Priority
             </Button>
@@ -162,7 +160,7 @@ const SubHeader = ({
               color="primary"
               variant="outlined"
               disabled={locationTrue && unAssignedTaskSelected}
-              onClick={handleDueDate}
+              onClick={() => onAction('dueDate')}
             >
               Change Due Date
             </Button>

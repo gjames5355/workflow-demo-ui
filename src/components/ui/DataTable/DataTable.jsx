@@ -9,6 +9,8 @@ import { InputBase, makeStyles, alpha } from '@material-ui/core'
 import SubHeader from '../shared/SubHeader'
 import { GlobalContext } from '../../../context/GlobalContext'
 import '../OverDueStyling/OverDueRow.css'
+import ActionsModal from '../modals/actions-modal/ActionsModal'
+import TaskDetail from '../modals/task-detail-modal/TaskDetail'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -61,6 +63,9 @@ const DataTable = ({ data, type }) => {
   const classes = useStyles()
   const [innerData, setInnerData] = useState(data)
   const [count, setCount] = useState(0)
+  const [openActions, setOpenActions] = useState(false)
+  const [openDetails, setOpenDetails] = useState(false)
+  const [modalType, setModalType] = useState('')
 
   useEffect(() => {
     const tableType = location.pathname === '/team' ? 'team' : 'personal'
@@ -151,6 +156,26 @@ const DataTable = ({ data, type }) => {
     setSelectedRows([])
   }
 
+  const handleClose = () => {
+    setOpenActions(false)
+    setOpenDetails(false)
+  }
+
+  const handleModalSave = () => {
+    setOpenActions(false)
+    setOpenDetails(false)
+  }
+
+  const handleAction = (type) => {
+    setModalType(type)
+    setOpenActions(true)
+  }
+
+  const handleDoubleClick = (e) => {
+    setOpenDetails(true)
+    setSelectedRows([e.row])
+  }
+
   return (
     <div style={{ height: 400, width: '100%' }}>
       <div className={classes.container}>
@@ -177,17 +202,31 @@ const DataTable = ({ data, type }) => {
             handleRows={setSelectedRows}
             onClaim={handleClaim}
             onUnclaim={handleUnclaim}
+            onAction={(type) => handleAction(type)}
           />
         </div>
       </div>
+      <ActionsModal 
+        open={openActions}
+        onClose={handleClose}
+        row={selectedRows[0]}
+        title='Update Selected Row'
+        handleSave={handleModalSave}
+        type={modalType}
+      />
+      <TaskDetail
+        open={openDetails}
+        onClose={handleClose}
+        row={selectedRows[0]}
+      />
       <DataGrid
         getRowClassName={(row) => `${row.getValue(row.id, "taskStatus")}-Row`}
         rows={inputValue ? innerData : data}
         columns={columns}
-        // pageSize={5}
         onColumnOrderChange
         checkboxSelection
         disableSelectionOnClick
+        onRowDoubleClick={handleDoubleClick}
         onSelectionModelChange={handleSelectRow}
       />
     </div>
