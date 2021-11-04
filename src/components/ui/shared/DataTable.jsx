@@ -135,7 +135,6 @@ const DataTable = ({ data }) => {
         taskStatus: "Complete",
       }
     })
-    console.log(updatedRows)
     completeTask(updatedRows)
   }
 

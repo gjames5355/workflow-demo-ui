@@ -86,21 +86,17 @@ const useStyles = makeStyles((theme) => ({
 const CompletedTasks = () => {
   const classes = useStyles()
   const { groupTasks, personalTasks } = useContext(GlobalContext)
-  console.log(groupTasks, personalTasks)
   const [data, setData] = useState([])
   const [inputValue, setInputValue] = useState("")
   const [filteredData, setFilteredData] = useState([])
   useEffect(() => {
     const newData = [...groupTasks, ...personalTasks]
     const filtered = newData.filter((item) => item.taskStatus === "Complete")
-    console.log("filtered", filtered)
     setData(filtered)
   }, [groupTasks, personalTasks])
 
   useEffect(() => {
     if (inputValue) {
-      console.log("data", data)
-      console.log("inputvalue", inputValue)
       const filteredCompleted = data.filter(
         (r) =>
           r.jobNumber.toString().includes(inputValue.toLowerCase()) ||
@@ -117,7 +113,6 @@ const CompletedTasks = () => {
           r.priority.toLowerCase().includes(inputValue.toLowerCase()) ||
           r.division.toLowerCase().includes(inputValue.toLowerCase())
       )
-      console.log("filteredCompl", filteredCompleted)
       setFilteredData(filteredCompleted)
     }
   }, [inputValue, data])

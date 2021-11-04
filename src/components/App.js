@@ -23,9 +23,6 @@ function App() {
     const newPersonalTasks = [...personalTasks]
     console.log(task)
     task.forEach((item) => {
-      console.log("newGroupTask", newGroupTasks)
-      console.log("newPersonalTasks", newPersonalTasks)
-      console.log("item", item)
       const index = newPersonalTasks.findIndex(
         (x) => x.jobNumber === item.jobNumber
       )

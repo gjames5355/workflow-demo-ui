@@ -1,7 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles"
 import TableAccordion from "../table-accordion/TableAccordion"
 import AddTaskButton from "../add-task-modal/AddTaskModal"
-import { PERSONAL_TASKS } from "../../../constants/constants"
 import { useState, useEffect, useContext } from "react"
 import { GlobalContext } from "../../../context/GlobalContext"
 
@@ -84,8 +83,6 @@ const PersonalTasks = () => {
       division: event.target.division.value,
       assignedTo: event.target.assignedTo,
     }
-    // console.log(event.target.taskDueDate)
-    // console.log(event.target.taskDueDate.value)
 
     const newData = [...data]
     newData.push(newTask)
