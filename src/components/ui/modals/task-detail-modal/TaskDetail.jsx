@@ -10,7 +10,9 @@ import {
 } from '@material-ui/core'
 import Item from "@material-ui/core/Grid"
 
-const TaskDetail = ({row, open, onClose}) => {
+const TaskDetail = ({row, open, onClose, location,}) => {
+    const type = location.pathname === '/team' ? 'group' : 'personal'
+
     return (
         <>
             {row && 
@@ -20,7 +22,7 @@ const TaskDetail = ({row, open, onClose}) => {
                     </DialogTitle>
                     <DialogContent>
                         <Grid container spacing={2}>
-                            <Grid item xs={4}>
+                            <Grid item xs={6}>
                                 <Item>
                                     <TextField
                                         id="standard-read-only-input"
@@ -33,7 +35,7 @@ const TaskDetail = ({row, open, onClose}) => {
                                     />
                                 </Item>
                             </Grid>
-                            <Grid item xs={4}>
+                            <Grid item xs={6}>
                                 <Item>
                                     <TextField
                                         id="standard-read-only-input"
@@ -46,7 +48,7 @@ const TaskDetail = ({row, open, onClose}) => {
                                     />
                                 </Item>
                             </Grid>
-                            <Grid item xs={4}>
+                            <Grid item xs={6}>
                                 <Item>
                                     <TextField
                                         id="standard-read-only-input"
@@ -59,7 +61,38 @@ const TaskDetail = ({row, open, onClose}) => {
                                     />
                                 </Item>
                             </Grid>
-                            <Grid item xs={4}>  
+                            {type === 'group' ?
+                                <>
+                                    <Grid item xs={6}>
+                                        <Item>
+                                            <TextField
+                                                id="standard-read-only-input"
+                                                label="Case Name"
+                                                defaultValue={row.caseName}
+                                                InputProps={{
+                                                    readOnly: true,
+                                                }}
+                                                variant="standard"
+                                            />
+                                        </Item>
+                                    </Grid>
+                                    <Grid item xs={6}>
+                                        <Item>
+                                            <TextField
+                                                id="standard-read-only-input"
+                                                label="Assigned To"
+                                                defaultValue={row.assignedTo}
+                                                InputProps={{
+                                                    readOnly: true,
+                                                }}
+                                                variant="standard"
+                                            />
+                                        </Item>
+                                    </Grid>
+                                </>
+                                : null
+                            }
+                            <Grid item xs={6}>  
                                 <Item>
                                     <TextField
                                         id="standard-read-only-input"
@@ -72,7 +105,7 @@ const TaskDetail = ({row, open, onClose}) => {
                                     />
                                 </Item>
                             </Grid>
-                            <Grid item xs={4}>  
+                            <Grid item xs={6}>  
                                 <Item>
                                     <TextField
                                         id="standard-read-only-input"
@@ -85,7 +118,7 @@ const TaskDetail = ({row, open, onClose}) => {
                                     />
                                 </Item>
                             </Grid>
-                            <Grid item xs={4}>  
+                            <Grid item xs={6}>  
                                 <Item>
                                     <TextField
                                         id="standard-read-only-input"
@@ -98,7 +131,7 @@ const TaskDetail = ({row, open, onClose}) => {
                                     />
                                 </Item>
                             </Grid>
-                            <Grid item xs={4}>
+                            <Grid item xs={6}>
                                 <Item>
                                     <TextField
                                         id="standard-read-only-input"
@@ -111,7 +144,7 @@ const TaskDetail = ({row, open, onClose}) => {
                                     />
                                 </Item>
                             </Grid>
-                            <Grid item xs={4}>
+                            <Grid item xs={6}>
                                 <Item>
                                     <TextField
                                         id="standard-read-only-input"
@@ -124,7 +157,7 @@ const TaskDetail = ({row, open, onClose}) => {
                                     />
                                 </Item>
                             </Grid>
-                            <Grid item xs={4}>
+                            <Grid item xs={6}>
                                 <Item>
                                     <TextField
                                         id="standard-read-only-input"

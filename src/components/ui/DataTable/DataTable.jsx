@@ -218,6 +218,7 @@ const DataTable = ({ data, type }) => {
         open={openDetails}
         onClose={handleClose}
         row={selectedRows[0]}
+        location={location}
       />
       <DataGrid
         getRowClassName={(row) => `${row.getValue(row.id, "taskStatus")}-Row`}
