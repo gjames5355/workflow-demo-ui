@@ -68,7 +68,7 @@ const TaskDetail = ({
                                             id="standard-read-only-input"
                                             defaultValue={updatedRow.processName}
                                             InputProps={{
-                                                readOnly: false,
+                                                readOnly: true,
                                             }}
                                             variant="outlined"
                                         />
@@ -85,7 +85,7 @@ const TaskDetail = ({
                                                     id="standard-read-only-input"
                                                     defaultValue={updatedRow.caseName}
                                                     InputProps={{
-                                                        readOnly: false,
+                                                        readOnly: true,
                                                     }}
                                                     variant="outlined"
                                                 />
@@ -164,6 +164,7 @@ const TaskDetail = ({
                                             required
                                             id="division-control"
                                             name="division"
+                                            readOnly={true}
                                             value={updatedRow.division}
                                             onChange={handleChange}
                                             margin="dense"
@@ -276,7 +277,7 @@ const TaskDetail = ({
                                 Claim
                             </Button>
                         )}
-                        {location.pathname !== "/team" && (
+                        {(updatedRow.assignedTo || location.pathname) !== 'team' && (
                             <Button
                                 size="medium"
                                 color="primary"
