@@ -86,14 +86,22 @@ const useStyles = makeStyles((theme) => ({
 const CompletedTasks = () => {
   const classes = useStyles()
   const { groupTasks, personalTasks } = useContext(GlobalContext)
-  const data = [...groupTasks, ...personalTasks]
+  console.log(groupTasks, personalTasks)
+  const [data, setData] = useState([])
   const [inputValue, setInputValue] = useState("")
   const [filteredData, setFilteredData] = useState([])
-  const completed = data.filter((item) => item.taskStatus === "Complete")
+  useEffect(() => {
+    const newData = [...groupTasks, ...personalTasks]
+    const filtered = newData.filter((item) => item.taskStatus === "Complete")
+    console.log("filtered", filtered)
+    setData(filtered)
+  }, [groupTasks, personalTasks])
 
   useEffect(() => {
     if (inputValue) {
-      const filteredCompleted = completed.filter(
+      console.log("data", data)
+      console.log("inputvalue", inputValue)
+      const filteredCompleted = data.filter(
         (r) =>
           r.jobNumber.toString().includes(inputValue.toLowerCase()) ||
           r.processName.toLowerCase().includes(inputValue.toLowerCase()) ||
@@ -107,12 +115,12 @@ const CompletedTasks = () => {
             .toLowerCase()
             .includes(inputValue.toLowerCase()) ||
           r.priority.toLowerCase().includes(inputValue.toLowerCase()) ||
-          r.caseName.toLowerCase().includes(inputValue.toLowerCase()) ||
           r.division.toLowerCase().includes(inputValue.toLowerCase())
       )
+      console.log("filteredCompl", filteredCompleted)
       setFilteredData(filteredCompleted)
     }
-  }, [inputValue])
+  }, [inputValue, data])
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value)
@@ -149,7 +157,7 @@ const CompletedTasks = () => {
               </div>
             </div>
             <DataGrid
-              rows={inputValue ? filteredData : completed}
+              rows={inputValue ? filteredData : data}
               // pageSize={5}
               columns={TABLE_COLUMNS}
               onColumnOrderChange
