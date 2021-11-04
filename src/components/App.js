@@ -15,8 +15,31 @@ function App() {
   const [count, setCount] = useState(0)
   const [filterValue, setFilterValue] = useState("")
   const [selectedRows, setSelectedRows] = useState([])
-  const [groupTasks, setGroupTasks] = useState(GROUP_TASKS)
   const [personalTasks, setPersonalTasks] = useState(PERSONAL_TASKS)
+  const [groupTasks, setGroupTasks] = useState(GROUP_TASKS)
+
+  const updateTasks = (task) => {
+    task.map((item) => {
+      const index = personalTasks.findIndex(
+        (x) => x.jobNumber === item.jobNumber
+      )
+      const newGroupTasks = [...GROUP_TASKS]
+      const newPersonalTasks = [...PERSONAL_TASKS]
+      if (index >= 0) {
+        newPersonalTasks.splice(index, 1)
+        newGroupTasks.push(item)
+      } else {
+        newPersonalTasks.push(item)
+        newGroupTasks.splice(
+          groupTasks.findIndex((x) => x.jobNumber === item.jobNumber),
+          1
+        )
+      }
+      setGroupTasks(newGroupTasks)
+      setPersonalTasks(newPersonalTasks)
+      return null
+    })
+  }
 
   const completeTask = (task) => {
     const newGroupTasks = [...groupTasks]
@@ -51,10 +74,11 @@ function App() {
     setFilterValue,
     selectedRows,
     setSelectedRows,
-    groupTasks,
-    setGroupTasks,
     personalTasks,
     setPersonalTasks,
+    groupTasks,
+    setGroupTasks,
+    updateTasks,
     completeTask,
   }
 

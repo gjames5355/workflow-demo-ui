@@ -1,12 +1,7 @@
-import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Typography,
-} from "@material-ui/core"
-import React from "react"
-import DataTable from "../shared/DataTable"
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
+import { Accordion, AccordionDetails, AccordionSummary, Typography } from '@material-ui/core';
+import React from 'react';
+import DataTable from '../DataTable/DataTable';
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 const TableAccordion = ({
   classes,

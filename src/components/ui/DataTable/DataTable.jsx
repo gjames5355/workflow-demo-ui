@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { DataGrid } from "@material-ui/data-grid"
 import { TABLE_COLUMNS } from "../../../constants/constants"
 import Actions from "../actions/Actions"
@@ -6,9 +6,11 @@ import { useLocation } from "react-router"
 import TeamStatus from "../team-status/TeamStatus"
 import SearchIcon from "@material-ui/icons/Search"
 import { InputBase, makeStyles, alpha } from "@material-ui/core"
-import SubHeader from "./SubHeader"
-import "../OverDueStyling/OverDueRow.css"
+import SubHeader from "../shared/SubHeader"
 import { GlobalContext } from "../../../context/GlobalContext"
+import "../OverDueStyling/OverDueRow.css"
+import ActionsModal from "../modals/actions-modal/ActionsModal"
+import TaskDetail from "../modals/task-detail-modal/TaskDetail"
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -47,12 +49,13 @@ const useStyles = makeStyles((theme) => ({
       width: "20ch",
     },
   },
-  buttonsContainer: {
+  subheaderContainer: {
     width: "80%",
   },
 }))
 
-const DataTable = ({ data }) => {
+const DataTable = ({ data, type }) => {
+  const { updateTasks } = useContext(GlobalContext)
   const [selectedRows, setSelectedRows] = useState([])
   const { completeTask } = useContext(GlobalContext)
   const location = useLocation()
@@ -61,6 +64,10 @@ const DataTable = ({ data }) => {
   const classes = useStyles()
   const [innerData, setInnerData] = useState(data)
   const [count, setCount] = useState(0)
+  const [openActions, setOpenActions] = useState(false)
+  const [openDetails, setOpenDetails] = useState(false)
+  const [modalType, setModalType] = useState("")
+
   useEffect(() => {
     const tableType = location.pathname === "/team" ? "team" : "personal"
     const cols = [...TABLE_COLUMNS]
@@ -128,6 +135,28 @@ const DataTable = ({ data }) => {
     setInputValue(e.target.value)
   }
 
+  const handleUnclaim = () => {
+    const updatedRows = selectedRows.map((row) => {
+      return {
+        ...row,
+        taskStatus: "New",
+      }
+    })
+    updateTasks(updatedRows)
+    setSelectedRows([])
+  }
+
+  const handleClaim = () => {
+    const updatedRows = selectedRows.map((row) => {
+      return {
+        ...row,
+        assignedTo: "",
+      }
+    })
+    updateTasks(updatedRows)
+    setSelectedRows([])
+  }
+
   const handleCompleted = () => {
     const updatedRows = selectedRows.map((row) => {
       return {
@@ -136,6 +165,26 @@ const DataTable = ({ data }) => {
       }
     })
     completeTask(updatedRows)
+  }
+
+  const handleClose = () => {
+    setOpenActions(false)
+    setOpenDetails(false)
+  }
+
+  const handleModalSave = () => {
+    setOpenActions(false)
+    setOpenDetails(false)
+  }
+
+  const handleAction = (type) => {
+    setModalType(type)
+    setOpenActions(true)
+  }
+
+  const handleDoubleClick = (e) => {
+    setOpenDetails(true)
+    setSelectedRows([e.row])
   }
 
   return (
@@ -156,24 +205,45 @@ const DataTable = ({ data }) => {
             inputProps={{ "aria-label": "search" }}
           />
         </div>
-        <div className={classes.buttonsContainer}>
+        <div className={classes.subheaderContainer}>
           <SubHeader
             count={count}
             handleCount={setCount}
             rows={selectedRows}
             handleRows={setSelectedRows}
+            onClaim={handleClaim}
+            onUnclaim={handleUnclaim}
             handleCompleted={handleCompleted}
+            onAction={(type) => handleAction(type)}
           />
         </div>
       </div>
+      <ActionsModal
+        open={openActions}
+        onClose={handleClose}
+        row={selectedRows[0]}
+        title="Update Selected Row"
+        handleSave={handleModalSave}
+        type={modalType}
+      />
+      <TaskDetail
+        open={openDetails}
+        onClose={handleClose}
+        row={selectedRows[0]}
+        location={location}
+        onClaim={handleClaim}
+        onUnclaim={handleUnclaim}
+        onAction={(type) => handleAction(type)}
+        onComplete={handleCompleted}
+      />
       <DataGrid
         getRowClassName={(row) => `${row.getValue(row.id, "taskStatus")}-Row`}
         rows={inputValue ? innerData : data}
         columns={columns}
-        // pageSize={5}
         onColumnOrderChange
         checkboxSelection
         disableSelectionOnClick
+        onRowDoubleClick={handleDoubleClick}
         onSelectionModelChange={handleSelectRow}
         forceUpdate
       />

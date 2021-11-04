@@ -1,7 +1,7 @@
 import { makeStyles } from "@material-ui/core/styles"
 import TableAccordion from "../table-accordion/TableAccordion"
 import AddTaskButton from "../add-task-modal/AddTaskModal"
-import { useState, useEffect, useContext } from "react"
+import { useContext, useEffect, useState } from "react"
 import { GlobalContext } from "../../../context/GlobalContext"
 
 const useStyles = makeStyles((theme) => ({
@@ -46,6 +46,7 @@ const PersonalTasks = () => {
   const classes = useStyles()
   const { personalTasks } = useContext(GlobalContext)
   const [data, setData] = useState(personalTasks)
+
   useEffect(() => {
     setData(personalTasks)
   }, [personalTasks])
@@ -53,22 +54,18 @@ const PersonalTasks = () => {
   const urgentTaskData = data.filter(
     (item) => item.priority === "Urgent" && item.taskStatus !== "Complete"
   )
-  const newTasksData = data.filter(
-    (item) =>
-      item.priority !== "Urgent" &&
-      item.priority !== "Snoozed" &&
-      item.taskStatus !== "Complete"
-  )
+  const newTasksData = data.filter((item) => item.taskStatus === "New")
   const snoozedTasksData = data.filter(
     (item) => item.priority === "Snoozed" && item.taskStatus !== "Complete"
   )
 
   const onSaveTask = (event) => {
-    const taskDueDate = event.target.taskDueDate.value
-    const earliestVideoOrderDueDate =
+    const formattedTaskDueDate = new Date(
+      event.target.taskDueDate.value
+    ).toLocaleDateString()
+    const formattedEarliestVideoOrderDueDate = new Date(
       event.target.earliestVideoOrderDueDate.value
-    const formattedTaskDueDate = `${taskDueDate[5]}${taskDueDate[6]}/${taskDueDate[8]}${taskDueDate[9]}/${taskDueDate[0]}${taskDueDate[1]}${taskDueDate[2]}${taskDueDate[3]}`
-    const formattedEarliestVideoOrderDueDate = `${earliestVideoOrderDueDate[5]}${earliestVideoOrderDueDate[6]}/${earliestVideoOrderDueDate[8]}${earliestVideoOrderDueDate[9]}/${earliestVideoOrderDueDate[0]}${earliestVideoOrderDueDate[1]}${earliestVideoOrderDueDate[2]}${earliestVideoOrderDueDate[3]}`
+    ).toLocaleDateString()
     const newTask = {
       id: event.target.jobNumber.value,
       jobNumber: event.target.jobNumber.value,

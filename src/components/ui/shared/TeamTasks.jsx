@@ -46,20 +46,23 @@ const TeamTasks = () => {
   const classes = useStyles()
   const { groupTasks } = useContext(GlobalContext)
   const [data, setData] = useState(groupTasks)
-  useEffect(() => {
-    setData(groupTasks)
-  }, [groupTasks])
 
   const urgentUnclaimed = data.filter(
     (item) => item.priority === "Urgent" && item.taskStatus !== "Complete"
   )
-  const unclaimed = data.filter((item) => item.taskStatus === "New")
+  const unclaimed = data.filter(
+    (item) => item.taskStatus === "New" && item.priority !== "Urgent"
+  )
   const claimed = data.filter(
     (x) =>
       x.taskStatus !== "New" &&
       x.priority !== "Urgent" &&
       x.taskStatus !== "Complete"
   )
+
+  useEffect(() => {
+    setData(groupTasks)
+  }, [groupTasks])
 
   const onSaveTask = (event) => {
     const taskDueDate = event.target.taskDueDate.value
