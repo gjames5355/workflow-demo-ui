@@ -1,16 +1,16 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { DataGrid } from '@material-ui/data-grid'
-import { TABLE_COLUMNS } from '../../../constants/constants'
-import Actions from '../actions/Actions'
-import { useLocation } from 'react-router'
-import TeamStatus from '../team-status/TeamStatus'
-import SearchIcon from '@material-ui/icons/Search'
-import { InputBase, makeStyles, alpha } from '@material-ui/core'
-import SubHeader from '../shared/SubHeader'
-import { GlobalContext } from '../../../context/GlobalContext'
-import '../OverDueStyling/OverDueRow.css'
-import ActionsModal from '../modals/actions-modal/ActionsModal'
-import TaskDetail from '../modals/task-detail-modal/TaskDetail'
+import React, { useContext, useEffect, useState } from "react"
+import { DataGrid } from "@material-ui/data-grid"
+import { TABLE_COLUMNS } from "../../../constants/constants"
+import Actions from "../actions/Actions"
+import { useLocation } from "react-router"
+import TeamStatus from "../team-status/TeamStatus"
+import SearchIcon from "@material-ui/icons/Search"
+import { InputBase, makeStyles, alpha } from "@material-ui/core"
+import SubHeader from "../shared/SubHeader"
+import { GlobalContext } from "../../../context/GlobalContext"
+import "../OverDueStyling/OverDueRow.css"
+import ActionsModal from "../modals/actions-modal/ActionsModal"
+import TaskDetail from "../modals/task-detail-modal/TaskDetail"
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -19,80 +19,80 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
   },
   search: {
-    position: 'relative',
+    position: "relative",
     borderRadius: theme.shape.borderRadius,
     backgroundColor: alpha(theme.palette.common.black, 0.15),
     marginRight: theme.spacing(2),
     marginLeft: 0,
     marginBottom: 10,
-    width: '20%',
-    maxHeight: '35px',
+    width: "20%",
+    maxHeight: "35px",
   },
   searchIcon: {
     padding: theme.spacing(0, 2),
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    height: "100%",
+    position: "absolute",
+    pointerEvents: "none",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   },
   inputRoot: {
-    color: 'inherit',
+    color: "inherit",
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
     paddingLeft: `calc(3em + ${theme.spacing(4)}px)`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('md')]: {
-      width: '20ch',
+    transition: theme.transitions.create("width"),
+    width: "100%",
+    [theme.breakpoints.up("md")]: {
+      width: "20ch",
     },
   },
   subheaderContainer: {
-    width: '80%'
-  }
+    width: "80%",
+  },
 }))
 
 const DataTable = ({ data, type }) => {
   const { updateTasks } = useContext(GlobalContext)
-  const [selectedRows, setSelectedRows ] = useState([])
+  const [selectedRows, setSelectedRows] = useState([])
   const location = useLocation()
   const [columns, setColumns] = useState([])
-  const [inputValue, setInputValue] = useState('')
+  const [inputValue, setInputValue] = useState("")
   const classes = useStyles()
   const [innerData, setInnerData] = useState(data)
   const [count, setCount] = useState(0)
   const [openActions, setOpenActions] = useState(false)
   const [openDetails, setOpenDetails] = useState(false)
-  const [modalType, setModalType] = useState('')
+  const [modalType, setModalType] = useState("")
 
   useEffect(() => {
-    const tableType = location.pathname === '/team' ? 'team' : 'personal'
+    const tableType = location.pathname === "/team" ? "team" : "personal"
     const cols = [...TABLE_COLUMNS]
     const actions = {
-      field: 'action',
-      headerName: 'Action',
+      field: "action",
+      headerName: "Action",
       width: 200,
       renderCell: (params) => <Actions params={params} />,
     }
 
     const teamStatus = {
-      field: 'taskStatus',
-      headerName: 'Task Status',
+      field: "taskStatus",
+      headerName: "Task Status",
       width: 200,
       editable: false,
       renderCell: (params) => <TeamStatus params={params} />,
     }
 
     const assignedTo = {
-      field: 'assignedTo',
-      headerName: 'Assigned To',
+      field: "assignedTo",
+      headerName: "Assigned To",
       width: 200,
       editable: false,
     }
 
-    if (tableType === 'personal') {
+    if (tableType === "personal") {
       setColumns([...cols, actions])
     } else {
       cols.splice(17, 0, teamStatus)
@@ -135,34 +135,34 @@ const DataTable = ({ data, type }) => {
   }
 
   const handleUnclaim = () => {
-    const updatedRows = selectedRows.map(row => {
+    const updatedRows = selectedRows.map((row) => {
       return {
         ...row,
-        taskStatus: 'New'
+        taskStatus: "New",
       }
-    });
+    })
     updateTasks(updatedRows)
     setSelectedRows([])
   }
 
   const handleClaim = () => {
-    const updatedRows = selectedRows.map(row => {
+    const updatedRows = selectedRows.map((row) => {
       return {
         ...row,
-        assignedTo: 'gjames'
+        assignedTo: "",
       }
-    });
+    })
     updateTasks(updatedRows)
     setSelectedRows([])
   }
 
   const handleCompleteTask = () => {
-    const updatedRows = selectedRows.map(row => {
+    const updatedRows = selectedRows.map((row) => {
       return {
         ...row,
-        taskStatus: 'Complete'
+        taskStatus: "Complete",
       }
-    });
+    })
     updateTasks(updatedRows)
     setSelectedRows([])
   }
@@ -188,25 +188,25 @@ const DataTable = ({ data, type }) => {
   }
 
   return (
-    <div style={{ height: 400, width: '100%' }}>
+    <div style={{ height: 400, width: "100%" }}>
       <div className={classes.container}>
         <div className={classes.search}>
           <div className={classes.searchIcon}>
             <SearchIcon />
           </div>
           <InputBase
-            placeholder='Search…'
+            placeholder="Search…"
             value={inputValue}
             classes={{
               root: classes.inputRoot,
               input: classes.inputInput,
             }}
             onChange={handleInputChange}
-            inputProps={{ 'aria-label': 'search' }}
+            inputProps={{ "aria-label": "search" }}
           />
         </div>
         <div className={classes.subheaderContainer}>
-          <SubHeader 
+          <SubHeader
             count={count}
             handleCount={setCount}
             rows={selectedRows}
@@ -217,11 +217,11 @@ const DataTable = ({ data, type }) => {
           />
         </div>
       </div>
-      <ActionsModal 
+      <ActionsModal
         open={openActions}
         onClose={handleClose}
         row={selectedRows[0]}
-        title='Update Selected Row'
+        title="Update Selected Row"
         handleSave={handleModalSave}
         type={modalType}
       />

@@ -276,20 +276,7 @@ const TaskDetail = ({
                 Assign
               </Button>
             )}
-            {/* <Button
-                            size="medium"
-                            color="primary"
-                            variant="outlined"
-                        >
-                            Change Due Date
-                        </Button>
-                        <Button
-                            size="medium"
-                            color="primary"
-                            variant="outlined"
-                        >
-                            Change Priority
-                        </Button> */}
+
             <Button size="medium" color="primary" variant="outlined">
               Snooze
             </Button>
