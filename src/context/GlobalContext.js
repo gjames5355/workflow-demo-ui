@@ -6,5 +6,10 @@ export const GlobalContext = React.createContext({
     filterValue: '',
     setFilterValue: () => {},
     selectedRows: [],
-    setSelectedRows: () => {}
+    setSelectedRows: () => {},
+    personalTasks: [],
+    setPersonalTasks: () => {},
+    groupTasks: [],
+    setGroupTasks: () => {},
+    updateTask: () => {},
 })
