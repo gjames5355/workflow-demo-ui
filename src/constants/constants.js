@@ -10,6 +10,32 @@ export const PERSONAL_TASKS = [
     earliestVideoOrderDays: 15,
     earliestVideoOrderDueDate: "11/18/2021",
     division: "South Carolina",
+    comments: [
+      {
+        id: 1,
+        title: 'Comment 1',
+        description: 'First Comment for task Stich MPEG',
+        creator: 'gjames@veritext.com',
+      },
+      {
+        id: 2,
+        title: 'Comment 2',
+        description: 'Second Comment for task Stich MPEG',
+        creator: 'gjames@veritext.com',
+      }
+    ],
+    history: [
+      {
+        id: 1,
+        description: 'Assigned to gjames',
+        date: '11/1/2021',
+      },
+      {
+        id: 2,
+        description: 'Claimed by cgalinda',
+        date: '11/2/2021',
+      }
+    ]
   },
   {
     id: 2,
@@ -22,6 +48,32 @@ export const PERSONAL_TASKS = [
     earliestVideoOrderDays: 5,
     earliestVideoOrderDueDate: "11/5/2021",
     division: "South Carolina",
+    comments: [
+      {
+        id: 1,
+        title: 'Comment 1',
+        description: 'First Comment for task Stich MPEG Normal Task',
+        creator: 'gjames@veritext.com',
+      },
+      {
+        id: 2,
+        title: 'Comment 2',
+        description: 'Second Comment for task Stich MPEG Normal Task',
+        creator: 'gjames@veritext.com',
+      }
+    ],
+    history: [
+      {
+        id: 1,
+        description: 'Assigned to gjames',
+        date: '11/1/2021',
+      },
+      {
+        id: 2,
+        description: 'Claimed by cgalinda',
+        date: '11/2/2021',
+      }
+    ]
   },
 ]
 
@@ -32,13 +84,39 @@ export const GROUP_TASKS = [
     processName: "Produce MPEG",
     taskName: "QC Original Files",
     taskDueDate: "10/21/2021",
-    taskStatus: "Assgined",
+    taskStatus: "Assigned",
     priority: "Normal",
     earliestVideoOrderDays: 10,
     earliestVideoOrderDueDate: "10/18/2021",
     caseName: "Dorsey, Bessie Et Al. v. Lm General Insurance Company",
     division: "Maryland",
     assignedTo: "mdrenkalo",
+    comments: [
+      {
+        id: 1,
+        title: 'Comment 1',
+        description: 'First Comment for task QC Original Files',
+        creator: 'gjames@veritext.com',
+      },
+      {
+        id: 2,
+        title: 'Comment 2',
+        description: 'Second Comment for task QC Original Files',
+        creator: 'gjames@veritext.com',
+      }
+    ],
+    history: [
+      {
+        id: 1,
+        description: 'Assigned to gjames',
+        date: '11/1/2021',
+      },
+      {
+        id: 2,
+        description: 'Claimed by cgalinda',
+        date: '11/2/2021',
+      }
+    ]
   },
   {
     id: 2,
@@ -52,6 +130,32 @@ export const GROUP_TASKS = [
     earliestVideoOrderDueDate: "10/18/2021",
     caseName: "In Re Brenn De Bree, Et Al.",
     division: "Houston",
+    comments: [
+      {
+        id: 1,
+        title: 'Comment 1',
+        description: 'First Comment for task Review/ QC Files/ Prepare PIP Video',
+        creator: 'gjames@veritext.com',
+      },
+      {
+        id: 2,
+        title: 'Comment 2',
+        description: 'Second Comment for task Review/ QC Files/ Prepare PIP Video',
+        creator: 'gjames@veritext.com',
+      }
+    ],
+    history: [
+      {
+        id: 1,
+        description: 'Assigned to gjames',
+        date: '11/1/2021',
+      },
+      {
+        id: 2,
+        description: 'Claimed by cgalinda',
+        date: '11/2/2021',
+      }
+    ]
   },
   {
     id: 3,
@@ -65,6 +169,32 @@ export const GROUP_TASKS = [
     earliestVideoOrderDueDate: "10/18/2021",
     caseName: "Addison, Lavaunda Vs. South Carolina Dept Of Trans",
     division: "South Carolina",
+    comments: [
+      {
+        id: 1,
+        title: 'Comment 1',
+        description: 'First Comment for task Stich MPEG',
+        creator: 'gjames@veritext.com',
+      },
+      {
+        id: 2,
+        title: 'Comment 2',
+        description: 'Second Comment for task Stich MPEG',
+        creator: 'gjames@veritext.com',
+      }
+    ],
+    history: [
+      {
+        id: 1,
+        description: 'Assigned to gjames',
+        date: '11/1/2021',
+      },
+      {
+        id: 2,
+        description: 'Claimed by cgalinda',
+        date: '11/2/2021',
+      }
+    ]
   },
   {
     id: 4,
@@ -78,6 +208,32 @@ export const GROUP_TASKS = [
     earliestVideoOrderDueDate: "10/18/2021",
     caseName: "In Re Brenn De Bree, Et Al.",
     division: "Dallas",
+    comments: [
+      {
+        id: 1,
+        title: 'Comment 1',
+        description: 'First Comment for task QC Files/ Prepare PIP Video/ Review',
+        creator: 'gjames@veritext.com',
+      },
+      {
+        id: 2,
+        title: 'Comment 2',
+        description: 'Second Comment for task QC Files/ Prepare PIP Video/ Review',
+        creator: 'gjames@veritext.com',
+      }
+    ],
+    history: [
+      {
+        id: 1,
+        description: 'Assigned to gjames',
+        date: '11/1/2021',
+      },
+      {
+        id: 2,
+        description: 'Claimed by cgalinda',
+        date: '11/2/2021',
+      }
+    ]
   },
 ]
 

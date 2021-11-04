@@ -156,6 +156,17 @@ const DataTable = ({ data, type }) => {
     setSelectedRows([])
   }
 
+  const handleCompleteTask = () => {
+    const updatedRows = selectedRows.map(row => {
+      return {
+        ...row,
+        taskStatus: 'Complete'
+      }
+    });
+    updateTasks(updatedRows)
+    setSelectedRows([])
+  }
+
   const handleClose = () => {
     setOpenActions(false)
     setOpenDetails(false)
@@ -219,6 +230,10 @@ const DataTable = ({ data, type }) => {
         onClose={handleClose}
         row={selectedRows[0]}
         location={location}
+        onClaim={handleClaim}
+        onUnclaim={handleUnclaim}
+        onAction={(type) => handleAction(type)}
+        onComplete={handleCompleteTask}
       />
       <DataGrid
         getRowClassName={(row) => `${row.getValue(row.id, "taskStatus")}-Row`}
