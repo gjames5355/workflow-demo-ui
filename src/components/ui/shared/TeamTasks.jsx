@@ -45,24 +45,22 @@ const useStyles = makeStyles((theme) => ({
 
 const TeamTasks = () => {
   const classes = useStyles()
-  const [data, setData] = useState(GROUP_TASKS)
-  console.log("team task data", data)
-  const { setCompletedTasks } = useContext(GlobalContext)
+  const { groupTasks } = useContext(GlobalContext)
+  const [data, setData] = useState(groupTasks)
+  useEffect(() => {
+    setData(groupTasks)
+  }, [groupTasks])
+
   const urgentUnclaimed = data.filter(
-    (item) => item.priority === "Urgent" && item.taskStatus !== "Completed"
+    (item) => item.priority === "Urgent" && item.taskStatus !== "Complete"
   )
   const unclaimed = data.filter((item) => item.taskStatus === "New")
   const claimed = data.filter(
     (x) =>
       x.taskStatus !== "New" &&
       x.priority !== "Urgent" &&
-      x.taskStatus !== "Completed"
+      x.taskStatus !== "Complete"
   )
-
-  useEffect(() => {
-    const completed = data.filter((item) => item.taskStatus === "Completed")
-    setCompletedTasks(completed)
-  }, [data, setCompletedTasks])
 
   const onSaveTask = (event) => {
     const taskDueDate = event.target.taskDueDate.value
@@ -109,8 +107,6 @@ const TeamTasks = () => {
         title="Urgent Unclaimed Tasks"
         data={urgentUnclaimed}
         handleChange={handleChange}
-        setData={setData}
-        allData={data}
       />
 
       <TableAccordion
@@ -124,8 +120,6 @@ const TeamTasks = () => {
         title="Unclaimed Tasks"
         data={unclaimed}
         handleChange={handleChange}
-        setData={setData}
-        allData={data}
       />
 
       <TableAccordion
@@ -139,8 +133,6 @@ const TeamTasks = () => {
         title="Claimed Tasks"
         data={claimed}
         handleChange={handleChange}
-        setData={setData}
-        allData={data}
       />
     </div>
   )

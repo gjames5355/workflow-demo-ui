@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useContext } from "react"
 import { DataGrid } from "@material-ui/data-grid"
 import { TABLE_COLUMNS } from "../../../constants/constants"
 import Actions from "../actions/Actions"
@@ -8,6 +8,7 @@ import SearchIcon from "@material-ui/icons/Search"
 import { InputBase, makeStyles, alpha } from "@material-ui/core"
 import SubHeader from "./SubHeader"
 import "../OverDueStyling/OverDueRow.css"
+import { GlobalContext } from "../../../context/GlobalContext"
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -51,8 +52,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const DataTable = ({ data, allData, setData }) => {
+const DataTable = ({ data }) => {
   const [selectedRows, setSelectedRows] = useState([])
+  const { completeTask } = useContext(GlobalContext)
   const location = useLocation()
   const [columns, setColumns] = useState([])
   const [inputValue, setInputValue] = useState("")
@@ -126,12 +128,15 @@ const DataTable = ({ data, allData, setData }) => {
     setInputValue(e.target.value)
   }
 
-  const markCompleted = () => {
-    for (const el of selectedRows) {
-      el.taskStatus = "Completed"
-    }
-    const newData = [...allData]
-    setData(newData)
+  const handleCompleted = () => {
+    const updatedRows = selectedRows.map((row) => {
+      return {
+        ...row,
+        taskStatus: "Complete",
+      }
+    })
+    console.log(updatedRows)
+    completeTask(updatedRows)
   }
 
   return (
@@ -158,7 +163,7 @@ const DataTable = ({ data, allData, setData }) => {
             handleCount={setCount}
             rows={selectedRows}
             handleRows={setSelectedRows}
-            markCompleted={markCompleted}
+            handleCompleted={handleCompleted}
           />
         </div>
       </div>

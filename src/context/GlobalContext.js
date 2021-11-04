@@ -7,6 +7,9 @@ export const GlobalContext = React.createContext({
   setFilterValue: () => {},
   selectedRows: [],
   setSelectedRows: () => {},
-  completedTasks: [],
-  setCompletedTask: () => {},
+  personalTasks: [],
+  setPersonalTasks: () => {},
+  groupTasks: [],
+  setGroupTasks: () => {},
+  updateTask: () => {},
 })

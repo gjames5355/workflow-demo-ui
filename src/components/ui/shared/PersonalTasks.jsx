@@ -2,7 +2,8 @@ import { makeStyles } from "@material-ui/core/styles"
 import TableAccordion from "../table-accordion/TableAccordion"
 import AddTaskButton from "../add-task-modal/AddTaskModal"
 import { PERSONAL_TASKS } from "../../../constants/constants"
-import { useState } from "react"
+import { useState, useEffect, useContext } from "react"
+import { GlobalContext } from "../../../context/GlobalContext"
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -44,13 +45,24 @@ const useStyles = makeStyles((theme) => ({
 
 const PersonalTasks = () => {
   const classes = useStyles()
-  const [data, setData] = useState(PERSONAL_TASKS)
+  const { personalTasks } = useContext(GlobalContext)
+  const [data, setData] = useState(personalTasks)
+  useEffect(() => {
+    setData(personalTasks)
+  }, [personalTasks])
 
-  const urgentTaskData = data.filter((item) => item.priority === "Urgent")
-  const newTasksData = data.filter(
-    (item) => item.priority !== "Urgent" && item.priority !== "Snoozed"
+  const urgentTaskData = data.filter(
+    (item) => item.priority === "Urgent" && item.taskStatus !== "Complete"
   )
-  const snoozedTasksData = data.filter((item) => item.priority === "Snoozed")
+  const newTasksData = data.filter(
+    (item) =>
+      item.priority !== "Urgent" &&
+      item.priority !== "Snoozed" &&
+      item.taskStatus !== "Complete"
+  )
+  const snoozedTasksData = data.filter(
+    (item) => item.priority === "Snoozed" && item.taskStatus !== "Complete"
+  )
 
   const onSaveTask = (event) => {
     const taskDueDate = event.target.taskDueDate.value

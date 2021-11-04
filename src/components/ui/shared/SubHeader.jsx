@@ -59,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const SubHeader = ({ count, handleCount, markCompleted, rows, handleRows }) => {
+const SubHeader = ({ count, handleCount, handleCompleted, rows, handleRows }) => {
   const styles = useStyles()
   const location = useLocation()
   const [isModalOpen, setModalOpen] = useState(false)
@@ -96,7 +96,7 @@ const SubHeader = ({ count, handleCount, markCompleted, rows, handleRows }) => {
           {count === 1 && (
             <div className={styles.selectedCount}>
               <Button
-                onClick={markCompleted}
+                onClick={handleCompleted}
                 className={styles.countButton}
                 startIcon={<Check />}
                 size="medium"
@@ -122,7 +122,7 @@ const SubHeader = ({ count, handleCount, markCompleted, rows, handleRows }) => {
               <MultipleSelectionsModal
                 isOpen={isModalOpen}
                 onClose={onCloseModal}
-                markCompleted={markCompleted}
+                handleCompleted={handleCompleted}
                 count={count}
               ></MultipleSelectionsModal>
             </div>
