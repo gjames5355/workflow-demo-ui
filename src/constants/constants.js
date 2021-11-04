@@ -10,6 +10,7 @@ export const PERSONAL_TASKS = [
     earliestVideoOrderDays: 15,
     earliestVideoOrderDueDate: "11/18/2021",
     division: "South Carolina",
+    assignedTo: 'gjames',
     comments: [
       {
         id: 1,
@@ -48,6 +49,7 @@ export const PERSONAL_TASKS = [
     earliestVideoOrderDays: 5,
     earliestVideoOrderDueDate: "11/5/2021",
     division: "South Carolina",
+    assignedTo: 'gjames',
     comments: [
       {
         id: 1,

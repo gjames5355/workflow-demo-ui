@@ -251,7 +251,7 @@ const TaskDetail = ({
             </Accordion>
           </DialogContent>
           <DialogActions>
-            {location.pathname === "/team" && (
+            {!updatedRow.assignedTo && (
               <Button
                 size="medium"
                 color="primary"
@@ -261,7 +261,7 @@ const TaskDetail = ({
                 Claim
               </Button>
             )}
-            {(updatedRow.assignedTo || location.pathname) !== "team" && (
+            {updatedRow.assignedTo && (
               <Button
                 size="medium"
                 color="primary"
