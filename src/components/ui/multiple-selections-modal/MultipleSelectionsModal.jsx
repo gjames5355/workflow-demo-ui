@@ -25,6 +25,7 @@ const MultipleSelectionsModal = ({ onClose, isOpen, markCompleted, count }) => {
               onClick={markCompleted}
               style={{
                 padding: "10px",
+                color: "red",
               }}
             >
               Yes
