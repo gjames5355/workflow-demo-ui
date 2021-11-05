@@ -57,6 +57,7 @@ const useStyles = makeStyles((theme) => ({
 const DataTable = ({ data, type }) => {
   const { updateTasks } = useContext(GlobalContext)
   const [selectedRows, setSelectedRows] = useState([])
+  const { completeTask } = useContext(GlobalContext)
   const location = useLocation()
   const [columns, setColumns] = useState([])
   const [inputValue, setInputValue] = useState("")
@@ -156,15 +157,14 @@ const DataTable = ({ data, type }) => {
     setSelectedRows([])
   }
 
-  const handleCompleteTask = () => {
+  const handleCompleted = () => {
     const updatedRows = selectedRows.map((row) => {
       return {
         ...row,
         taskStatus: "Complete",
       }
     })
-    updateTasks(updatedRows)
-    setSelectedRows([])
+    completeTask(updatedRows)
   }
 
   const handleClose = () => {
@@ -213,6 +213,7 @@ const DataTable = ({ data, type }) => {
             handleRows={setSelectedRows}
             onClaim={handleClaim}
             onUnclaim={handleUnclaim}
+            handleCompleted={handleCompleted}
             onAction={(type) => handleAction(type)}
           />
         </div>
@@ -233,7 +234,7 @@ const DataTable = ({ data, type }) => {
         onClaim={handleClaim}
         onUnclaim={handleUnclaim}
         onAction={(type) => handleAction(type)}
-        onComplete={handleCompleteTask}
+        onComplete={handleCompleted}
       />
       <DataGrid
         getRowClassName={(row) => `${row.getValue(row.id, "taskStatus")}-Row`}
@@ -244,6 +245,7 @@ const DataTable = ({ data, type }) => {
         disableSelectionOnClick
         onRowDoubleClick={handleDoubleClick}
         onSelectionModelChange={handleSelectRow}
+        forceUpdate
       />
     </div>
   )

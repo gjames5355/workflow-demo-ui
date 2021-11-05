@@ -284,7 +284,10 @@ const TaskDetail = ({
               size="medium"
               color="primary"
               variant="contained"
-              onClick={onComplete}
+              onClick={() => {
+                onComplete()
+                onClose()
+              }}
             >
               Complete
             </Button>

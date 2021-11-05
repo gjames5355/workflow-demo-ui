@@ -1,7 +1,7 @@
 export const PERSONAL_TASKS = [
   {
-    id: 1,
-    jobNumber: 4520001,
+    id: 11,
+    jobNumber: 9993939,
     processName: "Produce MPEG",
     taskName: "Stich MPEG",
     taskDueDate: "10/21/2021",
@@ -10,36 +10,36 @@ export const PERSONAL_TASKS = [
     earliestVideoOrderDays: 15,
     earliestVideoOrderDueDate: "11/18/2021",
     division: "South Carolina",
-    assignedTo: 'gjames',
+    assignedTo: "gjames",
     comments: [
       {
         id: 1,
-        title: 'Comment 1',
-        description: 'First Comment for task Stich MPEG',
-        creator: 'gjames@veritext.com',
+        title: "Comment 1",
+        description: "First Comment for task Stich MPEG",
+        creator: "gjames@veritext.com",
       },
       {
         id: 2,
-        title: 'Comment 2',
-        description: 'Second Comment for task Stich MPEG',
-        creator: 'gjames@veritext.com',
-      }
+        title: "Comment 2",
+        description: "Second Comment for task Stich MPEG",
+        creator: "gjames@veritext.com",
+      },
     ],
     history: [
       {
         id: 1,
-        description: 'Assigned to gjames',
-        date: '11/1/2021',
+        description: "Assigned to gjames",
+        date: "11/1/2021",
       },
       {
         id: 2,
-        description: 'Claimed by cgalinda',
-        date: '11/2/2021',
-      }
-    ]
+        description: "Claimed by cgalinda",
+        date: "11/2/2021",
+      },
+    ],
   },
   {
-    id: 2,
+    id: 12,
     jobNumber: 4520002,
     processName: "Produce MPEG 2",
     taskName: "Stich MPEG Normal Task",
@@ -49,33 +49,33 @@ export const PERSONAL_TASKS = [
     earliestVideoOrderDays: 5,
     earliestVideoOrderDueDate: "11/5/2021",
     division: "South Carolina",
-    assignedTo: 'gjames',
+    assignedTo: "gjames",
     comments: [
       {
         id: 1,
-        title: 'Comment 1',
-        description: 'First Comment for task Stich MPEG Normal Task',
-        creator: 'gjames@veritext.com',
+        title: "Comment 1",
+        description: "First Comment for task Stich MPEG Normal Task",
+        creator: "gjames@veritext.com",
       },
       {
         id: 2,
-        title: 'Comment 2',
-        description: 'Second Comment for task Stich MPEG Normal Task',
-        creator: 'gjames@veritext.com',
-      }
+        title: "Comment 2",
+        description: "Second Comment for task Stich MPEG Normal Task",
+        creator: "gjames@veritext.com",
+      },
     ],
     history: [
       {
         id: 1,
-        description: 'Assigned to gjames',
-        date: '11/1/2021',
+        description: "Assigned to gjames",
+        date: "11/1/2021",
       },
       {
         id: 2,
-        description: 'Claimed by cgalinda',
-        date: '11/2/2021',
-      }
-    ]
+        description: "Claimed by cgalinda",
+        date: "11/2/2021",
+      },
+    ],
   },
 ]
 
@@ -96,29 +96,29 @@ export const GROUP_TASKS = [
     comments: [
       {
         id: 1,
-        title: 'Comment 1',
-        description: 'First Comment for task QC Original Files',
-        creator: 'gjames@veritext.com',
+        title: "Comment 1",
+        description: "First Comment for task QC Original Files",
+        creator: "gjames@veritext.com",
       },
       {
         id: 2,
-        title: 'Comment 2',
-        description: 'Second Comment for task QC Original Files',
-        creator: 'gjames@veritext.com',
-      }
+        title: "Comment 2",
+        description: "Second Comment for task QC Original Files",
+        creator: "gjames@veritext.com",
+      },
     ],
     history: [
       {
         id: 1,
-        description: 'Assigned to gjames',
-        date: '11/1/2021',
+        description: "Assigned to gjames",
+        date: "11/1/2021",
       },
       {
         id: 2,
-        description: 'Claimed by cgalinda',
-        date: '11/2/2021',
-      }
-    ]
+        description: "Claimed by cgalinda",
+        date: "11/2/2021",
+      },
+    ],
   },
   {
     id: 2,
@@ -135,29 +135,31 @@ export const GROUP_TASKS = [
     comments: [
       {
         id: 1,
-        title: 'Comment 1',
-        description: 'First Comment for task Review/ QC Files/ Prepare PIP Video',
-        creator: 'gjames@veritext.com',
+        title: "Comment 1",
+        description:
+          "First Comment for task Review/ QC Files/ Prepare PIP Video",
+        creator: "gjames@veritext.com",
       },
       {
         id: 2,
-        title: 'Comment 2',
-        description: 'Second Comment for task Review/ QC Files/ Prepare PIP Video',
-        creator: 'gjames@veritext.com',
-      }
+        title: "Comment 2",
+        description:
+          "Second Comment for task Review/ QC Files/ Prepare PIP Video",
+        creator: "gjames@veritext.com",
+      },
     ],
     history: [
       {
         id: 1,
-        description: 'Assigned to gjames',
-        date: '11/1/2021',
+        description: "Assigned to gjames",
+        date: "11/1/2021",
       },
       {
         id: 2,
-        description: 'Claimed by cgalinda',
-        date: '11/2/2021',
-      }
-    ]
+        description: "Claimed by cgalinda",
+        date: "11/2/2021",
+      },
+    ],
   },
   {
     id: 3,
@@ -174,33 +176,33 @@ export const GROUP_TASKS = [
     comments: [
       {
         id: 1,
-        title: 'Comment 1',
-        description: 'First Comment for task Stich MPEG',
-        creator: 'gjames@veritext.com',
+        title: "Comment 1",
+        description: "First Comment for task Stich MPEG",
+        creator: "gjames@veritext.com",
       },
       {
         id: 2,
-        title: 'Comment 2',
-        description: 'Second Comment for task Stich MPEG',
-        creator: 'gjames@veritext.com',
-      }
+        title: "Comment 2",
+        description: "Second Comment for task Stich MPEG",
+        creator: "gjames@veritext.com",
+      },
     ],
     history: [
       {
         id: 1,
-        description: 'Assigned to gjames',
-        date: '11/1/2021',
+        description: "Assigned to gjames",
+        date: "11/1/2021",
       },
       {
         id: 2,
-        description: 'Claimed by cgalinda',
-        date: '11/2/2021',
-      }
-    ]
+        description: "Claimed by cgalinda",
+        date: "11/2/2021",
+      },
+    ],
   },
   {
     id: 4,
-    jobNumber: 3490934,
+    jobNumber: 9847463,
     processName: "Produce MP4",
     taskName: "QC Files/ Prepare PIP Video/ Review",
     taskDueDate: "10/21/2021",
@@ -213,29 +215,72 @@ export const GROUP_TASKS = [
     comments: [
       {
         id: 1,
-        title: 'Comment 1',
-        description: 'First Comment for task QC Files/ Prepare PIP Video/ Review',
-        creator: 'gjames@veritext.com',
+        title: "Comment 1",
+        description:
+          "First Comment for task QC Files/ Prepare PIP Video/ Review",
+        creator: "gjames@veritext.com",
       },
       {
         id: 2,
-        title: 'Comment 2',
-        description: 'Second Comment for task QC Files/ Prepare PIP Video/ Review',
-        creator: 'gjames@veritext.com',
-      }
+        title: "Comment 2",
+        description:
+          "Second Comment for task QC Files/ Prepare PIP Video/ Review",
+        creator: "gjames@veritext.com",
+      },
     ],
     history: [
       {
         id: 1,
-        description: 'Assigned to gjames',
-        date: '11/1/2021',
+        description: "Assigned to gjames",
+        date: "11/1/2021",
       },
       {
         id: 2,
-        description: 'Claimed by cgalinda',
-        date: '11/2/2021',
-      }
-    ]
+        description: "Claimed by cgalinda",
+        date: "11/2/2021",
+      },
+    ],
+  },
+  {
+    id: 5,
+    jobNumber: 1123434,
+    processName: "Produce MP4",
+    taskName: "QC Files/ Prepare PIP Video/ Review",
+    taskDueDate: "10/21/2021",
+    taskStatus: "Complete",
+    priority: "Urgent",
+    earliestVideoOrderDays: 5,
+    earliestVideoOrderDueDate: "10/18/2021",
+    caseName: "In Re Brenn De Bree, Et Al.",
+    division: "Dallas",
+  },
+  {
+    id: 6,
+    jobNumber: 7463846,
+    processName: "Produce MP4",
+    taskName: "QC Files/ Prepare PIP Video/ Review",
+    taskDueDate: "10/21/2021",
+    taskStatus: "Assigned",
+    priority: "High",
+    earliestVideoOrderDays: 5,
+    earliestVideoOrderDueDate: "10/18/2021",
+    caseName: "In Re Brenn De Bree, Et Al.",
+    division: "Dallas",
+    assignedTo: "mdrenkalo",
+  },
+  {
+    id: 7,
+    jobNumber: 3490954,
+    processName: "Produce MP4",
+    taskName: "QC Files/ Prepare PIP Video/ Review",
+    taskDueDate: "10/21/2021",
+    taskStatus: "Assigned",
+    priority: "High",
+    earliestVideoOrderDays: 5,
+    earliestVideoOrderDueDate: "10/18/2021",
+    caseName: "In Re Brenn De Bree, Et Al.",
+    division: "Dallas",
+    assignedTo: "guy",
   },
 ]
 

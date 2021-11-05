@@ -47,9 +47,18 @@ const TeamTasks = () => {
   const { groupTasks } = useContext(GlobalContext)
   const [data, setData] = useState(groupTasks)
 
-  const urgentUnclaimed = data.filter((item) => item.priority === "Urgent")
-  const unclaimed = data.filter((item) => item.taskStatus === "New" && item.priority !== 'Urgent')
-  const claimed = data.filter((x) => x.taskStatus !== "New" && x.priority !== "Urgent")
+  const urgentUnclaimed = data.filter(
+    (item) => item.priority === "Urgent" && item.taskStatus !== "Complete"
+  )
+  const unclaimed = data.filter(
+    (item) => item.taskStatus === "New" && item.priority !== "Urgent"
+  )
+  const claimed = data.filter(
+    (x) =>
+      x.taskStatus !== "New" &&
+      x.priority !== "Urgent" &&
+      x.taskStatus !== "Complete"
+  )
 
   useEffect(() => {
     setData(groupTasks)

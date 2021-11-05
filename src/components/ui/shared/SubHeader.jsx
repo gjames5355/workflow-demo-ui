@@ -1,7 +1,8 @@
 import { Button, makeStyles } from "@material-ui/core"
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { useLocation } from "react-router"
 import { Check } from "@material-ui/icons"
+import MultipleSelectionsModal from "../multiple-selections-modal/MultipleSelectionsModal"
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -63,12 +64,22 @@ const SubHeader = ({
   handleCount,
   rows,
   handleRows,
-  onClaim, 
+  onClaim,
   onUnclaim,
   onAction,
+  handleCompleted,
 }) => {
   const styles = useStyles()
   const location = useLocation()
+  const [isModalOpen, setModalOpen] = useState(false)
+
+  const onMultipleCountHandler = () => {
+    setModalOpen(true)
+  }
+
+  const onCloseModal = () => {
+    setModalOpen(false)
+  }
 
   useEffect(() => {
     handleCount(0)
@@ -94,17 +105,40 @@ const SubHeader = ({
     count > 0 && (
       <div className={styles.container}>
         <div className={styles.buttonContainer}>
-          <div className={styles.selectedCount}>
-            <Button
-              className={styles.countButton}
-              startIcon={<Check />}
-              size="medium"
-              variant="outlined"
-              disabled={locationTrue && unAssignedTaskSelected}
-            >
-              Mark {count} as Complete
-            </Button>
-          </div>
+          {count === 1 && (
+            <div className={styles.selectedCount}>
+              <Button
+                onClick={handleCompleted}
+                className={styles.countButton}
+                startIcon={<Check />}
+                size="medium"
+                variant="outlined"
+                disabled={locationTrue && unAssignedTaskSelected}
+              >
+                Mark {count} as Complete
+              </Button>
+            </div>
+          )}
+          {count > 1 && (
+            <div className={styles.selectedCount}>
+              <Button
+                onClick={onMultipleCountHandler}
+                className={styles.countButton}
+                startIcon={<Check />}
+                size="medium"
+                variant="outlined"
+                disabled={locationTrue && unAssignedTaskSelected}
+              >
+                Mark {count} as Complete
+              </Button>
+              <MultipleSelectionsModal
+                isOpen={isModalOpen}
+                onClose={onCloseModal}
+                handleCompleted={handleCompleted}
+                count={count}
+              ></MultipleSelectionsModal>
+            </div>
+          )}
           <div className={styles.buttonGroup1}>
             {location.pathname === "/team" && (
               <Button
@@ -135,7 +169,7 @@ const SubHeader = ({
                 color="primary"
                 variant="outlined"
                 disabled={locationTrue && unAssignedTaskSelected}
-                onClick={() => onAction('assign')}
+                onClick={() => onAction("assign")}
               >
                 Assign
               </Button>
@@ -148,7 +182,7 @@ const SubHeader = ({
               color="primary"
               variant="outlined"
               disabled={locationTrue && unAssignedTaskSelected}
-              onClick={() => onAction('priority')}
+              onClick={() => onAction("priority")}
             >
               Change Priority
             </Button>
@@ -160,7 +194,7 @@ const SubHeader = ({
               color="primary"
               variant="outlined"
               disabled={locationTrue && unAssignedTaskSelected}
-              onClick={() => onAction('dueDate')}
+              onClick={() => onAction("dueDate")}
             >
               Change Due Date
             </Button>

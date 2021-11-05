@@ -49,15 +49,23 @@ const PersonalTasks = () => {
 
   useEffect(() => {
     setData(personalTasks)
-  },[personalTasks])
+  }, [personalTasks])
 
-  const urgentTaskData = data.filter((item) => item.priority === "Urgent")
+  const urgentTaskData = data.filter(
+    (item) => item.priority === "Urgent" && item.taskStatus !== "Complete"
+  )
   const newTasksData = data.filter((item) => item.taskStatus === "New")
-  const snoozedTasksData = data.filter((item) => item.priority === "Snoozed")
+  const snoozedTasksData = data.filter(
+    (item) => item.priority === "Snoozed" && item.taskStatus !== "Complete"
+  )
 
   const onSaveTask = (event) => {
-    const formattedTaskDueDate = new Date(event.target.taskDueDate.value).toLocaleDateString();
-    const formattedEarliestVideoOrderDueDate = new Date(event.target.earliestVideoOrderDueDate.value).toLocaleDateString();
+    const formattedTaskDueDate = new Date(
+      event.target.taskDueDate.value
+    ).toLocaleDateString()
+    const formattedEarliestVideoOrderDueDate = new Date(
+      event.target.earliestVideoOrderDueDate.value
+    ).toLocaleDateString()
     const newTask = {
       id: event.target.jobNumber.value,
       jobNumber: event.target.jobNumber.value,
