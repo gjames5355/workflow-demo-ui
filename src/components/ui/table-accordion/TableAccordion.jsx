@@ -1,17 +1,14 @@
-import { Accordion, AccordionDetails, AccordionSummary, Typography } from '@material-ui/core';
-import React from 'react';
-import DataTable from '../DataTable/DataTable';
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Typography,
+} from "@material-ui/core"
+import React from "react"
+import DataTable from "../DataTable/DataTable"
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
 
-const TableAccordion = ({
-  classes,
-  title,
-  type,
-  data,
-  handleChange,
-  setData,
-  allData,
-}) => {
+const TableAccordion = ({ classes, title, type, data, handleChange }) => {
   return (
     <Accordion className={classes.accordion} defaultExpanded={true}>
       <AccordionSummary
@@ -23,13 +20,7 @@ const TableAccordion = ({
         <Typography className={classes.title}>{title}</Typography>
       </AccordionSummary>
       <AccordionDetails className={classes.details}>
-        <DataTable
-          setData={setData}
-          type={type}
-          data={data}
-          handleChange={handleChange}
-          allData={allData}
-        />
+        <DataTable type={type} data={data} handleChange={handleChange} />
       </AccordionDetails>
     </Accordion>
   )
