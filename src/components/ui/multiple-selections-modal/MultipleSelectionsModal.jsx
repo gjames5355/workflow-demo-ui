@@ -12,7 +12,8 @@ const useStyles = makeStyles((theme) => ({
   buttonContainer: {
     display: "flex",
     width: "100%",
-    justifyContent: "space-between",
+    paddingTop: "5px",
+    justifyContent: "space-around",
   },
   buttonGroup3: {
     display: "flex",
@@ -51,31 +52,29 @@ const MultipleSelectionsModal = ({
             <DialogContentText>Do you wish to continue?</DialogContentText>
           </div>
           <div className={styles.buttonContainer}>
-            <div className={styles.buttonGroup3}>
-              <Button
-                color="primary"
-                size="medium"
-                variant="outlined"
-                onClick={handleCompleted}
-                style={{
-                  padding: "10px",
-                  color: "red",
-                }}
-              >
-                Yes
-              </Button>
-              <Button
-                color="primary"
-                size="medium"
-                variant="outlined"
-                onClick={onClose}
-                style={{
-                  padding: "10px",
-                }}
-              >
-                No
-              </Button>
-            </div>
+            <Button
+              size="medium"
+              variant="contained"
+              onClick={handleCompleted}
+              style={{
+                padding: "10px",
+                color: "white",
+                backgroundColor: "red",
+              }}
+            >
+              Yes
+            </Button>
+            <Button
+              color="primary"
+              size="medium"
+              variant="outlined"
+              onClick={onClose}
+              style={{
+                padding: "10px",
+              }}
+            >
+              No
+            </Button>
           </div>
         </Box>
       </DialogContent>
