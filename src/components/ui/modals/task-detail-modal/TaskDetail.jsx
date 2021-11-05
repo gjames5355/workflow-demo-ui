@@ -17,9 +17,27 @@ import {
   Select,
   FormControl,
   MenuItem,
+  makeStyles,
+  DialogContentText,
 } from "@material-ui/core"
 import Item from "@material-ui/core/Grid"
 import { ExpandMore } from "@material-ui/icons"
+import { StylesContext } from "@material-ui/styles"
+
+const useStyles = makeStyles((theme) => ({
+  top: {
+    backgroundColor: "#63B0F3",
+  },
+
+  lower: {
+    backgroundColor: "#63B0F3",
+  },
+
+  commentText: {
+    color: "black",
+    paddingTop: "10px",
+  },
+}))
 
 const TaskDetail = ({
   row,
@@ -40,11 +58,13 @@ const TaskDetail = ({
     setUpdatedRow(newRow)
   }
 
+  const classes = useStyles()
+
   return (
     <>
       {updatedRow && (
         <Dialog open={open} onClose={onClose} fullWidth={true} maxWidth="md">
-          <DialogTitle>
+          <DialogTitle className={classes.top}>
             {updatedRow.jobNumber} - {updatedRow.taskName}
           </DialogTitle>
           <DialogContent dividers={true}>
@@ -212,7 +232,10 @@ const TaskDetail = ({
             </Grid>
             <Divider />
             <Accordion defaultExpanded={true} style={{ marginTop: "4px" }}>
-              <AccordionSummary expandIcon={<ExpandMore />}>
+              <AccordionSummary
+                className={classes.lower}
+                expandIcon={<ExpandMore />}
+              >
                 <Typography>Comments</Typography>
               </AccordionSummary>
               <AccordionDetails style={{ display: "inherit" }}>
@@ -224,14 +247,19 @@ const TaskDetail = ({
                       style={{ padding: "10px", margin: "4px" }}
                     >
                       <Typography>{comment.title}</Typography>
-                      <p>{comment.description}</p>
-                      <small>{comment.creator}</small>
+                      <DialogContentText className={classes.commentText}>
+                        {comment.description}
+                      </DialogContentText>
+                      <DialogContentText>{comment.creator}</DialogContentText>
                     </Paper>
                   ))}
               </AccordionDetails>
             </Accordion>
             <Accordion defaultExpanded={false} style={{ marginTop: "8px" }}>
-              <AccordionSummary expandIcon={<ExpandMore />}>
+              <AccordionSummary
+                expandIcon={<ExpandMore />}
+                className={classes.lower}
+              >
                 <Typography>History</Typography>
               </AccordionSummary>
               <AccordionDetails style={{ display: "inherit" }}>
