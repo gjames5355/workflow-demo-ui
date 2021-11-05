@@ -49,10 +49,13 @@ const MultipleSelectionsModal = ({
             <DialogContentText>
               You have selected {count} items
             </DialogContentText>
-            <DialogContentText>Do you wish to continue?</DialogContentText>
+            <DialogContentText style={{ color: "black", fontWeight: "bold" }}>
+              Do you wish to continue?
+            </DialogContentText>
           </div>
           <div className={styles.buttonContainer}>
             <Button
+              color="primary"
               size="medium"
               variant="contained"
               onClick={handleCompleted}
