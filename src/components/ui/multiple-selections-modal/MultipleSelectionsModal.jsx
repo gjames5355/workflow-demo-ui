@@ -59,7 +59,6 @@ const MultipleSelectionsModal = ({
               style={{
                 padding: "10px",
                 color: "white",
-                backgroundColor: "red",
               }}
             >
               Yes
