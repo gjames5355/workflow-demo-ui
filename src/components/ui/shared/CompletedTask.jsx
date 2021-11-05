@@ -91,8 +91,10 @@ const CompletedTasks = () => {
   const [filteredData, setFilteredData] = useState([])
   useEffect(() => {
     const newData = [...groupTasks, ...personalTasks]
-    const filtered = newData.filter((item) => item.taskStatus === "Complete")
-    setData(filtered)
+    const completedTasks = newData.filter(
+      (item) => item.taskStatus === "Complete"
+    )
+    setData(completedTasks)
   }, [groupTasks, personalTasks])
 
   useEffect(() => {
