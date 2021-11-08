@@ -17,9 +17,40 @@ import {
   Select,
   FormControl,
   MenuItem,
+  makeStyles,
+  DialogContentText,
+  alpha,
 } from "@material-ui/core"
 import Item from "@material-ui/core/Grid"
 import { ExpandMore } from "@material-ui/icons"
+import { StylesContext } from "@material-ui/styles"
+
+const useStyles = makeStyles((theme) => ({
+  top: {
+    backgroundColor: "#63B0F3",
+  },
+
+  lower: {
+    backgroundColor: "#63B0F3",
+  },
+
+  commentText: {
+    color: theme.palette.common.black,
+    fontSize: ".9em",
+  },
+
+  commentEmail: {
+    fontSize: ".8em",
+  },
+
+  commentTitle: {
+    paddingBottom: "10px",
+  },
+
+  commentContainer: {
+    backgroundColor: alpha(theme.palette.common.black, 0.05),
+  },
+}))
 
 const TaskDetail = ({
   row,
@@ -40,11 +71,13 @@ const TaskDetail = ({
     setUpdatedRow(newRow)
   }
 
+  const classes = useStyles()
+
   return (
     <>
       {updatedRow && (
         <Dialog open={open} onClose={onClose} fullWidth={true} maxWidth="md">
-          <DialogTitle>
+          <DialogTitle className={classes.top}>
             {updatedRow.jobNumber} - {updatedRow.taskName}
           </DialogTitle>
           <DialogContent dividers={true}>
@@ -212,10 +245,16 @@ const TaskDetail = ({
             </Grid>
             <Divider />
             <Accordion defaultExpanded={true} style={{ marginTop: "4px" }}>
-              <AccordionSummary expandIcon={<ExpandMore />}>
+              <AccordionSummary
+                className={classes.lower}
+                expandIcon={<ExpandMore />}
+              >
                 <Typography>Comments</Typography>
               </AccordionSummary>
-              <AccordionDetails style={{ display: "inherit" }}>
+              <AccordionDetails
+                style={{ display: "inherit" }}
+                className={classes.commentContainer}
+              >
                 {updatedRow.comments &&
                   updatedRow.comments.map((comment) => (
                     <Paper
@@ -223,28 +262,45 @@ const TaskDetail = ({
                       key={comment.id}
                       style={{ padding: "10px", margin: "4px" }}
                     >
-                      <Typography>{comment.title}</Typography>
-                      <p>{comment.description}</p>
-                      <small>{comment.creator}</small>
+                      <Typography className={classes.commentTitle}>
+                        {comment.title}
+                      </Typography>
+                      <DialogContentText className={classes.commentText}>
+                        {comment.description}
+                      </DialogContentText>
+                      <DialogContentText className={classes.commentEmail}>
+                        {comment.creator}
+                      </DialogContentText>
                     </Paper>
                   ))}
               </AccordionDetails>
             </Accordion>
             <Accordion defaultExpanded={false} style={{ marginTop: "8px" }}>
-              <AccordionSummary expandIcon={<ExpandMore />}>
-                <Typography>History</Typography>
+              <AccordionSummary
+                expandIcon={<ExpandMore />}
+                className={classes.lower}
+              >
+                <Typography className={classes.commentTitle}>
+                  History
+                </Typography>
               </AccordionSummary>
-              <AccordionDetails style={{ display: "inherit" }}>
+              <AccordionDetails
+                className={classes.commentContainer}
+                style={{ display: "inherit" }}
+              >
                 {updatedRow.history &&
                   updatedRow.history.map((item) => (
                     <Paper
                       elevation={2}
                       key={item.id}
-                      style={{ padding: "10px", margin: "4px" }}
+                      style={{
+                        padding: "10px",
+                        margin: "4px",
+                      }}
                     >
-                      <p>
+                      <DialogContentText className={classes.commentText}>
                         {item.description} on {item.date}
-                      </p>
+                      </DialogContentText>
                     </Paper>
                   ))}
               </AccordionDetails>
