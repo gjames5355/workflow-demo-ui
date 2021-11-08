@@ -23,7 +23,6 @@ import {
 } from "@material-ui/core"
 import Item from "@material-ui/core/Grid"
 import { ExpandMore } from "@material-ui/icons"
-import { StylesContext } from "@material-ui/styles"
 
 const useStyles = makeStyles((theme) => ({
   top: {
