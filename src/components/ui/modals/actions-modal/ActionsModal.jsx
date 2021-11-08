@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import {
     Dialog,
     DialogContent,
@@ -19,10 +19,20 @@ const ActionsModal = ({
     title,
     type,
     row,
-    handleSave,
+    onSave,
 }) => {
+    const [currentRow, setCurrentRow] = useState(row)
+    
+    useEffect(() => setCurrentRow(row), [row])
+    
     const handleChange = (e) => {
-        
+      const newValue = { ...row }
+      newValue[e.target.name] = e.target.value
+      setCurrentRow(newValue)
+    }
+
+    const handleSave = () => {
+      onSave(currentRow)
     }
 
     return (
@@ -41,6 +51,7 @@ const ActionsModal = ({
                             required
                             id="assign-control"
                             name="assign"
+                            value={currentRow.assignedTo}
                             onChange={handleChange}
                             margin="dense"
                           >
@@ -60,6 +71,7 @@ const ActionsModal = ({
                             name="taskDueDate"
                             variant="outlined"
                             type="date"
+                            value={currentRow.taskDueDate}
                             onChange={handleChange}
                           />
                         </FormControl>
@@ -75,7 +87,7 @@ const ActionsModal = ({
                             required
                             id="priority-control"
                             name="priority"
-                            value={row.priority}
+                            value={currentRow.priority}
                             onChange={handleChange}
                             margin="dense"
                           >

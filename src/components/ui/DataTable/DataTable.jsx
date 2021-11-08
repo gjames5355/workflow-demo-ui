@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const DataTable = ({ data, type }) => {
-  const { updateTasks } = useContext(GlobalContext)
+  const { updateTasks, updateRow } = useContext(GlobalContext)
   const [selectedRows, setSelectedRows] = useState([])
   const { completeTask } = useContext(GlobalContext)
   const location = useLocation()
@@ -172,9 +172,10 @@ const DataTable = ({ data, type }) => {
     setOpenDetails(false)
   }
 
-  const handleModalSave = () => {
+  const handleModalSave = (row) => {
     setOpenActions(false)
     setOpenDetails(false)
+    handleRowUpdate(row)
   }
 
   const handleAction = (type) => {
@@ -185,6 +186,12 @@ const DataTable = ({ data, type }) => {
   const handleDoubleClick = (e) => {
     setOpenDetails(true)
     setSelectedRows([e.row])
+  }
+
+  const handleRowUpdate = (row) => {
+    const source = location.pathname === '/team' ? 'group' : 'personal'
+    updateRow(row, source)
+    setOpenDetails(false)
   }
 
   return (
@@ -223,7 +230,7 @@ const DataTable = ({ data, type }) => {
         onClose={handleClose}
         row={selectedRows[0]}
         title="Update Selected Row"
-        handleSave={handleModalSave}
+        onSave={(row) => handleModalSave(row)}
         type={modalType}
       />
       <TaskDetail
@@ -235,6 +242,7 @@ const DataTable = ({ data, type }) => {
         onUnclaim={handleUnclaim}
         onAction={(type) => handleAction(type)}
         onComplete={handleCompleted}
+        onSave={(row) => handleRowUpdate(row)}
       />
       <DataGrid
         getRowClassName={(row) => `${row.getValue(row.id, "taskStatus")}-Row`}

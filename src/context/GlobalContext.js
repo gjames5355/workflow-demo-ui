@@ -13,4 +13,5 @@ export const GlobalContext = React.createContext({
   setGroupTasks: () => {},
   updateTask: () => {},
   completeTask: () => {},
+  updateRow: () => {},
 })

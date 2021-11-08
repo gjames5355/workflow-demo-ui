@@ -23,7 +23,6 @@ import {
 } from "@material-ui/core"
 import Item from "@material-ui/core/Grid"
 import { ExpandMore } from "@material-ui/icons"
-import { StylesContext } from "@material-ui/styles"
 
 const useStyles = makeStyles((theme) => ({
   top: {
@@ -60,6 +59,7 @@ const TaskDetail = ({
   onClaim,
   onUnclaim,
   onComplete,
+  onSave,
 }) => {
   const [updatedRow, setUpdatedRow] = useState()
   useEffect(() => setUpdatedRow(row), [row])
@@ -69,6 +69,10 @@ const TaskDetail = ({
     const newRow = { ...row }
     newRow[event.target.name] = event.target.value
     setUpdatedRow(newRow)
+  }
+  
+  const handleSave = () => {
+    onSave(updatedRow)
   }
 
   const classes = useStyles()
@@ -164,7 +168,7 @@ const TaskDetail = ({
               </Grid>
               <Grid item xs={6}>
                 <Item>
-                  <FormLabel>Status</FormLabel>
+                  <FormLabel>Status:</FormLabel>
                   <FormControl margin="dense" fullWidth>
                     <Select
                       variant="outlined"
@@ -203,6 +207,7 @@ const TaskDetail = ({
                   <FormControl margin="dense" fullWidth>
                     <TextField
                       id="standard-read-only-input"
+                      name='taskDueDate'
                       defaultValue={updatedRow.taskDueDate}
                       InputProps={{
                         readOnly: false,
@@ -218,6 +223,8 @@ const TaskDetail = ({
                   <FormControl margin="dense" fullWidth>
                     <TextField
                       id="standard-read-only-input"
+                      onChange={handleChange}
+                      name='earliestVideoOrderDueDate'
                       defaultValue={updatedRow.earliestVideoOrderDueDate}
                       InputProps={{
                         readOnly: false,
@@ -233,6 +240,9 @@ const TaskDetail = ({
                   <FormControl margin="dense" fullWidth>
                     <TextField
                       id="standard-read-only-input"
+                      name='earliestVideoOrderDays'
+                      type='number'
+                      onChange={handleChange}
                       defaultValue={updatedRow.earliestVideoOrderDays}
                       InputProps={{
                         readOnly: false,
@@ -346,6 +356,14 @@ const TaskDetail = ({
               }}
             >
               Complete
+            </Button>
+            <Button
+              size="medium"
+              color="primary"
+              variant="contained"
+              onClick={handleSave}
+            >
+              Save Task
             </Button>
             <Button
               size="medium"
