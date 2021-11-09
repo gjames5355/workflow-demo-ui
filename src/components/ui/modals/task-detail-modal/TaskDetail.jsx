@@ -208,6 +208,7 @@ const TaskDetail = ({
                     <TextField
                       id="standard-read-only-input"
                       name='taskDueDate'
+                      onChange={handleChange}
                       defaultValue={updatedRow.taskDueDate}
                       InputProps={{
                         readOnly: false,
