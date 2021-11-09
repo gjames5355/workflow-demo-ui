@@ -1,19 +1,19 @@
-import React, { useState } from "react"
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
-import { ThemeProvider } from "@material-ui/core/styles"
-import Divider from "@material-ui/core/Divider"
-import Fields from "./ui/shared/Fields"
-import Header from "./ui/shared/Header"
-import theme from "./ui/shared/Theme"
-import PersonalTasks from "./ui/shared/PersonalTasks"
-import CompletedTasks from "./ui/shared/CompletedTask"
-import TeamTasks from "./ui/shared/TeamTasks"
-import { GlobalContext } from "../context/GlobalContext"
-import { PERSONAL_TASKS, GROUP_TASKS } from "../constants/constants"
+import React, { useState } from 'react'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { ThemeProvider } from '@material-ui/core/styles'
+import Divider from '@material-ui/core/Divider'
+import Fields from './ui/shared/Fields'
+import Header from './ui/shared/Header'
+import theme from './ui/shared/Theme'
+import PersonalTasks from './ui/shared/PersonalTasks'
+import CompletedTasks from './ui/shared/CompletedTask'
+import TeamTasks from './ui/shared/TeamTasks'
+import { GlobalContext } from '../context/GlobalContext'
+import { PERSONAL_TASKS, GROUP_TASKS } from '../constants/constants'
 
 function App() {
   const [count, setCount] = useState(0)
-  const [filterValue, setFilterValue] = useState("")
+  const [filterValue, setFilterValue] = useState('')
   const [selectedRows, setSelectedRows] = useState([])
   const [personalTasks, setPersonalTasks] = useState(PERSONAL_TASKS)
   const [groupTasks, setGroupTasks] = useState(GROUP_TASKS)
@@ -66,6 +66,31 @@ function App() {
     setPersonalTasks(newPersonalTasks)
   }
 
+  const updateRow = (row, type) => {
+    const updatedRow = {
+      priority: row.priority,
+      taskStatus: row.taskStatus,
+      taskDueDate: row.taskDueDate,
+      earliestVideoOrderDueDate: row.earliestVideoOrderDueDate,
+      earliestVideoOrderDays: row.earliestVideoOrderDays,
+    }
+    if (type === 'group') {
+      const newGroupTasks = [...groupTasks]
+      const currentTaskIndex = newGroupTasks.findIndex(x => x.id === row.id)
+      const currentTask = newGroupTasks.find(x => x.id === row.id)
+
+      newGroupTasks.splice(currentTaskIndex, 1, {...currentTask, ...updatedRow})
+      setGroupTasks(newGroupTasks)
+    } else {
+      const newPersonalTasks = [...personalTasks]
+      const currentTaskIndex = newPersonalTasks.findIndex(x => x.id === row.id)
+      const currentTask = newPersonalTasks.find(x => x.id === row.id)
+
+      newPersonalTasks.splice(currentTaskIndex, 1, {...currentTask, ...updatedRow})
+      setPersonalTasks(newPersonalTasks)
+    }
+  }
+
   const value = {
     count,
     setCount,
@@ -79,6 +104,7 @@ function App() {
     setGroupTasks,
     updateTasks,
     completeTask,
+    updateRow,
   }
 
   return (
@@ -90,19 +116,19 @@ function App() {
           <Fields />
           <Divider />
           <Switch>
-            <Route exact path="/">
+            <Route exact path='/'>
               <PersonalTasks />
             </Route>
-            <Route exact path="/team">
+            <Route exact path='/team'>
               <TeamTasks />
             </Route>
-            <Route exact path="/completed">
+            <Route exact path='/completed'>
               <CompletedTasks />
             </Route>
-            <Route exact path="/jobs" component={() => <div>Jobs</div>} />
+            <Route exact path='/jobs' component={() => <div>Jobs</div>} />
             <Route
               exact
-              path="/management"
+              path='/management'
               component={() => <div>Team Management</div>}
             />
           </Switch>
