@@ -91,6 +91,10 @@ function App() {
     }
   }
 
+  const snoozeTask = (row, type) => {
+
+  }
+
   const value = {
     count,
     setCount,
@@ -105,6 +109,7 @@ function App() {
     updateTasks,
     completeTask,
     updateRow,
+    snoozeTask,
   }
 
   return (

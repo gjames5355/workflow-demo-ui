@@ -1,6 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles"
 import TableAccordion from "../table-accordion/TableAccordion"
-import AddTaskButton from "../add-task-modal/AddTaskModal"
+import AddTaskButton from "../modals/add-task-modal/AddTaskModal"
 import { useContext, useEffect, useState } from "react"
 import { GlobalContext } from "../../../context/GlobalContext"
 

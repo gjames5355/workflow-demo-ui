@@ -68,6 +68,7 @@ const SubHeader = ({
   onUnclaim,
   onAction,
   handleCompleted,
+  onSnooze,
 }) => {
   const styles = useStyles()
   const location = useLocation()
@@ -204,6 +205,7 @@ const SubHeader = ({
               color="primary"
               variant="outlined"
               disabled={locationTrue && unAssignedTaskSelected}
+              onClick={onSnooze}
             >
               Snooze
             </Button>

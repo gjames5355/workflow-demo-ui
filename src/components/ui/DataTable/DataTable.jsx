@@ -11,6 +11,7 @@ import { GlobalContext } from "../../../context/GlobalContext"
 import "../OverDueStyling/OverDueRow.css"
 import ActionsModal from "../modals/actions-modal/ActionsModal"
 import TaskDetail from "../modals/task-detail-modal/TaskDetail"
+import SnoozeModal from "../modals/snooze-modal/SnoozeModal"
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -67,6 +68,7 @@ const DataTable = ({ data, type }) => {
   const [openActions, setOpenActions] = useState(false)
   const [openDetails, setOpenDetails] = useState(false)
   const [modalType, setModalType] = useState("")
+  const [openSnooze, setOpenSnooze] = useState(false)
 
   useEffect(() => {
     const tableType = location.pathname === "/team" ? "team" : "personal"
@@ -169,6 +171,7 @@ const DataTable = ({ data, type }) => {
 
   const handleClose = () => {
     setOpenActions(false)
+    setOpenSnooze(false)
     setOpenDetails(false)
   }
 
@@ -193,6 +196,8 @@ const DataTable = ({ data, type }) => {
     updateRow(row, source)
     setOpenDetails(false)
   }
+
+  const handleSnooze = () => setOpenSnooze(true)
 
   return (
     <div style={{ height: 400, width: "100%" }}>
@@ -222,6 +227,7 @@ const DataTable = ({ data, type }) => {
             onUnclaim={handleUnclaim}
             handleCompleted={handleCompleted}
             onAction={(type) => handleAction(type)}
+            onSnooze={handleSnooze}
           />
         </div>
       </div>
@@ -243,6 +249,10 @@ const DataTable = ({ data, type }) => {
         onAction={(type) => handleAction(type)}
         onComplete={handleCompleted}
         onSave={(row) => handleRowUpdate(row)}
+      />
+      <SnoozeModal 
+        open={openSnooze}
+        onClose={handleClose}
       />
       <DataGrid
         getRowClassName={(row) => `${row.getValue(row.id, "taskStatus")}-Row`}
