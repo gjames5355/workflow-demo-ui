@@ -19,44 +19,67 @@ import { Schedule, Today } from '@material-ui/icons'
 import React, { useState } from 'react'
 import moment from 'moment'
 
-const SnoozeModal = ({open, onClose}) => {
-    const [selectedIndex, setSelectedIndex] = useState()
+const SnoozeModal = ({open, onClose, onSave}) => {
+    const [selectedIndex, setSelectedIndex] = useState(0)
     const [openDateTime, setOpenDateTime] = useState(false)
-    const [date, setDate] = useState()
-    const [time, setTime] = useState()
+    const [date, setDate] = useState(moment().format('ddd, MMM Do, YYYY'))
+    const [time, setTime] = useState(getTime('minutes'))
 
     const handleListItemClick = (event, index) => {
         setSelectedIndex(index)
+        setDate(times[index].dateTime.date)
+        setTime(times[index].dateTime.time)
     }
 
     const times = [
         {
             name: '30 Minutes', 
-            time: getTime('minutes'),
+            dateTime: {
+                time:  getTime('minutes'),
+                date:  getDate(),
+            },
         },
         {
             name: '1 Hour', 
-            time: `${new Date().getHours() + 1}:${new Date().getMinutes()}`,
+            dateTime: {
+                time:  getTime('hours', 1),
+                date:  getDate(),
+            },
         },
         {
             name: '2 Hours', 
-            time: `${new Date().getHours() + 2}:${new Date().getMinutes()}`,
+            dateTime: {
+                time:  getTime('hours', 2),
+                date:  getDate(),
+            },
         },
         {
             name: '4 Hours', 
-            time: `${new Date().getHours() + 4}:${new Date().getMinutes()}`,
+            dateTime: {
+                time:  getTime('hours', 4),
+                date:  getDate(),
+            },
         },
         {
             name: 'Tomorrow', 
-            time: getTime('days', 1),
+            dateTime: {
+                time:  getTime('days', 1),
+                date:  getDate(1),
+            },
         },
         {
             name: '2 Days', 
-            time: getTime('days', 2),
+            dateTime: {
+                time:  getTime('days', 2),
+                date:  getDate(2),
+            },
         },
         {
             name: '1 Week', 
-            time: getTime('days', 7),
+            dateTime: {
+                time:  getTime('days', 7),
+                date:  getDate(7),
+            },
         }
     ]
 
@@ -67,6 +90,8 @@ const SnoozeModal = ({open, onClose}) => {
             if ((minute + 30) > 60) {
                 hour += 1
                 minute = (minute + 30) - 60
+            } else {
+                minute += 30
             }
             return `${hour}:${minute.toString().padStart(2, '0')}`
         }
@@ -75,6 +100,14 @@ const SnoozeModal = ({open, onClose}) => {
             const nextDate = today.clone().add(amount, 'days').format('ddd, MMM Do, YYYY, HH:mm')
             return nextDate
         }
+        if (measure === 'hours') {
+            return `${new Date().getHours() + amount}:${new Date().getMinutes().toString().padStart(2, '0')}`
+        }
+    }
+
+    function getDate(amount = 0) {
+        if (amount > 0 ) return moment().add(amount, 'days').format('ddd, MMM Do, YYYY')
+        return moment().format('ddd, MMM Do, YYYY');
     }
 
     const handleOpenDateTime = () => {
@@ -106,7 +139,7 @@ const SnoozeModal = ({open, onClose}) => {
                                 <ListItemText>
                                     <div style={{display: 'flex',justifyContent: 'space-between'}}>
                                         <div>{time.name}</div>
-                                        <div>{time.time}</div>
+                                        <div>{time.dateTime.time}</div>
                                     </div>
                                 </ListItemText>
                             </ListItem>
@@ -131,6 +164,7 @@ const SnoozeModal = ({open, onClose}) => {
                         size="medium"
                         color="primary"
                         variant="contained"
+                        onClick={() => onSave({date, time})}
                     >
                         Save
                     </Button>

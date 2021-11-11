@@ -66,7 +66,7 @@ const TaskDetail = ({
   const type = location.pathname === "/team" ? "group" : "personal"
 
   const handleChange = (event) => {
-    const newRow = { ...row }
+    const newRow = { ...updatedRow }
     newRow[event.target.name] = event.target.value
     setUpdatedRow(newRow)
   }

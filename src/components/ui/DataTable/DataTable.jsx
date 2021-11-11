@@ -55,8 +55,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const DataTable = ({ data, type }) => {
-  const { updateTasks, updateRow } = useContext(GlobalContext)
+const DataTable = ({ data }) => {
+  const { updateTasks, updateRow, snoozeTask } = useContext(GlobalContext)
   const [selectedRows, setSelectedRows] = useState([])
   const { completeTask } = useContext(GlobalContext)
   const location = useLocation()
@@ -199,6 +199,13 @@ const DataTable = ({ data, type }) => {
 
   const handleSnooze = () => setOpenSnooze(true)
 
+  const onSnoozeSave = (dateTime) => {
+    setOpenSnooze(false)
+    const updatedRow = selectedRows[0]
+    updatedRow.taskDueDate = `${dateTime.date} ${dateTime.time}`
+    snoozeTask(updatedRow, location.pathname === '/team' ? 'group' : 'personal')
+  }
+
   return (
     <div style={{ height: 400, width: "100%" }}>
       <div className={classes.container}>
@@ -253,6 +260,7 @@ const DataTable = ({ data, type }) => {
       <SnoozeModal 
         open={openSnooze}
         onClose={handleClose}
+        onSave={(ev) => onSnoozeSave(ev)}
       />
       <DataGrid
         getRowClassName={(row) => `${row.getValue(row.id, "taskStatus")}-Row`}

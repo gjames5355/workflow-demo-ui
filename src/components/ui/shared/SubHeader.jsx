@@ -204,7 +204,7 @@ const SubHeader = ({
               size="medium"
               color="primary"
               variant="outlined"
-              disabled={locationTrue && unAssignedTaskSelected}
+              disabled={locationTrue && unAssignedTaskSelected && count !== 1}
               onClick={onSnooze}
             >
               Snooze

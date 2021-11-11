@@ -52,11 +52,11 @@ const PersonalTasks = () => {
   }, [personalTasks])
 
   const urgentTaskData = data.filter(
-    (item) => item.priority === "Urgent" && item.taskStatus !== "Complete"
+    (item) => item.priority === "Urgent" && item.taskStatus !== "Complete" && item.taskStatus !== 'Snoozed'
   )
-  const newTasksData = data.filter((item) => item.taskStatus === "New")
+  const newTasksData = data.filter((item) => item.priority !== "Urgent" && item.taskStatus !== "Complete")
   const snoozedTasksData = data.filter(
-    (item) => item.priority === "Snoozed" && item.taskStatus !== "Complete"
+    (item) => item.taskStatus === "Snoozed" && item.taskStatus !== "Complete"
   )
 
   const onSaveTask = (event) => {
