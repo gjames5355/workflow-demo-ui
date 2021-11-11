@@ -197,12 +197,24 @@ const DataTable = ({ data }) => {
     setOpenDetails(false)
   }
 
-  const handleSnooze = () => setOpenSnooze(true)
+  const handleSnooze = () => {
+    if (selectedRows[0].taskStatus === 'Snoozed') {
+      onSnoozeSave()
+    } else {
+      setOpenSnooze(true)
+    }
+  }
 
   const onSnoozeSave = (dateTime) => {
     setOpenSnooze(false)
     const updatedRow = selectedRows[0]
-    updatedRow.taskDueDate = `${dateTime.date} ${dateTime.time}`
+    if (selectedRows[0].taskStatus !== 'Snoozed') {
+      updatedRow.snoozeDate = `${dateTime.date} ${dateTime.time}`
+      updatedRow.taskStatus = 'Snoozed'
+    } else {
+      updatedRow.taskStatus = 'Assigned'
+      updatedRow.snoozeDate = ''
+    }
     snoozeTask(updatedRow, location.pathname === '/team' ? 'group' : 'personal')
   }
 
@@ -256,6 +268,7 @@ const DataTable = ({ data }) => {
         onAction={(type) => handleAction(type)}
         onComplete={handleCompleted}
         onSave={(row) => handleRowUpdate(row)}
+        onSnooze={handleSnooze}
       />
       <SnoozeModal 
         open={openSnooze}

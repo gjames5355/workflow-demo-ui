@@ -98,10 +98,6 @@ const SubHeader = ({
 
   const locationTrue = location.pathname === "/team"
 
-  // const handleDueDate = () => {
-  //   //onChangeDueDate()
-  // }
-
   return (
     count > 0 && (
       <div className={styles.container}>
@@ -207,7 +203,7 @@ const SubHeader = ({
               disabled={locationTrue && unAssignedTaskSelected && count !== 1}
               onClick={onSnooze}
             >
-              Snooze
+              {rows[0].taskStatus === 'Snoozed' ? 'Unsnooze' : 'Snooze'}
             </Button>
           </div>
         </div>

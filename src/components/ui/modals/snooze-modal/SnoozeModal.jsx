@@ -85,23 +85,15 @@ const SnoozeModal = ({open, onClose, onSave}) => {
 
     function getTime(measure, amount) {
         if (measure === 'minutes') {
-            let hour = new Date().getHours()
-            let minute = new Date().getMinutes()
-            if ((minute + 30) > 60) {
-                hour += 1
-                minute = (minute + 30) - 60
-            } else {
-                minute += 30
-            }
-            return `${hour}:${minute.toString().padStart(2, '0')}`
+            return moment().add(30, 'minutes').format('hh:mm A')
         }
         if (measure === 'days') {
             const today = moment()
-            const nextDate = today.clone().add(amount, 'days').format('ddd, MMM Do, YYYY, HH:mm')
+            const nextDate = today.clone().add(amount, 'days').format('ddd, MMM Do, YYYY, hh:mm A')
             return nextDate
         }
         if (measure === 'hours') {
-            return `${new Date().getHours() + amount}:${new Date().getMinutes().toString().padStart(2, '0')}`
+            return moment().add(amount, 'hours').format('hh:mm A')
         }
     }
 
@@ -192,7 +184,7 @@ const SnoozeModal = ({open, onClose, onSave}) => {
                                         variant="outlined"
                                         type="date"
                                         value={date}
-                                        onChange={(e) => setDate(e.target.value)}
+                                        onChange={(e) => setDate(moment(e.target.value).format('ddd, MMM Do, YYYY'))}
                                     />
                                 </FormControl>
                             </Item>

@@ -93,8 +93,8 @@ function App() {
 
   const snoozeTask = (row, type) => {
     const updatedRow = {
-      taskDueDate: row.taskDueDate,
-      taskStatus: 'Snoozed',
+      snoozeDate: row.snoozeDate,
+      taskStatus: row.taskStatus,
     }
     if (type === 'group') {
       const newGroupTasks = [...groupTasks]

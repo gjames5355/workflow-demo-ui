@@ -60,6 +60,7 @@ const TaskDetail = ({
   onUnclaim,
   onComplete,
   onSave,
+  onSnooze,
 }) => {
   const [updatedRow, setUpdatedRow] = useState()
   useEffect(() => setUpdatedRow(row), [row])
@@ -344,7 +345,12 @@ const TaskDetail = ({
               </Button>
             )}
 
-            <Button size="medium" color="primary" variant="outlined">
+            <Button 
+              size="medium"
+              color="primary"
+              variant="outlined"
+              onClick={onSnooze}
+            >
               Snooze
             </Button>
             <Button
