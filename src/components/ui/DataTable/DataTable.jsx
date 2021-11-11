@@ -141,7 +141,8 @@ const DataTable = ({ data }) => {
     const updatedRows = selectedRows.map((row) => {
       return {
         ...row,
-        taskStatus: "New",
+        taskStatus: 'New',
+        assignedTo: '',
       }
     })
     updateTasks(updatedRows)
@@ -152,7 +153,7 @@ const DataTable = ({ data }) => {
     const updatedRows = selectedRows.map((row) => {
       return {
         ...row,
-        assignedTo: "",
+        assignedTo: 'gjames',
       }
     })
     updateTasks(updatedRows)

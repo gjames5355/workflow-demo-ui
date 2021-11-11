@@ -183,6 +183,7 @@ const TaskDetail = ({
                       <MenuItem value="New">New</MenuItem>
                       <MenuItem value="Assigned">Assigned</MenuItem>
                       <MenuItem value="Overdue">Overdue</MenuItem>
+                      <MenuItem value="Snoozed">Snoozed</MenuItem>
                     </Select>
                   </FormControl>
                 </Item>
@@ -345,14 +346,16 @@ const TaskDetail = ({
               </Button>
             )}
 
-            <Button 
-              size="medium"
-              color="primary"
-              variant="outlined"
-              onClick={onSnooze}
-            >
-              Snooze
-            </Button>
+            {updatedRow.assignedTo !== '' &&
+              <Button 
+                size="medium"
+                color="primary"
+                variant="outlined"
+                onClick={onSnooze}
+              >
+                {updatedRow.taskStatus === 'Snoozed' ? 'Unsnooze' : 'Snooze'}
+              </Button>
+            }
             <Button
               size="medium"
               color="primary"

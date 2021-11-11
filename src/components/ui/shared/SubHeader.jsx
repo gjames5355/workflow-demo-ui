@@ -195,16 +195,18 @@ const SubHeader = ({
             >
               Change Due Date
             </Button>
-            <Button
-              className={styles.button3}
-              size="medium"
-              color="primary"
-              variant="outlined"
-              disabled={locationTrue && unAssignedTaskSelected && count !== 1}
-              onClick={onSnooze}
-            >
-              {rows[0].taskStatus === 'Snoozed' ? 'Unsnooze' : 'Snooze'}
-            </Button>
+            {rows[0] && rows[0].assignedTo !== '' &&
+              <Button
+                className={styles.button3}
+                size="medium"
+                color="primary"
+                variant="outlined"
+                disabled={locationTrue && unAssignedTaskSelected && count !== 1}
+                onClick={onSnooze}
+              >
+                {rows[0].taskStatus === 'Snoozed' ? 'Unsnooze' : 'Snooze'}
+              </Button>
+            }
           </div>
         </div>
       </div>

@@ -54,7 +54,7 @@ const PersonalTasks = () => {
   const urgentTaskData = data.filter(
     (item) => item.priority === "Urgent" && item.taskStatus !== "Complete" && item.taskStatus !== 'Snoozed'
   )
-  const newTasksData = data.filter((item) => item.priority !== "Urgent" && item.taskStatus !== "Complete")
+  const newTasksData = data.filter((item) => item.priority !== "Urgent" && item.taskStatus !== "Complete" && item.taskStatus !=='Snoozed')
   const snoozedTasksData = data.filter(
     (item) => item.taskStatus === "Snoozed" && item.taskStatus !== "Complete"
   )

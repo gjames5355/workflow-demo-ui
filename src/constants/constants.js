@@ -132,6 +132,7 @@ export const GROUP_TASKS = [
     earliestVideoOrderDueDate: "10/18/2021",
     caseName: "In Re Brenn De Bree, Et Al.",
     division: "Houston",
+    assignedTo: '',
     comments: [
       {
         id: 1,
@@ -173,6 +174,7 @@ export const GROUP_TASKS = [
     earliestVideoOrderDueDate: "10/18/2021",
     caseName: "Addison, Lavaunda Vs. South Carolina Dept Of Trans",
     division: "South Carolina",
+    assignedTo: '',
     comments: [
       {
         id: 1,
@@ -212,6 +214,7 @@ export const GROUP_TASKS = [
     earliestVideoOrderDueDate: "10/18/2021",
     caseName: "In Re Brenn De Bree, Et Al.",
     division: "Dallas",
+    assignedTo: '',
     comments: [
       {
         id: 1,
@@ -253,6 +256,7 @@ export const GROUP_TASKS = [
     earliestVideoOrderDueDate: "10/18/2021",
     caseName: "In Re Brenn De Bree, Et Al.",
     division: "Dallas",
+    assignedTo: '',
   },
   {
     id: 6,
