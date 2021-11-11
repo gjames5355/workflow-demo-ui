@@ -11,6 +11,7 @@ import { GlobalContext } from "../../../context/GlobalContext"
 import "../OverDueStyling/OverDueRow.css"
 import ActionsModal from "../modals/actions-modal/ActionsModal"
 import TaskDetail from "../modals/task-detail-modal/TaskDetail"
+import SnoozeModal from "../modals/snooze-modal/SnoozeModal"
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -54,8 +55,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const DataTable = ({ data, type }) => {
-  const { updateTasks, updateRow } = useContext(GlobalContext)
+const DataTable = ({ data }) => {
+  const { updateTasks, updateRow, snoozeTask } = useContext(GlobalContext)
   const [selectedRows, setSelectedRows] = useState([])
   const { completeTask } = useContext(GlobalContext)
   const location = useLocation()
@@ -67,6 +68,7 @@ const DataTable = ({ data, type }) => {
   const [openActions, setOpenActions] = useState(false)
   const [openDetails, setOpenDetails] = useState(false)
   const [modalType, setModalType] = useState("")
+  const [openSnooze, setOpenSnooze] = useState(false)
 
   useEffect(() => {
     const tableType = location.pathname === "/team" ? "team" : "personal"
@@ -139,7 +141,8 @@ const DataTable = ({ data, type }) => {
     const updatedRows = selectedRows.map((row) => {
       return {
         ...row,
-        taskStatus: "New",
+        taskStatus: 'New',
+        assignedTo: '',
       }
     })
     updateTasks(updatedRows)
@@ -150,7 +153,7 @@ const DataTable = ({ data, type }) => {
     const updatedRows = selectedRows.map((row) => {
       return {
         ...row,
-        assignedTo: "",
+        assignedTo: 'gjames',
       }
     })
     updateTasks(updatedRows)
@@ -169,6 +172,7 @@ const DataTable = ({ data, type }) => {
 
   const handleClose = () => {
     setOpenActions(false)
+    setOpenSnooze(false)
     setOpenDetails(false)
   }
 
@@ -192,6 +196,27 @@ const DataTable = ({ data, type }) => {
     const source = location.pathname === '/team' ? 'group' : 'personal'
     updateRow(row, source)
     setOpenDetails(false)
+  }
+
+  const handleSnooze = () => {
+    if (selectedRows[0].taskStatus === 'Snoozed') {
+      onSnoozeSave()
+    } else {
+      setOpenSnooze(true)
+    }
+  }
+
+  const onSnoozeSave = (dateTime) => {
+    setOpenSnooze(false)
+    const updatedRow = selectedRows[0]
+    if (selectedRows[0].taskStatus !== 'Snoozed') {
+      updatedRow.snoozeDate = `${dateTime.date} ${dateTime.time}`
+      updatedRow.taskStatus = 'Snoozed'
+    } else {
+      updatedRow.taskStatus = 'Assigned'
+      updatedRow.snoozeDate = ''
+    }
+    snoozeTask(updatedRow, location.pathname === '/team' ? 'group' : 'personal')
   }
 
   return (
@@ -222,6 +247,7 @@ const DataTable = ({ data, type }) => {
             onUnclaim={handleUnclaim}
             handleCompleted={handleCompleted}
             onAction={(type) => handleAction(type)}
+            onSnooze={handleSnooze}
           />
         </div>
       </div>
@@ -243,6 +269,12 @@ const DataTable = ({ data, type }) => {
         onAction={(type) => handleAction(type)}
         onComplete={handleCompleted}
         onSave={(row) => handleRowUpdate(row)}
+        onSnooze={handleSnooze}
+      />
+      <SnoozeModal 
+        open={openSnooze}
+        onClose={handleClose}
+        onSave={(ev) => onSnoozeSave(ev)}
       />
       <DataGrid
         getRowClassName={(row) => `${row.getValue(row.id, "taskStatus")}-Row`}

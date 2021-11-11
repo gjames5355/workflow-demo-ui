@@ -68,6 +68,7 @@ const SubHeader = ({
   onUnclaim,
   onAction,
   handleCompleted,
+  onSnooze,
 }) => {
   const styles = useStyles()
   const location = useLocation()
@@ -96,10 +97,6 @@ const SubHeader = ({
   )
 
   const locationTrue = location.pathname === "/team"
-
-  // const handleDueDate = () => {
-  //   //onChangeDueDate()
-  // }
 
   return (
     count > 0 && (
@@ -198,15 +195,18 @@ const SubHeader = ({
             >
               Change Due Date
             </Button>
-            <Button
-              className={styles.button3}
-              size="medium"
-              color="primary"
-              variant="outlined"
-              disabled={locationTrue && unAssignedTaskSelected}
-            >
-              Snooze
-            </Button>
+            {rows[0] && rows[0].assignedTo !== '' &&
+              <Button
+                className={styles.button3}
+                size="medium"
+                color="primary"
+                variant="outlined"
+                disabled={locationTrue && unAssignedTaskSelected && count !== 1}
+                onClick={onSnooze}
+              >
+                {rows[0].taskStatus === 'Snoozed' ? 'Unsnooze' : 'Snooze'}
+              </Button>
+            }
           </div>
         </div>
       </div>

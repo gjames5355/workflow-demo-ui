@@ -91,6 +91,28 @@ function App() {
     }
   }
 
+  const snoozeTask = (row, type) => {
+    const updatedRow = {
+      snoozeDate: row.snoozeDate,
+      taskStatus: row.taskStatus,
+    }
+    if (type === 'group') {
+      const newGroupTasks = [...groupTasks]
+      const currentTaskIndex = newGroupTasks.findIndex(x => x.id === row.id)
+      const currentTask = newGroupTasks.find(x => x.id === row.id)
+
+      newGroupTasks.splice(currentTaskIndex, 1, {...currentTask, ...updatedRow})
+      setGroupTasks(newGroupTasks)
+    } else {
+      const newPersonalTasks = [...personalTasks]
+      const currentTaskIndex = newPersonalTasks.findIndex(x => x.id === row.id)
+      const currentTask = newPersonalTasks.find(x => x.id === row.id)
+
+      newPersonalTasks.splice(currentTaskIndex, 1, {...currentTask, ...updatedRow})
+      setPersonalTasks(newPersonalTasks)
+    }
+  }
+
   const value = {
     count,
     setCount,
@@ -105,6 +127,7 @@ function App() {
     updateTasks,
     completeTask,
     updateRow,
+    snoozeTask,
   }
 
   return (

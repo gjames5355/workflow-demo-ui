@@ -60,13 +60,14 @@ const TaskDetail = ({
   onUnclaim,
   onComplete,
   onSave,
+  onSnooze,
 }) => {
   const [updatedRow, setUpdatedRow] = useState()
   useEffect(() => setUpdatedRow(row), [row])
   const type = location.pathname === "/team" ? "group" : "personal"
 
   const handleChange = (event) => {
-    const newRow = { ...row }
+    const newRow = { ...updatedRow }
     newRow[event.target.name] = event.target.value
     setUpdatedRow(newRow)
   }
@@ -182,6 +183,7 @@ const TaskDetail = ({
                       <MenuItem value="New">New</MenuItem>
                       <MenuItem value="Assigned">Assigned</MenuItem>
                       <MenuItem value="Overdue">Overdue</MenuItem>
+                      <MenuItem value="Snoozed">Snoozed</MenuItem>
                     </Select>
                   </FormControl>
                 </Item>
@@ -344,9 +346,16 @@ const TaskDetail = ({
               </Button>
             )}
 
-            <Button size="medium" color="primary" variant="outlined">
-              Snooze
-            </Button>
+            {updatedRow.assignedTo !== '' &&
+              <Button 
+                size="medium"
+                color="primary"
+                variant="outlined"
+                onClick={onSnooze}
+              >
+                {updatedRow.taskStatus === 'Snoozed' ? 'Unsnooze' : 'Snooze'}
+              </Button>
+            }
             <Button
               size="medium"
               color="primary"
